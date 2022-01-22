@@ -27,21 +27,35 @@ jobs:
       
       - name: ftp-action
         # You may pin to the exact commit or the version.
-        # uses: sebastianpopp/ftp-action@eb75c5cb29d23ee4a729720a27dfb66403cb0f6d
-        uses: sebastianpopp/ftp-action@v2.0.0
+        # uses: SamKirkland/FTP-Deploy-Action@a9644610a0efe63542b1887c9317ce8628f56521
+        uses: SamKirkland/FTP-Deploy-Action@4.2.0
         with:
           # FTP host
-          host: 160.153.155.212
+          server: ${{ secrets.ftphost}}
           # FTP user
-          user: lmw
+          username: ${{ secrets.ftpuser}}
           # FTP password
-          password: peDme0-dummoh-hydfem
-          # Force SSL encryption
-          forceSsl: false
-          # Local directory
-          # localDir: # optional, default is .
-          # Remote directory
-          remoteDir: .
+          password: ${{ secrets.ftppassword}}
+          # Server port to connect to (read your web hosts docs)
+          # port: # optional
+          # protocol to deploy with - ftp, ftps, or ftps-legacy
+          # protocol: # optional
+          # Folder to upload from, must end with trailing slash /
+          # local-dir: # optional
+          # Path to upload to on the server. Must end with trailing slash /
+          # server-dir: # optional
+          # Path and name of the state file - this file is used to track which files have been deployed
+          # state-name: # optional
+          # Prints which modifications will be made with current config options, but doesnt actually make any changes
+          # dry-run: # optional
+          # Deletes ALL contents of server-dir, even items in excluded with exclude argument
+          # dangerous-clean-slate: # optional
+          # An array of glob patterns, these files will not be included in the publish/delete process
+          # exclude: # optional
+          # How verbose should the information be - minimal, standard, or verbose
+          # log-level: # optional
+          # strict or loose
+          # log-level: # optional
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
