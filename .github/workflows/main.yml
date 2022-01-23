@@ -40,7 +40,7 @@ jobs:
       
       - name: Build
         working-directory: ./sckc-app
-        run: npm run build --prod
+        run: npm run build -- --prod
 
       - name: Lint
         working-directory: ./sckc-app
@@ -48,7 +48,7 @@ jobs:
         
       - name: Test
         working-directory: ./sckc-app
-        run: npm run test --prod
+        run: npm run test -- --prod
 
       - name: ftp-action
         # You may pin to the exact commit or the version.
