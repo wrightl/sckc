@@ -48,7 +48,7 @@ jobs:
         
       - name: Test
         working-directory: ./sckc-app
-        run: npm run test:production
+        run: npm run test:prod
 
       - name: ftp-action
         # You may pin to the exact commit or the version.
