@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -14,14 +16,25 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTreeModule } from '@angular/material/tree';
 
 import { ActivitiesComponent } from './activities/activities.component';
+import { ContactusComponent } from './contactus/contactus.component';
+import { PersonComponent } from './person/person.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
-  declarations: [AppComponent, ActivitiesComponent],
+  declarations: [
+    AppComponent,
+    ActivitiesComponent,
+    ContactusComponent,
+    PersonComponent,
+    FooterComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatButtonModule,
+    MatCardModule,
+    MatExpansionModule,
     MatIconModule,
     MatListModule,
     MatSidenavModule,

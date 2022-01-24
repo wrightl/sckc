@@ -1,0 +1,8 @@
+<mat-card class="example-card">
+  <mat-card-title-group>
+    <mat-card-title>{{ name }}</mat-card-title>
+    <mat-card-subtitle>{{ role }}</mat-card-subtitle>
+    <img *ngIf="imageUrl" src="{{ imageUrl }}" />
+  </mat-card-title-group>
+  <mat-card-content> <div [innerHTML]="longText"></div></mat-card-content>
+</mat-card>
