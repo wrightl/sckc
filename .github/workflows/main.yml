@@ -16,7 +16,8 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build:
+  angular-app:
+    if: ${{ false }}  # disable for now
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -82,6 +83,34 @@ jobs:
           # strict or loose
           # log-level: # optional
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
+  api: 
+  
+    runs-on: windows-latest
+    
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: setup-msbuild
+        uses: microsoft/setup-msbuild@v1.1
+        #with:
+          # Folder location of where vswhere.exe is located if a self-hosted agent
+          #vswhere-path: # optional
+          # Version of Visual Studio to search; defaults to latest if not specified
+          #vs-version: # optional
+          # Enable searching for pre-release versions of Visual Studio/MSBuild
+          #vs-prerelease: # optional
+          # The preferred processor architecture of MSBuild. Can be either "x86" or "x64". "x64" is only available from Visual Studio version 17.0 and later.
+          #msbuild-architecture: # optional, default is x86
+          
+      - name: Setup nuget
+        uses: NuGet/setup-nuget@v1.0.5
+        
+      - name: Restore NuGet Packages
+        working-directory: ./sckc
+        run: nuget restore sckc.sln
+        
+      - name: Build and Publish Web App
+        working-directory: ./sckc
+        run: msbuild sckc.sln /p:Configuration=Release 
