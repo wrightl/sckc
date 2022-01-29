@@ -3,18 +3,24 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.809.9
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sckc.api", "sckc.api\sckc.api.csproj", "{A35BDB16-A35E-4448-A205-2ADEF02B7708}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sckc.api", "sckc.api\sckc.api.csproj", "{723CA91B-5FA6-4855-990A-E99FED6FD657}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sckc.api.Tests", "sckc.api.Tests\sckc.api.Tests.csproj", "{2253A9C5-726B-46AC-8F54-DBFA5E289BF7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|anycpu = Debug|anycpu
-		Release|anycpu = Release|anycpu
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A35BDB16-A35E-4448-A205-2ADEF02B7708}.Debug|anycpu.ActiveCfg = Debug|anycpu
-		{A35BDB16-A35E-4448-A205-2ADEF02B7708}.Debug|anycpu.Build.0 = Debug|anycpu
-		{A35BDB16-A35E-4448-A205-2ADEF02B7708}.Release|anycpu.ActiveCfg = Release|anycpu
-		{A35BDB16-A35E-4448-A205-2ADEF02B7708}.Release|anycpu.Build.0 = Release|anycpu
+		{723CA91B-5FA6-4855-990A-E99FED6FD657}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{723CA91B-5FA6-4855-990A-E99FED6FD657}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{723CA91B-5FA6-4855-990A-E99FED6FD657}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{723CA91B-5FA6-4855-990A-E99FED6FD657}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2253A9C5-726B-46AC-8F54-DBFA5E289BF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2253A9C5-726B-46AC-8F54-DBFA5E289BF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2253A9C5-726B-46AC-8F54-DBFA5E289BF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2253A9C5-726B-46AC-8F54-DBFA5E289BF7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
