@@ -33,6 +33,7 @@ speed-measure-plugin*.json
 .history/*
 */obj/
 */bin/
+*/*.csproj.user
 
 # misc
 /.angular/cache
