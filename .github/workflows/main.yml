@@ -114,3 +114,5 @@ jobs:
       - name: Build and Publish Web App
         working-directory: ./sckc
         run: msbuild sckc.sln /p:Configuration=Release 
+
+# add extra step to request a page or api in order to force a compilation 
