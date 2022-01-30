@@ -77,27 +77,6 @@ jobs:
             - !Global.asax
             - !Web.config
           log-level: verbose
-      
-      - name: ftp-action
-        # You may pin to the exact commit or the version.
-        # uses: SamKirkland/FTP-Deploy-Action@a9644610a0efe63542b1887c9317ce8628f56521
-        if: ${{ false }}  # disable for now
-        uses: SamKirkland/FTP-Deploy-Action@4.2.0
-        with:
-          # FTP host
-          server: ${{ secrets.ftphost}}
-          # FTP user
-          username: ${{ secrets.ftpuser}}
-          # FTP password
-          password: ${{ secrets.ftppassword}}
-          # Server port to connect to (read your web hosts docs)
-          # port: # optional
-          # protocol to deploy with - ftp, ftps, or ftps-legacy
-          # protocol: # optional
-          # Folder to upload from, must end with trailing slash /
-          local-dir: sckc/sckc.api/bin/
-          # Path to upload to on the server. Must end with trailing slash /
-          server-dir: app/bin/
 
   # build app
   angular-app:
@@ -137,7 +116,17 @@ jobs:
         working-directory: ./sckc-app
         run: npm run test:prod
 
-      - name: ftp-action
+  # build app
+  ftp:
+    needs: angular-app
+    if: ${{ true }}  # disable for now?
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+
+      - name: ftp-action-app
         # You may pin to the exact commit or the version.
         # uses: SamKirkland/FTP-Deploy-Action@a9644610a0efe63542b1887c9317ce8628f56521
         uses: SamKirkland/FTP-Deploy-Action@4.2.0
@@ -169,16 +158,7 @@ jobs:
           # strict or loose
           # log-level: # optional
 
-  # build app
-  ftp:
-    needs: api
-    if: ${{ true }}  # disable for now?
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      - name: ftp-action
+      - name: ftp-action-config
         # You may pin to the exact commit or the version.
         # uses: SamKirkland/FTP-Deploy-Action@a9644610a0efe63542b1887c9317ce8628f56521
         uses: SamKirkland/FTP-Deploy-Action@4.2.0
@@ -202,6 +182,27 @@ jobs:
             - !Global.asax
             - !Web.config
           log-level: verbose
+      
+      - name: ftp-action-bin
+        # You may pin to the exact commit or the version.
+        # uses: SamKirkland/FTP-Deploy-Action@a9644610a0efe63542b1887c9317ce8628f56521
+        if: ${{ true }}  # disable for now
+        uses: SamKirkland/FTP-Deploy-Action@4.2.0
+        with:
+          # FTP host
+          server: ${{ secrets.ftphost}}
+          # FTP user
+          username: ${{ secrets.ftpuser}}
+          # FTP password
+          password: ${{ secrets.ftppassword}}
+          # Server port to connect to (read your web hosts docs)
+          # port: # optional
+          # protocol to deploy with - ftp, ftps, or ftps-legacy
+          # protocol: # optional
+          # Folder to upload from, must end with trailing slash /
+          local-dir: sckc/sckc.api/bin/
+          # Path to upload to on the server. Must end with trailing slash /
+          server-dir: app/bin/
             
       - name: URL Health Check
         # You may pin to the exact commit or the version.
