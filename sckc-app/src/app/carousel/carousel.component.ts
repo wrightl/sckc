@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, ElementRef, ViewChild, EventEmitter, HostBinding, HostListener, Input, Output, OnDestroy, SimpleChanges} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, ViewChild, EventEmitter, HostBinding, HostListener, Input, Output, OnDestroy, SimpleChanges, OnInit, AfterViewInit, OnChanges} from '@angular/core';
 
 import {Images} from './interfaces';
 import {Touches} from './touches';
@@ -17,7 +17,7 @@ import {Properties as CarouselProperties} from './interfaces';
     styleUrls: ['./carousel.component.sass']
 })
 
-export class CarouselComponent implements OnDestroy {
+export class CarouselComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
     carousel:any;
     container:any;
     utils:any;

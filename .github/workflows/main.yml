@@ -136,7 +136,7 @@ jobs:
           # Path to upload to on the server. Must end with trailing slash /
           server-dir: app/
           # Path and name of the state file - this file is used to track which files have been deployed
-          # state-name: # optional
+          state-name: .ftp-deploy-app-sync-state.json # optional
           # Prints which modifications will be made with current config options, but doesnt actually make any changes
           # dry-run: # optional
           # Deletes ALL contents of server-dir, even items in excluded with exclude argument
@@ -168,6 +168,8 @@ jobs:
           local-dir: /home/runner/work/sckc/sckc/published_api/
           # Path to upload to on the server. Must end with trailing slash /
           server-dir: app/
+          # Path and name of the state file - this file is used to track which files have been deployed
+          state-name: .ftp-deploy-config-sync-state.json # optional
           exclude: |
             - .*
             - !Global.asax
@@ -194,6 +196,8 @@ jobs:
           local-dir: /home/runner/work/sckc/sckc/published_app/bin/
           # Path to upload to on the server. Must end with trailing slash /
           server-dir: app/bin/
+          # Path and name of the state file - this file is used to track which files have been deployed
+          state-name: .ftp-deploy-bin-sync-state.json # optional
             
       - name: URL Health Check
         # You may pin to the exact commit or the version.
