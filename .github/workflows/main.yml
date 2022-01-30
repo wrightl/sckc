@@ -135,7 +135,7 @@ jobs:
           # protocol to deploy with - ftp, ftps, or ftps-legacy
           # protocol: # optional
           # Folder to upload from, must end with trailing slash /
-          local-dir: sckc/sckc/sckc/sckc.api/bin/
+          local-dir: sckc/sckc.api/bin/
           # Path to upload to on the server. Must end with trailing slash /
           server-dir: app/bin/
       
@@ -155,7 +155,7 @@ jobs:
           # protocol to deploy with - ftp, ftps, or ftps-legacy
           # protocol: # optional
           # Folder to upload from, must end with trailing slash /
-          local-dir: sckc/sckc/sckc/sckc.api/
+          local-dir: sckc/sckc.api/
           # Path to upload to on the server. Must end with trailing slash /
           server-dir: app/
           exclude: |
