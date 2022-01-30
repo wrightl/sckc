@@ -11,6 +11,7 @@ import {Properties as CarouselProperties} from './interfaces';
 
 
 @Component({
+    // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'carousel, [carousel]',
     templateUrl: './carousel.component.html',
     styleUrls: ['./carousel.component.sass']
@@ -141,18 +142,21 @@ export class CarouselComponent implements OnDestroy {
         return this._images;
     }
 
+    // eslint-disable-next-line @angular-eslint/no-input-rename
     @Input('cellWidth') set cellWidth(value: number | '100%') {
         if (value) {
             this._cellWidth = value;
         }
     }
 
+    // eslint-disable-next-line @angular-eslint/no-input-rename
     @Input('counter') set isCounter(value: boolean) {
         if (value) {
             this._isCounter = value;
         }
     }
 
+    // eslint-disable-next-line @angular-eslint/no-input-rename
     @Input('loop') set loop(value: boolean) {
         if (value) {
             this._loop = value;
@@ -167,6 +171,7 @@ export class CarouselComponent implements OnDestroy {
         }
     }
 
+    // eslint-disable-next-line @angular-eslint/no-input-rename
     @Input('lightDOM') set lightDOM(value: boolean) {
         if (value) {
             this._lightDOM = value;
