@@ -19,6 +19,12 @@ namespace sckc.api.APIs
             string str;
             List<PhotoSet> photoSets = new List<PhotoSet>();
             string str1 = HttpContext.Current.Server.MapPath("/gallery");
+
+            if (!Directory.Exists(str1))
+            {
+                return Ok("Missing folder");
+            }
+
             string[] directories = Directory.GetDirectories(str1);
             for (int i = 0; i < (int)directories.Length; i++)
             {
