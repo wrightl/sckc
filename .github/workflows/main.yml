@@ -55,6 +55,7 @@ jobs:
       - name: ftp-action
         # You may pin to the exact commit or the version.
         # uses: SamKirkland/FTP-Deploy-Action@a9644610a0efe63542b1887c9317ce8628f56521
+        if: ${{ false }}  # disable for now
         uses: SamKirkland/FTP-Deploy-Action@4.2.0
         with:
           # FTP host
@@ -80,6 +81,7 @@ jobs:
       - name: ftp-action
         # You may pin to the exact commit or the version.
         # uses: SamKirkland/FTP-Deploy-Action@a9644610a0efe63542b1887c9317ce8628f56521
+        if: ${{ false }}  # disable for now
         uses: SamKirkland/FTP-Deploy-Action@4.2.0
         with:
           # FTP host
@@ -96,21 +98,6 @@ jobs:
           local-dir: sckc/sckc.api/bin/
           # Path to upload to on the server. Must end with trailing slash /
           server-dir: app/bin/
-            
-      - name: URL Health Check
-        # You may pin to the exact commit or the version.
-        # uses: Jtalk/url-health-check-action@74726480338ca80a0740c2fbc31bb577bb5ad1b0
-        uses: Jtalk/url-health-check-action@v2
-        with:
-          # Target URL(s), split by |
-          url: http://www.sheffieldcitykayakclub.co.uk/app/api/gallery
-          # Number of unsuccessful attempts to call URL before giving up
-          max-attempts: 1 # optional, default is 1
-          # Time between attempts (e.g. 3s, 1m)
-          retry-delay: 1 # optional, default is 3s
-          # Follow redirected location in case request resulted in 3XX status code
-          follow-redirect: false # optional, default is false
-          # Retry all errors, including 4xx (see man curl on --retry-all-errors).
 
   # build app
   angular-app:
@@ -215,3 +202,18 @@ jobs:
             - !Global.asax
             - !Web.config
           log-level: verbose
+            
+      - name: URL Health Check
+        # You may pin to the exact commit or the version.
+        # uses: Jtalk/url-health-check-action@74726480338ca80a0740c2fbc31bb577bb5ad1b0
+        uses: Jtalk/url-health-check-action@v2
+        with:
+          # Target URL(s), split by |
+          url: http://www.sheffieldcitykayakclub.co.uk/app/api/gallery
+          # Number of unsuccessful attempts to call URL before giving up
+          max-attempts: 1 # optional, default is 1
+          # Time between attempts (e.g. 3s, 1m)
+          retry-delay: 1 # optional, default is 3s
+          # Follow redirected location in case request resulted in 3XX status code
+          follow-redirect: false # optional, default is false
+          # Retry all errors, including 4xx (see man curl on --retry-all-errors).
