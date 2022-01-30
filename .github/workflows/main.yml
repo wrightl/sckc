@@ -48,6 +48,7 @@ jobs:
         run: npm run lint
         
       - name: Test
+        if: ${{ true }}  # disable for now
         working-directory: ./sckc-app
         run: npm run test:prod
 
