@@ -136,9 +136,14 @@ jobs:
           # protocol to deploy with - ftp, ftps, or ftps-legacy
           # protocol: # optional
           # Folder to upload from, must end with trailing slash /
-          local-dir: sckc/sckc.api/bin/
+          local-dir: sckc/sckc.api/
           # Path to upload to on the server. Must end with trailing slash /
-          server-dir: app/bin/
+          server-dir: app/
+          exclude: |
+            - .*
+            - !Global.asax
+            - !Web.config
+          log-level: verbose
       
       - name: ftp-action
         # You may pin to the exact commit or the version.
@@ -156,13 +161,9 @@ jobs:
           # protocol to deploy with - ftp, ftps, or ftps-legacy
           # protocol: # optional
           # Folder to upload from, must end with trailing slash /
-          local-dir: sckc/sckc.api/
+          local-dir: sckc/sckc.api/bin/
           # Path to upload to on the server. Must end with trailing slash /
-          server-dir: app/
-          exclude: |
-            - .*
-            - !Global.asax
-            - !Web.config
+          server-dir: app/bin/
             
       - name: URL Health Check
         # You may pin to the exact commit or the version.
