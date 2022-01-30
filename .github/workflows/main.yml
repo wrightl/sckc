@@ -51,32 +51,12 @@ jobs:
       # TODO: run unit test
       #
       #
-      
-      - name: ftp-action
-        # You may pin to the exact commit or the version.
-        # uses: SamKirkland/FTP-Deploy-Action@a9644610a0efe63542b1887c9317ce8628f56521
-        if: ${{ false }}  # disable for now
-        uses: SamKirkland/FTP-Deploy-Action@4.2.0
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2.5.1
         with:
-          # FTP host
-          server: ${{ secrets.ftphost}}
-          # FTP user
-          username: ${{ secrets.ftpuser}}
-          # FTP password
-          password: ${{ secrets.ftppassword}}
-          # Server port to connect to (read your web hosts docs)
-          # port: # optional
-          # protocol to deploy with - ftp, ftps, or ftps-legacy
-          # protocol: # optional
-          # Folder to upload from, must end with trailing slash /
-          local-dir: sckc/sckc.api/
-          # Path to upload to on the server. Must end with trailing slash /
-          server-dir: app/
-          exclude: |
-            - .*
-            - !Global.asax
-            - !Web.config
-          log-level: verbose
+          name: published_api
+          path: ./sckc/sckc.api
 
   # build app
   angular-app:
@@ -116,6 +96,12 @@ jobs:
         working-directory: ./sckc-app
         run: npm run test:prod
 
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2.5.1
+        with:
+          name: published_app
+          path: ./sckc-app/dist/sckc-app
+
   # build app
   ftp:
     needs: angular-app
@@ -126,7 +112,11 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
 
+      - name: Download all workflow run artifacts
+        uses: actions/download-artifact@v2.5.1
+
       - name: ftp-action-app
+        if: ${{ false }}  # disable for now?
         # You may pin to the exact commit or the version.
         # uses: SamKirkland/FTP-Deploy-Action@a9644610a0efe63542b1887c9317ce8628f56521
         uses: SamKirkland/FTP-Deploy-Action@4.2.0
@@ -159,6 +149,7 @@ jobs:
           # log-level: # optional
 
       - name: ftp-action-config
+        if: ${{ false }}  # disable for now?
         # You may pin to the exact commit or the version.
         # uses: SamKirkland/FTP-Deploy-Action@a9644610a0efe63542b1887c9317ce8628f56521
         uses: SamKirkland/FTP-Deploy-Action@4.2.0
@@ -186,7 +177,7 @@ jobs:
       - name: ftp-action-bin
         # You may pin to the exact commit or the version.
         # uses: SamKirkland/FTP-Deploy-Action@a9644610a0efe63542b1887c9317ce8628f56521
-        if: ${{ true }}  # disable for now
+        if: ${{ false }}  # disable for now
         uses: SamKirkland/FTP-Deploy-Action@4.2.0
         with:
           # FTP host
@@ -207,6 +198,7 @@ jobs:
       - name: URL Health Check
         # You may pin to the exact commit or the version.
         # uses: Jtalk/url-health-check-action@74726480338ca80a0740c2fbc31bb577bb5ad1b0
+        if: ${{ false }}  # disable for now?
         uses: Jtalk/url-health-check-action@v2
         with:
           # Target URL(s), split by |
