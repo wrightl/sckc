@@ -13,7 +13,8 @@ namespace sckc.api.APIs
 {
     public class GalleryController : ApiController
     {
-        [HttpGet("GetName")]
+        [HttpGet]
+        [Route("GetName")]
         public IHttpActionResult GetName()
         {
             return Ok("Worked");
