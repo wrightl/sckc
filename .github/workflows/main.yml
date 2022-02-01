@@ -170,9 +170,9 @@ jobs:
           # Remove existing files inside FTP remote folder
           cleanup: false # optional
           # includes
-          include: [ 'Global.asax', 'Web.config' ] # optional
+          include: '[ "Global.asax", "Web.config" ]' # optional
           # exclude
-          exclude: [] # optional
+          #exclude: [] # optional
           # passive
           pasive: false # optional
 
