@@ -9,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
-import {MatGridListModule} from '@angular/material/grid-list';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -27,6 +27,7 @@ import { CarouselComponent } from './carousel/carousel.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { PhotosComponent } from './photos/photos.component';
 import { HttpClientModule } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatToolbarModule,
     MatTreeModule,
   ],
-  providers: [{ provide: APP_BASE_HREF, useValue: '/app' }],
+  providers: [{ provide: APP_BASE_HREF, useValue: environment.baseHref }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+//{ provide: APP_BASE_HREF, useValue: '/app' }
