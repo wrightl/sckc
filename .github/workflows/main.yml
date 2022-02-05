@@ -164,7 +164,7 @@ jobs:
           # Ftp password
           password: ${{ secrets.ftppassword}}
           # The remote folder location of your FTP server
-          remote_folder: app/ # optional
+          remote_folder: /app/ # optional
           # The local folder location
           local_folder: /home/runner/work/sckc/sckc/published_api/ # optional, default is dist
           # Remove existing files inside FTP remote folder
