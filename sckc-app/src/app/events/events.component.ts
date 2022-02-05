@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
+import { EventsService } from '../services/events.service';
 import { CalendarEvent } from './calendar-event';
-import { EventsService } from './events.service';
 
 @Component({
   selector: 'app-events',
@@ -8,10 +8,14 @@ import { EventsService } from './events.service';
   styleUrls: ['./events.component.scss'],
 })
 export class EventsComponent {
-  events: CalendarEvent[];
+  isReady = false;
+  events: CalendarEvent[] = [];
   displayedColumns: string[] = ['date', 'name', 'book'];
 
   constructor(eventsService: EventsService) {
-    this.events = eventsService.getEvents();
+    eventsService.getEvents().subscribe((data: CalendarEvent[]) => {
+      this.events = data;
+      this.isReady = true;
+    });
   }
 }

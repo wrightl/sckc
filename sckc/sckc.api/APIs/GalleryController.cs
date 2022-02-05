@@ -1,25 +1,14 @@
-﻿using Newtonsoft.Json;
-using sckc.api.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web;
 using System.Web.Http;
+using sckc.api.Models;
 
 namespace sckc.api.APIs
 {
     public class GalleryController : ApiController
     {
-        [HttpGet]
-        [Route("GetName")]
-        public IHttpActionResult GetName()
-        {
-            return Ok("Worked");
-        }
-
         // GET api/<controller>
         public IHttpActionResult Get()
         {
