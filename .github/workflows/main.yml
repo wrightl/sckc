@@ -233,7 +233,7 @@ jobs:
         uses: indiesdev/curl@v1
         with:
           # The target url
-          url: http://www.sheffieldcitykayakclub.co.uk/app/api/gallery# optional
+          url: http://www.sheffieldcitykayakclub.co.uk/app/api/gallery # optional
           # timeout (millisec)
           timeout: 30000 # optional, default is 1000
           # show debug message of response
