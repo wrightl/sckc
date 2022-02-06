@@ -11,4 +11,6 @@ jobs:
         run: 
           echo ${{ env }}
           echo ${{ secrets.google_calendar_creds }}
+          echo isProduction ${{ env.isProduction }}
+          echo path ${{ env.path }}
         
