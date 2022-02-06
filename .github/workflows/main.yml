@@ -62,23 +62,15 @@ jobs:
       #
       
       - name: Copy deployment files
-        shell: cmd
         run: |
-          dir
-          echo about to cd
           cd ./sckc/sckc.api
-          dir
-          echo about to mkdir
           mkdir deploy
-          dir
-          echo about to copy global
-          xcopy global.asax .\deploy\
-          dir
-          echo about to copy web.config
-          xcopy web.config .\deploy\
-          dir
-          echo about to copy bin 1
           mkdir .\deploy\bin
+          xcopy global.asax .\deploy\
+          xcopy web.config .\deploy\
+          echo about to copy-item
+          Copy-Item ".\bin\*" -Destination ".\deploy\bin" -Recurse -Force
+          echo about to copy bin 1
           xcopy ".\bin\" ".\deploy\" /e
           echo about to copy bin 2
           xcopy bin\ .\deploy\ /e
@@ -93,16 +85,6 @@ jobs:
           dir
           cd bin
           dir
-          
-      - name: Copy Directory
-        # You may pin to the exact commit or the version.
-        # uses: MadaraUchiha/copy-action@7ddff6fc153a2ea2cd0fb88ed9750544c051e399
-        uses: MadaraUchiha/copy-action@0.0.1
-        with:
-          # Source file
-          source: ./sckc/sckc.api/bin/
-          # Target file
-          target: ./sckc/sckc.api/deploy/bin/
           
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
