@@ -62,6 +62,7 @@ jobs:
       #
       
       - name: Copy deployment files
+        shell: cmd
         run: |
           dir
           echo about to cd
@@ -76,16 +77,16 @@ jobs:
           echo about to copy web.config
           xcopy web.config .\deploy\
           dir
-          echo about to copy bin #1
+          echo about to copy bin 1
           mkdir .\deploy\bin
           xcopy .\bin\ .\deploy\ /e
-          echo about to copy bin #2
+          echo about to copy bin 2
           xcopy bin\ .\deploy\ /e
-          echo about to copy bin #3
+          echo about to copy bin 3
           xcopy bin\ deploy\ /e
-          echo about to copy bin #4
+          echo about to copy bin 4
           xcopy bin\ .\deploy\ /e
-          echo about to copy bin #5
+          echo about to copy bin 5
           xcopy .\bin\ .\deploy\
           dir
           cd deploy
