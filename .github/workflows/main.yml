@@ -48,6 +48,15 @@ jobs:
         working-directory: ./sckc
         run: msbuild sckc.sln /p:Configuration=Release
         
+      - name: Write File
+        uses: DamianReeves/write-file-action@v1.0
+        with:
+          path: ./sckc/sckc.api/data/sckc.data
+          # The contents of the file
+          contents: ${{ secrets.google_calendar_creds }}
+          # The mode of writing to use: `overwrite`, `append`, or `preserve`.
+          write-mode: overwite # optional, default is preserve
+        
       # TODO: run unit test
       #
       #
@@ -61,7 +70,7 @@ jobs:
   # build app
   angular-app:
     needs: api
-    if: ${{ true }}  # disable for now
+    if: ${{ false }}  # disable for now
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -105,7 +114,7 @@ jobs:
   # build app
   ftp:
     needs: angular-app
-    if: ${{ true }}  # disable for now?
+    if: ${{ false }}  # disable for now?
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
