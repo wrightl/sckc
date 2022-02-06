@@ -65,26 +65,9 @@ jobs:
         run: |
           cd ./sckc/sckc.api
           mkdir deploy
-          mkdir .\deploy\bin
-          xcopy global.asax .\deploy\
-          xcopy web.config .\deploy\
-          echo about to copy-item
+          Copy-Item "global.asax" -Destination ".\deploy\" -Force
+          Copy-Item "web.config" -Destination ".\deploy\" -Force
           Copy-Item ".\bin\*" -Destination ".\deploy\bin" -Recurse -Force
-          echo about to copy bin 1
-          xcopy ".\bin\" ".\deploy\" /e
-          echo about to copy bin 2
-          xcopy bin\ .\deploy\ /e
-          echo about to copy bin 3
-          xcopy bin\ deploy\ /e
-          echo about to copy bin 4
-          xcopy bin\ .\deploy\ /e
-          echo about to copy bin 5
-          xcopy .\bin\ .\deploy\
-          dir
-          cd deploy
-          dir
-          cd bin
-          dir
           
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
