@@ -1,0 +1,14 @@
+name: Main deployment workflow
+
+on: workflow_call
+
+jobs:
+  output_variables:
+    name: Output variables
+    runs-on: ubuntu-latest
+    steps:
+      - name: output
+        run: 
+          echo ${{ env }}
+          echo ${{ secrets.google_calendar_creds }}
+        
