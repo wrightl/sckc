@@ -1,3 +1,5 @@
 /sckc-app/node_modules
 .DS_Store
 .vs/
+
+/sckc/sckc.api/data
