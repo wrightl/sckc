@@ -77,7 +77,9 @@ jobs:
           xcopy web.config .\deploy\
           dir
           echo about to copy bin
-          xcopy .\bin\ .\deploy\bin\ /e
+          xcopy .\bin\ .\deploy\ /e
+          dir
+          cd deploy
           dir
 
       - name: Upload Artifact
