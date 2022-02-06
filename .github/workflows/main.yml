@@ -221,6 +221,7 @@ jobs:
       - name: Alt health check
         # You may pin to the exact commit or the version.
         # uses: indiesdev/curl@60fb289d6e72261f095d7cefd578e659dd1b5182
+        if: ${{ false }}  # disable for now?
         uses: indiesdev/curl@v1
         with:
           # The target url
