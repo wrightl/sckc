@@ -134,8 +134,6 @@ jobs:
 
       - name: ftp-action-app
         if: ${{ true }}  # disable for now?
-        # You may pin to the exact commit or the version.
-        # uses: SamKirkland/FTP-Deploy-Action@a9644610a0efe63542b1887c9317ce8628f56521
         uses: SamKirkland/FTP-Deploy-Action@4.2.0
         with:
           # FTP host
@@ -144,60 +142,17 @@ jobs:
           username: ${{ secrets.ftpuser}}
           # FTP password
           password: ${{ secrets.ftppassword}}
-          # Server port to connect to (read your web hosts docs)
-          # port: # optional
-          # protocol to deploy with - ftp, ftps, or ftps-legacy
-          # protocol: # optional
           # Folder to upload from, must end with trailing slash /
           local-dir: /home/runner/work/sckc/sckc/published_app/
           # Path to upload to on the server. Must end with trailing slash /
           server-dir: app/
           # Path and name of the state file - this file is used to track which files have been deployed
           state-name: .ftp-deploy-app-sync-state.json # optional
-          # Prints which modifications will be made with current config options, but doesnt actually make any changes
-          # dry-run: # optional
-          # Deletes ALL contents of server-dir, even items in excluded with exclude argument
-          # dangerous-clean-slate: # optional
-          # An array of glob patterns, these files will not be included in the publish/delete process
-          # exclude: # optional
           # How verbose should the information be - minimal, standard, or verbose
-          # log-level: # optional
-          # strict or loose
           log-level: verbose # optional
-
-      - name: FTP Deployer
-        if: ${{ false }}  # disable for now?
-        # You may pin to the exact commit or the version.
-        # uses: sand4rt/ftp-deployer@b4d8a88f104b46a1bcfac8f69b3413986cc0ce28
-        uses: sand4rt/ftp-deployer@v1.3
-        with:
-          # SFTP on
-          sftp: false # optional
-          # FTP host URL like: ftp.host.com or sftp.host.com
-          host: ${{ secrets.ftphost}}
-          # FTP port
-          #port: # optional, default is 21
-          # Ftp username
-          username: ${{ secrets.ftpuser}}
-          # Ftp password
-          password: ${{ secrets.ftppassword}}
-          # The remote folder location of your FTP server
-          remote_folder: /app/ # optional
-          # The local folder location
-          local_folder: /home/runner/work/sckc/sckc/published_api/ # optional, default is dist
-          # Remove existing files inside FTP remote folder
-          cleanup: false # optional
-          # includes
-          include: '[ "Global.asax", "Web.config", "bin/**" ]' # optional
-          # exclude
-          #exclude: [] # optional
-          # passive
-          pasive: false # optional
 
       - name: ftp-action-api
         if: ${{ true }}  # disable for now?
-        # You may pin to the exact commit or the version.
-        # uses: SamKirkland/FTP-Deploy-Action@a9644610a0efe63542b1887c9317ce8628f56521
         uses: SamKirkland/FTP-Deploy-Action@4.2.0
         with:
           # FTP host
@@ -206,10 +161,6 @@ jobs:
           username: ${{ secrets.ftpuser}}
           # FTP password
           password: ${{ secrets.ftppassword}}
-          # Server port to connect to (read your web hosts docs)
-          # port: # optional
-          # protocol to deploy with - ftp, ftps, or ftps-legacy
-          # protocol: # optional
           # Folder to upload from, must end with trailing slash /
           local-dir: /home/runner/work/sckc/sckc/published_api/
           # Path to upload to on the server. Must end with trailing slash /
@@ -217,23 +168,8 @@ jobs:
           # Path and name of the state file - this file is used to track which files have been deployed
           state-name: .ftp-deploy-api-sync-state.json # optional
           log-level: verbose
-          
-      - name: Alt health check
-        # You may pin to the exact commit or the version.
-        # uses: indiesdev/curl@60fb289d6e72261f095d7cefd578e659dd1b5182
-        if: ${{ false }}  # disable for now?
-        uses: indiesdev/curl@v1
-        with:
-          # The target url
-          url: http://www.sheffieldcitykayakclub.co.uk/app/api/gallery # optional
-          # timeout (millisec)
-          timeout: 30000 # optional, default is 1000
-          # show debug message of response
-          is_debug: true # optional
             
       - name: URL Health Check
-        # You may pin to the exact commit or the version.
-        # uses: Jtalk/url-health-check-action@74726480338ca80a0740c2fbc31bb577bb5ad1b0
         if: ${{ true }}  # disable for now?
         uses: Jtalk/url-health-check-action@v2
         with:
