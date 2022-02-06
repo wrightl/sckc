@@ -61,12 +61,20 @@ jobs:
       #
       #
       
-      - name: Copy deplyment files
+      - name: Copy deployment files
         run: |
+          dir
+          echo about to cd
           cd ./sckc/sckc.api
+          dir
+          echo about to mkdir
           mkdir deploy
+          dir
+          echo about to copy global
           xcopy global.asax deploy\
+          echo about to copy web.config
           xcopy web.config deploy\
+          echo about to copy bin
           xcopy bin\ deploy\bin\ /e
 
       - name: Upload Artifact
