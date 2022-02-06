@@ -71,11 +71,14 @@ jobs:
           mkdir deploy
           dir
           echo about to copy global
-          xcopy global.asax deploy\
+          xcopy global.asax .\deploy\
+          dir
           echo about to copy web.config
-          xcopy web.config deploy\
+          xcopy web.config .\deploy\
+          dir
           echo about to copy bin
-          xcopy bin\ deploy\bin\ /e
+          xcopy .\bin\ .\deploy\bin\ /e
+          dir
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
