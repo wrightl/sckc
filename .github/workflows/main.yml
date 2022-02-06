@@ -48,6 +48,15 @@ jobs:
         working-directory: ./sckc
         run: msbuild sckc.sln /p:Configuration=Release
         
+      - name: Write File
+        uses: DamianReeves/write-file-action@v1.0
+        with:
+          path: ./sckc/sckc.api/data/sckc.data
+          # The contents of the file
+          contents: ${{ secrets.google_calendar_creds }}
+          # The mode of writing to use: `overwrite`, `append`, or `preserve`.
+          write-mode: overwrite # optional, default is preserve
+        
       # TODO: run unit test
       #
       #
@@ -254,3 +263,14 @@ jobs:
           # Follow redirected location in case request resulted in 3XX status code
           follow-redirect: false # optional, default is false
           # Retry all errors, including 4xx (see man curl on --retry-all-errors).
+      
+      - name: Delete Artifacts
+        if: ${{ true }}  # disable for now?
+        uses: GeekyEggo/delete-artifact@v1.0.0
+        with:
+          # The name of the artifact to delete; multiple names can be supplied on new lines.
+          name: |
+            published_api
+            published_app
+          # Indicates whether the action should fail upon encountering an error.
+          failOnError: false # optional, default is true
