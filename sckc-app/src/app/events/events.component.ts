@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { EventsService } from '../services/events.service';
-import { CalendarEvent } from './calendar-event';
+import { CalendarEvent } from '../models/calendar-event';
 
 @Component({
   selector: 'app-events',

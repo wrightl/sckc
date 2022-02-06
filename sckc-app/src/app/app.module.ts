@@ -19,7 +19,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTreeModule } from '@angular/material/tree';
 
 import { ActivitiesComponent } from './activities/activities.component';
-import { ContactusComponent } from './contactus/contactus.component';
+import { PeopleComponent } from './people/people.component';
 import { PersonComponent } from './person/person.component';
 import { FooterComponent } from './footer/footer.component';
 import { EventsComponent } from './events/events.component';
@@ -28,18 +28,28 @@ import { GalleryComponent } from './gallery/gallery.component';
 import { PhotosComponent } from './photos/photos.component';
 import { HttpClientModule } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { LocationComponent } from './location/location.component';
+import { PoolComponent } from './pool/pool.component';
+import { RiverComponent } from './river/river.component';
+import { ReportsComponent } from './reports/reports.component';
+import { TripReportComponent } from './trip-report/trip-report.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ActivitiesComponent,
-    ContactusComponent,
+    PeopleComponent,
     PersonComponent,
     FooterComponent,
     EventsComponent,
     CarouselComponent,
     GalleryComponent,
     PhotosComponent,
+    LocationComponent,
+    PoolComponent,
+    RiverComponent,
+    ReportsComponent,
+    TripReportComponent,
   ],
   imports: [
     BrowserModule,

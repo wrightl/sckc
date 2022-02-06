@@ -110,12 +110,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APIs\ReportsController.cs" />
     <Compile Include="APIs\GalleryController.cs" />
     <None Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Report.cs" />
     <Compile Include="Models\PhotoSet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="APIs\EventsController.cs" />
@@ -140,6 +142,7 @@
     <Folder Include="gallery\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="data\tripreports.data" />
     <None Include="packages.config" />
   </ItemGroup>
   <PropertyGroup>

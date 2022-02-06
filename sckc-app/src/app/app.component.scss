@@ -32,9 +32,29 @@ h1.app-name {
 }
 
 mat-sidenav {
-  width: 200px;
+  width: 240px;
 }
 
 mat-sidenav-content {
   padding: 0 12px;
+}
+
+.mat-expansion-panel-header {
+  padding: 0 16px;
+  font-size: 16px;
+
+  &.mat-expanded {
+    height:48px;
+  }
+}
+
+.mat-expansion-panel {
+
+  .mat-nav-list.mat-list-base {
+    padding-top: 0px;
+  }
+
+  .mat-expansion-panel-body {
+    padding-bottom: 0px;
+  }
 }

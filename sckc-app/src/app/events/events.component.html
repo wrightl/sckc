@@ -1,8 +1,10 @@
-<table mat-table [dataSource]="events">
+<mat-spinner *ngIf="!isReady"></mat-spinner>
+
+<table *ngIf="isReady" mat-table [dataSource]="events">
   <!-- Position Column -->
   <ng-container matColumnDef="date">
     <th mat-header-cell *matHeaderCellDef>Date</th>
-    <td mat-cell *matCellDef="let element">{{ element.Date }}</td>
+    <td mat-cell *matCellDef="let element">{{ element.LocaleDate }}</td>
   </ng-container>
 
   <!-- Name Column -->

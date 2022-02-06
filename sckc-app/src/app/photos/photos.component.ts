@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { GalleryServiceService } from '../services/gallery-service.service';
-import { PhotoSet } from './photo-set';
+import { GalleryService } from '../services/gallery.service';
+import { PhotoSet } from '../models/photo-set';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -14,7 +14,7 @@ export class PhotosComponent implements OnInit {
   photoSets: PhotoSet[] = [];
   baseUrl = environment.baseUrl;
 
-  constructor(private service: GalleryServiceService) { }
+  constructor(private service: GalleryService) { }
 
   ngOnInit(): void {
     this.service.getPhotoSets()

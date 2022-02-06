@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { PhotoSet } from '../photos/photo-set';
+import { PhotoSet } from '../models/photo-set';
 
 @Injectable({
   providedIn: 'root'
 })
-export class GalleryServiceService {
+export class GalleryService {
 
   constructor(private http: HttpClient) { }
 

@@ -1,4 +1,4 @@
-import { CalendarEvent } from './calendar-event';
+import { CalendarEvent } from '../models/calendar-event';
 
 export const MOCK_EVENTS: CalendarEvent[] = [
   {

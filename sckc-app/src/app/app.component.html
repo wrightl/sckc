@@ -17,51 +17,46 @@
       [fixedInViewport]="mobileQuery.matches"
       fixedTopGap="56"
     >
-      <!-- <mat-nav-list>
-        <mat-list-item routerLink="#">Home</mat-list-item>
-        <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
-          <mat-expansion-panel-header> Activities </mat-expansion-panel-header>
-          <mat-nav-list dense>
-            <a mat-list-item routerLink="#">Calendar</a>
-            <a mat-list-item routerLink="#">River</a>
-          </mat-nav-list>
-        </mat-expansion-panel>
-        <mat-list-item routerLink="#">Activities</mat-list-item>
-        <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
-          <mat-expansion-panel-header> News </mat-expansion-panel-header>
-          <mat-nav-list dense>
-            <a mat-list-item routerLink="#"
-              ><mat-icon>attach_money</mat-icon>Billing</a
-            >
-            <a mat-list-item routerLink="#"
-              ><mat-icon>notification_important</mat-icon>Notification</a
-            >
-          </mat-nav-list>
-        </mat-expansion-panel>
-      </mat-nav-list> -->
       <mat-nav-list>
-        <a mat-list-item routerLink="."> Home </a>
-        <a mat-list-item routerLink="/activities"> Activities </a>
-        <a mat-list-item routerLink="/events"> Calendar </a>
-        <a mat-list-item routerLink="."> River </a>
-        <a mat-list-item routerLink="."> Trips </a>
-        <a mat-list-item routerLink="."> Slalom </a>
-        <a mat-list-item routerLink="."> News </a>
-        <a mat-list-item routerLink="."> Latest News </a>
-        <a mat-list-item routerLink="."> Trip Reports </a>
-        <a mat-list-item routerLink=""> Gallery </a>
-        <a mat-list-item routerLink="/photos"> Photos </a>
-        <a mat-list-item routerLink="."> Videos </a>
-        <a mat-list-item routerLink="."> Resources </a>
-        <a mat-list-item routerLink="."> Membership </a>
-        <a mat-list-item routerLink="."> Links </a>
-        <a mat-list-item routerLink="."> Coaching </a>
-        <a mat-list-item routerLink="."> Archives </a>
-        <a mat-list-item routerLink="."> About Us </a>
-        <a mat-list-item routerLink="/contactus"> Contact Us </a>
-        <a mat-list-item routerLink="."> Location </a>
-        <a mat-list-item routerLink="."> Club History </a>
-        <a mat-list-item routerLink="."> Club Officials </a>
+        <mat-list-item routerLink=".">Home</mat-list-item>
+        <mat-expansion-panel [class.mat-elevation-z0]="true">
+          <mat-expansion-panel-header> Activities </mat-expansion-panel-header>
+          <mat-nav-list>
+            <a mat-list-item routerLink="/pool"> Pool </a>
+            <a mat-list-item routerLink="/river"> River </a>
+            <a mat-list-item routerLink="/trips"> Trips </a>
+            <a mat-list-item routerLink="/coaching"> Coaching? </a>
+            <a mat-list-item routerLink="/reports"> Trip Reports </a>
+          </mat-nav-list>
+        </mat-expansion-panel>
+        <mat-list-item routerLink="/events">Events</mat-list-item>
+        <mat-expansion-panel [class.mat-elevation-z0]="true">
+          <mat-expansion-panel-header> Club Information </mat-expansion-panel-header>
+          <mat-nav-list>
+            <a mat-list-item routerLink="/location"> Location </a>
+            <a mat-list-item routerLink="/prices"> Prices </a>
+            <a mat-list-item routerLink="/coaches"> Coaches? </a>
+            <a mat-list-item routerLink="/people"> Club Officials </a>
+            <a mat-list-item routerLink="/history"> Club History </a>
+            <a mat-list-item routerLink="/documents"> Documents & Policies </a>
+            <a mat-list-item routerLink="/conduct"> Code of Conduct </a>
+            <a mat-list-item routerLink="/covid"> COVID </a>
+          </mat-nav-list>
+        </mat-expansion-panel>
+        <mat-expansion-panel [class.mat-elevation-z0]="true">
+          <mat-expansion-panel-header> Membership </mat-expansion-panel-header>
+          <mat-nav-list>
+            <a mat-list-item routerLink="/joining"> Joining </a>
+          </mat-nav-list>
+        </mat-expansion-panel>
+        <mat-list-item routerLink="/photos">Photos</mat-list-item>
+        <!-- <mat-expansion-panel [class.mat-elevation-z0]="true">
+          <mat-expansion-panel-header> Gallery </mat-expansion-panel-header>
+          <mat-nav-list>
+            <a mat-list-item routerLink="/photos"> Photos </a>
+            <a mat-list-item routerLink="/videos"> Videos </a>
+          </mat-nav-list>
+        </mat-expansion-panel> -->
       </mat-nav-list>
     </mat-sidenav>
 

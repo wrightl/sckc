@@ -1,0 +1,11 @@
+<mat-spinner *ngIf="isReady"></mat-spinner>
+
+<mat-expansion-panel *ngFor="let report of reports">
+    <mat-expansion-panel-header>
+        {{report.title}}
+    </mat-expansion-panel-header>
+
+    <ng-template matExpansionPanelContent>
+        <app-trip-report [report]="report"></app-trip-report>
+    </ng-template>
+</mat-expansion-panel>
