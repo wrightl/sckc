@@ -55,7 +55,7 @@ jobs:
           # The contents of the file
           contents: ${{ secrets.google_calendar_creds }}
           # The mode of writing to use: `overwrite`, `append`, or `preserve`.
-          write-mode: overwite # optional, default is preserve
+          write-mode: overwrite # optional, default is preserve
         
       # TODO: run unit test
       #
