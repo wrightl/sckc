@@ -1,0 +1,22 @@
+name: PR Staged CI
+
+# Controls when the workflow will run
+on:
+    # Triggers the workflow on push or pull request events but only for the master branch
+    pull_request:
+        branches: [master]
+
+    # Allows you to run this workflow manually from the Actions tab
+    workflow_dispatch:
+
+jobs:
+    call-deployment-workflow:
+        uses: ./.github/workflows/deployment.yml
+        with:
+            env_type: staged
+            deployment_path: app/
+        secrets:
+            google_calendar_creds: ${{ secrets.google_calendar_creds }}
+            ftphost: ${{ secrets.ftphost }}
+            ftpuser: ${{ secrets.ftpuser }}
+            ftppassword: ${{ secrets.ftppassword }}
