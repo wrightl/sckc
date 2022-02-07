@@ -6,18 +6,18 @@ on:
             env_type:
                 required: true
                 type: string
-            deployment_path:
-                required: true
-                type: string
-        secrets:
-            google_calendar_creds:
-                required: true
-            ftphost:
-                required: true
-            ftpuser:
-                required: true
-            ftppassword:
-                required: true
+#             deployment_path:
+#                 required: true
+#                 type: string
+#         secrets:
+#             google_calendar_creds:
+#                 required: true
+#             ftphost:
+#                 required: true
+#             ftpuser:
+#                 required: true
+#             ftppassword:
+#                 required: true
 
 jobs:
     output_variables:
