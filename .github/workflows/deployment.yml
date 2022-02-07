@@ -12,16 +12,12 @@ on:
         secrets:
             google_calendar_creds:
                 required: true
-                type: string
             ftphost:
                 required: true
-                type: string
             ftpuser:
                 required: true
-                type: string
             ftppassword:
                 required: true
-                type: string
 
 jobs:
     output_variables:
