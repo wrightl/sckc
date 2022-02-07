@@ -14,8 +14,8 @@ jobs:
         uses: ./.github/workflows/deployment.yml
         with:
             env_type: production
-            deployment_path: /app
-            google_calendar_creds: ${{ secrets.google_calendar_creds }}
-            ftphost: ${{ secrets.ftphost }}
-            ftpuser: ${{ secrets.ftpuser }}
-            ftppassword: ${{ secrets.ftppassword }}
+#             deployment_path: /app
+#             google_calendar_creds: ${{ secrets.google_calendar_creds }}
+#             ftphost: ${{ secrets.ftphost }}
+#             ftpuser: ${{ secrets.ftpuser }}
+#             ftppassword: ${{ secrets.ftppassword }}
