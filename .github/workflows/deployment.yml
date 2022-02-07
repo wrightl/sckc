@@ -1,16 +1,35 @@
 name: Main deployment workflow
 
-on: workflow_call
+on:
+    workflow_call:
+        inputs:
+            env_type:
+                required: true
+                type: string
+            deployment_path:
+                required: true
+                type: string
+        secrets:
+            google_calendar_creds:
+                required: true
+                type: string
+            ftphost:
+                required: true
+                type: string
+            ftpuser:
+                required: true
+                type: string
+            ftppassword:
+                required: true
+                type: string
 
 jobs:
-  output_variables:
-    name: Output variables
-    runs-on: windows-latest
-    steps:
-      - name: output
-        run: 
-          echo ${{ env }}
-          echo ${{ secrets.google_calendar_creds }}
-          echo isProduction ${{ env.isProduction }}
-          echo path ${{ env.path }}
-        
+    output_variables:
+        name: Output variables
+        runs-on: windows-latest
+        steps:
+            - name: output
+              run: echo ${{ env }}
+                  echo ${{ secrets.google_calendar_creds }}
+                  echo isProduction ${{ env.isProduction }}
+                  echo path ${{ env.path }}
