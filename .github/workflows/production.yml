@@ -13,9 +13,9 @@ jobs:
     call-deployment-workflow:
         uses: ./.github/workflows/deployment.yml
         with:
+            google_calendar_creds: ${{ secrets.google_calendar_creds }}
             env_type: production
             deployment_path: /app
-            google_calendar_creds: ${{ secrets.google_calendar_creds }}
 #             ftphost: ${{ secrets.ftphost }}
 #             ftpuser: ${{ secrets.ftpuser }}
 #             ftppassword: ${{ secrets.ftppassword }}
