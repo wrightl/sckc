@@ -8,12 +8,15 @@ on:
 
     # Allows you to run this workflow manually from the Actions tab
     workflow_dispatch:
+    
+env:
+    google_calendar_creds: ${{ secrets.google_calendar_creds }}
 
 jobs:
     call-deployment-workflow:
         uses: ./.github/workflows/deployment.yml
         with:
-            google_calendar_creds: ${{ secrets.google_calendar_creds }}
+            google_calendar_creds: ${{ env.google_calendar_creds }}
             env_type: production
             deployment_path: /app
 #             ftphost: ${{ secrets.ftphost }}
