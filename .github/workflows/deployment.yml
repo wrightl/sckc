@@ -26,7 +26,7 @@ jobs:
         steps:
             - name: output
               run: |
-                  echo ${{ format('http://www.sheffieldcitykayakclub.co.uk/{0}}api/gallery', inputs.deployment_path) }}
+                  echo ${{ format('http://www.sheffieldcitykayakclub.co.uk/{0}api/gallery', inputs.deployment_path) }}
                   echo ${{ secrets.google_calendar_creds }}
                   echo isProduction ${{ inputs.env_type }}
                   echo path ${{ inputs.deployment_path }}
