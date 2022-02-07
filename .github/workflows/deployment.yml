@@ -6,12 +6,12 @@ on:
             env_type:
                 required: true
                 type: string
-#             deployment_path:
-#                 required: true
-#                 type: string
-#         secrets:
-#             google_calendar_creds:
-#                 required: true
+            deployment_path:
+                required: true
+                type: string
+        secrets:
+            google_calendar_creds:
+                required: true
 #             ftphost:
 #                 required: true
 #             ftpuser:
@@ -27,5 +27,5 @@ jobs:
             - name: output
               run: echo ${{ env }}
                   echo ${{ secrets.google_calendar_creds }}
-                  echo isProduction ${{ env.isProduction }}
-                  echo path ${{ env.path }}
+                  echo isProduction ${{ inputs.env_type }}
+                  echo path ${{ inputs.deployment_path }}
