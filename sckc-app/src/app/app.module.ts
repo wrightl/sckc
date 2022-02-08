@@ -33,6 +33,7 @@ import { PoolComponent } from './pool/pool.component';
 import { RiverComponent } from './river/river.component';
 import { ReportsComponent } from './reports/reports.component';
 import { TripReportComponent } from './trip-report/trip-report.component';
+import { EventCalendarComponent } from './event-calendar/event-calendar.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { TripReportComponent } from './trip-report/trip-report.component';
     RiverComponent,
     ReportsComponent,
     TripReportComponent,
+    EventCalendarComponent,
   ],
   imports: [
     BrowserModule,

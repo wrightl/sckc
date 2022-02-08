@@ -5,11 +5,4 @@
     >enquiries@sheffieldcitykayakclub.co.uk</a
   >, or alternatively contact one of our committee members below.
 </p>
-<app-person
-  *ngFor="let person of people"
-  [name]="person.name"
-  [role]="person.role"
-  [emailAddress]="person.emailAddress"
-  [imageUrl]="person.imageUrl"
-  [longText]="person.longText"
-></app-person>
+<app-person *ngFor="let person of people" [person]="person"></app-person>

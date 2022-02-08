@@ -18,7 +18,7 @@ namespace sckc.api.APIs
 
             if (!Directory.Exists(str1))
             {
-                return Ok("Missing folder");
+                throw new Exception("Missing folder");
             }
 
             string[] directories = Directory.GetDirectories(str1);

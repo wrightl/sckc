@@ -95,7 +95,7 @@ namespace sckc.api.APIs
 			}
 		}
 
-		public static List<ClubEvent> GetClubEvents()
+		public static IEnumerable<ClubEventMonth> GetClubEvents()
 		{
 			CalendarService calendarService = CreateGoogleCalendarService();
 			EventsResource.ListRequest listRequest = calendarService.Events.List(ClubCalendarId);
@@ -126,10 +126,17 @@ namespace sckc.api.APIs
 			catch (Exception)
 			{
 			}
-			return (from entry in list
-					where entry.Status != "cancelled"
-					orderby entry.StartDateTime
-					select entry).ToList();
+
+			var months = list.Where(ev => !ev.Status.Equals("cancelled"))
+							 .GroupBy(ev => ev.StartDateTime.ToString("MMMMYYYY"))
+							 .Select((key, group) => new ClubEventMonth() { Events = key.ToList(), Month = key.FirstOrDefault()?.StartDateTime.ToString("MMMM") });
+
+			return months;
+
+			//return (from entry in list
+			//		where entry.Status != "cancelled"
+			//		orderby entry.StartDateTime
+			//		select entry).ToList();
 		}
 
 		private static DateTime GetDateTime(EventDateTime dt)

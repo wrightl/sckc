@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Person } from '../data/people';
 
 @Component({
   selector: 'app-person',
@@ -6,11 +7,6 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./person.component.scss'],
 })
 export class PersonComponent {
-  @Input() name = '';
-  @Input() role = '';
-  @Input() imageUrl = '';
-  @Input() longText = '';
-  @Input() emailAddress = '';
-
-  constructor() {}
+  @Input()
+  person!: Person;
 }
