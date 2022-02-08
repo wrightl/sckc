@@ -2,5 +2,5 @@ export const environment = {
   production: true,
   baseUrl: '',
   baseApiUrl: '',
-  baseHref: '',
+  baseHref: '/app',
 };

@@ -20,13 +20,178 @@ on:
                 required: true
 
 jobs:
-    output_variables:
-        name: Output variables
+    # build api
+    api:
         runs-on: windows-latest
+
         steps:
-            - name: output
+            # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            - name: setup-msbuild
+              uses: microsoft/setup-msbuild@v1.1
+              #with:
+              # Folder location of where vswhere.exe is located if a self-hosted agent
+              #vswhere-path: # optional
+              # Version of Visual Studio to search; defaults to latest if not specified
+              #vs-version: # optional/p:DeployOnBuild=true /p:PublishProfile=FolderProfile
+              # Enable searching for pre-release versions of Visual Studio/MSBuild
+              #vs-prerelease: # optional
+              # The preferred processor architecture of MSBuild. Can be either "x86" or "x64". "x64" is only available from Visual Studio version 17.0 and later.
+              #msbuild-architecture: # optional, default is x86
+
+            - name: Setup nuget
+              uses: NuGet/setup-nuget@v1.0.5
+
+            - name: Restore NuGet Packages
+              working-directory: ./sckc
+              run: nuget restore sckc.sln
+
+            - name: Build Web App
+              working-directory: ./sckc
+              run: msbuild sckc.sln /p:Configuration=Release
+
+            - name: Write File
+              uses: DamianReeves/write-file-action@v1.0
+              with:
+                  path: ./sckc/sckc.api/data/sckc.data
+                  # The contents of the file
+                  contents: ${{ secrets.google_calendar_creds }}
+                  # The mode of writing to use: `overwrite`, `append`, or `preserve`.
+                  write-mode: overwrite # optional, default is preserve
+
+            # TODO: run unit test
+            #
+            #
+
+            - name: Copy deployment files
               run: |
-                  echo ${{ format('http://www.sheffieldcitykayakclub.co.uk/{0}api/gallery', inputs.deployment_path) }}
-                  echo ${{ secrets.google_calendar_creds }}
-                  echo isProduction ${{ inputs.env_type }}
-                  echo path ${{ inputs.deployment_path }}
+                  cd ./sckc/sckc.api
+                  mkdir deploy
+                  Copy-Item "global.asax" -Destination ".\deploy\" -Force
+                  Copy-Item "web.config" -Destination ".\deploy\" -Force
+                  Copy-Item ".\bin\*" -Destination ".\deploy\bin" -Recurse -Force
+
+            - name: Upload Artifact
+              uses: actions/upload-artifact@v2
+              with:
+                  name: published_api
+                  path: ./sckc/sckc.api/deploy
+
+    # build app
+    angular-app:
+        if: ${{ true }} # disable for now
+        # The type of runner that the job will run on
+        runs-on: ubuntu-latest
+
+        # Steps represent a sequence of tasks that will be executed as part of the job
+        steps:
+            # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+            - uses: actions/checkout@v2
+
+            - name: Setup Node.js environment
+              uses: actions/setup-node@v2
+              # with:
+              # Version Spec of the version to use.  Examples: 12.x, 10.15.1, >=10.15.0
+              # node-version: # optional
+
+            - name: Install Dependencies
+              working-directory: ./sckc-app
+              #if:
+              #  steps.cache-nodemodules.outputs.cache-hit != 'true'
+              #  # 👆 if cache hits the skip this step.
+              run: npm ci
+
+            - name: Build
+              working-directory: ./sckc-app
+              run: npm run build:${{ inputs.env_type }}
+
+            - name: Lint
+              working-directory: ./sckc-app
+              run: npm run lint
+
+            - name: Test
+              if: ${{ false }} # disable for now
+              working-directory: ./sckc-app
+              run: npm run test:${{ inputs.env_type }}
+
+            - name: Upload Artifact
+              uses: actions/upload-artifact@v2
+              with:
+                  name: published_app
+                  path: ./sckc-app/dist/sckc-app
+
+    # build app
+    ftp:
+        needs: [angular-app, api]
+        if: ${{ true }} # disable for now?
+        # The type of runner that the job will run on
+        runs-on: ubuntu-latest
+
+        # Steps represent a sequence of tasks that will be executed as part of the job
+        steps:
+            - name: Download all workflow run artifacts
+              uses: actions/download-artifact@v2
+
+            - name: ftp-action-app
+              if: ${{ true }} # disable for now?
+              uses: SamKirkland/FTP-Deploy-Action@4.2.0
+              with:
+                  # FTP host
+                  server: ${{ secrets.ftphost}}
+                  # FTP user
+                  username: ${{ secrets.ftpuser}}
+                  # FTP password
+                  password: ${{ secrets.ftppassword}}
+                  # Folder to upload from, must end with trailing slash /
+                  local-dir: /home/runner/work/sckc/sckc/published_app/
+                  # Path to upload to on the server. Must end with trailing slash /
+                  server-dir: ${{ inputs.deployment_path }}
+                  # Path and name of the state file - this file is used to track which files have been deployed
+                  state-name: .ftp-deploy-app-sync-state.json # optional
+                  # How verbose should the information be - minimal, standard, or verbose
+                  log-level: verbose # optional
+
+            - name: ftp-action-api
+              if: ${{ false }} # disable for now?
+              uses: SamKirkland/FTP-Deploy-Action@4.2.0
+              with:
+                  # FTP host
+                  server: ${{ secrets.ftphost}}
+                  # FTP user
+                  username: ${{ secrets.ftpuser}}
+                  # FTP password
+                  password: ${{ secrets.ftppassword}}
+                  # Folder to upload from, must end with trailing slash /
+                  local-dir: /home/runner/work/sckc/sckc/published_api/
+                  # Path to upload to on the server. Must end with trailing slash /
+                  server-dir: ${{ inputs.deployment_path }}
+                  # Path and name of the state file - this file is used to track which files have been deployed
+                  state-name: .ftp-deploy-api-sync-state.json # optional
+                  log-level: verbose
+
+            - name: URL Health Check
+              if: ${{ true }} # disable for now?
+              uses: Jtalk/url-health-check-action@v2
+              with:
+                  # Target URL(s), split by |
+                  url: ${{ format('http://www.sheffieldcitykayakclub.co.uk/app/{0}gallery', input.deployment_path }}
+                  # Number of unsuccessful attempts to call URL before giving up
+                  max-attempts: 3 # optional, default is 1
+                  # Time between attempts (e.g. 3s, 1m)
+                  retry-delay: 30s # optional, default is 3s
+                  # Follow redirected location in case request resulted in 3XX status code
+                  follow-redirect: false # optional, default is false
+                  # Retry all errors, including 4xx (see man curl on --retry-all-errors).
+
+            - name: Delete Artifacts
+              if: ${{ true }} # disable for now?
+              uses: GeekyEggo/delete-artifact@v1.0.0
+              with:
+                  # The name of the artifact to delete; multiple names can be supplied on new lines.
+                  name: |
+                      published_api
+                      published_app
+                  # Indicates whether the action should fail upon encountering an error.
+                  failOnError: false # optional, default is true
