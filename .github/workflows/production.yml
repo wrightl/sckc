@@ -13,7 +13,7 @@ jobs:
     call-deployment-workflow:
         uses: ./.github/workflows/deployment.yml
         with:
-            env_type: production
+            env_type: staged
             deployment_path: app/
         secrets:
             google_calendar_creds: ${{ secrets.google_calendar_creds }}
