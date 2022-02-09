@@ -34,6 +34,9 @@ import { RiverComponent } from './river/river.component';
 import { ReportsComponent } from './reports/reports.component';
 import { TripReportComponent } from './trip-report/trip-report.component';
 import { EventCalendarComponent } from './event-calendar/event-calendar.component';
+import { HomeComponent } from './home/home.component';
+import { JoiningComponent } from './joining/joining.component';
+import { DocumentsComponent } from './documents/documents.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +55,9 @@ import { EventCalendarComponent } from './event-calendar/event-calendar.componen
     ReportsComponent,
     TripReportComponent,
     EventCalendarComponent,
+    HomeComponent,
+    JoiningComponent,
+    DocumentsComponent,
   ],
   imports: [
     BrowserModule,

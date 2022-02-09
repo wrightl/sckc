@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { CalendarEventMonth } from '../models/calendar-event';
+import { CalendarEvent, CalendarEventMonth } from '../models/calendar-event';
 // import { MOCK_EVENTS } from './mock-events';
 
 @Injectable({
@@ -12,8 +12,13 @@ export class EventsService {
 
   getEvents() {
     //return MOCK_EVENTS;
+    return this.http.get<CalendarEvent[]>(`${environment.baseApiUrl}GetEvents`);
+  }
+
+  getGroupedEvents() {
+    //return MOCK_EVENTS;
     return this.http.get<CalendarEventMonth[]>(
-      `${environment.baseApiUrl}events`
+      `${environment.baseApiUrl}GetGroupedEvents`
     );
   }
 }

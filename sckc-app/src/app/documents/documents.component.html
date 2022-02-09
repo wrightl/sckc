@@ -1,0 +1,7 @@
+<h1>Documents & Policies</h1>
+
+<mat-list>
+  <mat-list-item *ngFor="let document of documents">
+    <a href="{{ document.link }}">{{ document.name }}</a>
+  </mat-list-item>
+</mat-list>

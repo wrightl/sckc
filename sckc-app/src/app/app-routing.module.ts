@@ -9,17 +9,24 @@ import { LocationComponent } from './location/location.component';
 import { PoolComponent } from './pool/pool.component';
 import { RiverComponent } from './river/river.component';
 import { ReportsComponent } from './reports/reports.component';
+import { HomeComponent } from './home/home.component';
+import { JoiningComponent } from './joining/joining.component';
+import { DocumentsComponent } from './documents/documents.component';
 
 const routes: Routes = [
+  { path: 'home', component: HomeComponent },
   { path: 'activities', component: ActivitiesComponent },
   { path: 'people', component: PeopleComponent },
+  { path: 'documents', component: DocumentsComponent },
   { path: 'events', component: EventsComponent },
   { path: 'gallery/:id', component: GalleryComponent },
+  { path: 'joining', component: JoiningComponent },
   { path: 'photos', component: PhotosComponent },
   { path: 'location', component: LocationComponent },
   { path: 'pool', component: PoolComponent },
   { path: 'river', component: RiverComponent },
   { path: 'reports', component: ReportsComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
 ];
 
 @NgModule({

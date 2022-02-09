@@ -15,11 +15,16 @@ namespace sckc.api.APIs
 {
 	public class EventsController : ApiController
 	{
-
+		[Route("api/GetEvents")]
 		public IHttpActionResult Get()
 		{
 			return Json(CalendarServiceHelper.GetClubEvents());
+		}
 
+		[Route("api/GetGroupedEvents")]
+		public IHttpActionResult GetGroupedEvent()
+		{
+			return Json(CalendarServiceHelper.GetGroupedClubEvents());
 		}
 	}
 
@@ -95,7 +100,15 @@ namespace sckc.api.APIs
 			}
 		}
 
-		public static IEnumerable<ClubEventMonth> GetClubEvents()
+		public static IEnumerable<ClubEventMonth> GetGroupedClubEvents()
+        {
+			return GetClubEvents().GroupBy(ev => ev.StartDateTime.ToString("MMMMYYYY"))
+							 .Select((key, group) => new ClubEventMonth()
+							 { Events = key.ToList(), Month = key.FirstOrDefault()?.StartDateTime.ToString("MMMM") });
+
+		}
+
+		public static IEnumerable<ClubEvent> GetClubEvents()
 		{
 			CalendarService calendarService = CreateGoogleCalendarService();
 			EventsResource.ListRequest listRequest = calendarService.Events.List(ClubCalendarId);
@@ -127,16 +140,7 @@ namespace sckc.api.APIs
 			{
 			}
 
-			var months = list.Where(ev => !ev.Status.Equals("cancelled"))
-							 .GroupBy(ev => ev.StartDateTime.ToString("MMMMYYYY"))
-							 .Select((key, group) => new ClubEventMonth() { Events = key.ToList(), Month = key.FirstOrDefault()?.StartDateTime.ToString("MMMM") });
-
-			return months;
-
-			//return (from entry in list
-			//		where entry.Status != "cancelled"
-			//		orderby entry.StartDateTime
-			//		select entry).ToList();
+			return list.Where(ev => !ev.Status.Equals("cancelled"));
 		}
 
 		private static DateTime GetDateTime(EventDateTime dt)
