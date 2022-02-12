@@ -36,7 +36,20 @@ mat-sidenav {
 }
 
 mat-sidenav-content {
-  padding: 0 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  .router-container{
+    padding: 0 12px;
+    flex-grow: 1;
+    overflow-y: auto;
+  }
+
+  app-footer {
+    // padding: 0 12px;
+    // flex: 0 0 auto;
+  }
 }
 
 .mat-expansion-panel-header {

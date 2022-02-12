@@ -12,6 +12,8 @@ import { GalleryService } from '../services/gallery.service';
 export class GalleryComponent implements OnInit {
   isReady = false;
   images: Image[] = [];
+  title = '';
+  date?: Date;
 
   constructor(private service: GalleryService, private route: ActivatedRoute) {}
 
@@ -21,6 +23,8 @@ export class GalleryComponent implements OnInit {
       this.images = data.Photos.map((file) => ({
         path: `${environment.baseUrl}${file}`,
       }));
+      this.title = data.Title;
+      this.date = data.Date;
       this.isReady = true;
     });
   }

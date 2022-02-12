@@ -42,7 +42,7 @@ namespace sckc.api.APIs
 			{
 				googleCredential = GoogleCredential.FromStream(stream);
 			}
-			string[] scopes = new string[1] { CalendarService.Scope.Calendar };
+			string[] scopes = new string[1] { CalendarService.Scope.CalendarReadonly };
 			googleCredential = googleCredential.CreateScoped(scopes);
 			return new CalendarService(new BaseClientService.Initializer
 			{
@@ -113,32 +113,33 @@ namespace sckc.api.APIs
 			CalendarService calendarService = CreateGoogleCalendarService();
 			EventsResource.ListRequest listRequest = calendarService.Events.List(ClubCalendarId);
 			listRequest.TimeMin = DateTime.Today;
+			listRequest.TimeMax = DateTime.Today.AddMonths(6);
 			Events events2 = listRequest.Execute();
 			List<ClubEvent> list = new List<ClubEvent>();
 			foreach (Event item in events2.Items)
 			{
 				ProcessEvent(item, list);
 			}
-			try
-			{
-				CalendarService calendarService2 = CreateGoogleCalendarService();
-				listRequest = calendarService2.Events.List(SpecialEventsCalendarId);
-				listRequest.TimeMin = DateTime.Today;
-				events2 = listRequest.Execute();
-				List<ClubEvent> list2 = new List<ClubEvent>();
-				foreach (Event item2 in events2.Items)
-				{
-					ProcessEvent(item2, list2);
-				}
-				list2.ForEach(delegate (ClubEvent entry)
-				{
-					entry.IsSpecialEvent = true;
-				});
-				list.AddRange(list2);
-			}
-			catch (Exception)
-			{
-			}
+			//try
+			//{
+			//	listRequest = calendarService.Events.List(SpecialEventsCalendarId);
+			//	listRequest.TimeMin = DateTime.Today;
+			//	events2 = listRequest.Execute();
+			//	List<ClubEvent> list2 = new List<ClubEvent>();
+			//	foreach (Event item2 in events2.Items)
+			//	{
+			//		ProcessEvent(item2, list2);
+			//	}
+			//	list2.ForEach(delegate (ClubEvent entry)
+			//	{
+			//		entry.IsSpecialEvent = true;
+			//	});
+			//	list.AddRange(list2);
+			//}
+			//catch (Exception ex)
+			//{
+
+			//}
 
 			list = list.Where(ev => !ev.Status.Equals("cancelled")).ToList();
 

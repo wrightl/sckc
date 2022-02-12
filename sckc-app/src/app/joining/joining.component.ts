@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./joining.component.scss'],
 })
 export class JoiningComponent {
-  constructor() {}
+
+  membershipyear: string;
+
+  constructor() {
+    this.membershipyear = (new Date()).getFullYear().toString();
+  }
 }
