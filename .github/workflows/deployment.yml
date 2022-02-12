@@ -187,7 +187,7 @@ jobs:
                   # Retry all errors, including 4xx (see man curl on --retry-all-errors).
 
             - name: Delete Artifacts
-              if: ${{ true }} # disable for now?
+              if: ${{ false }} # disable for now?
               uses: GeekyEggo/delete-artifact@v1.0.0
               with:
                   # The name of the artifact to delete; multiple names can be supplied on new lines.
