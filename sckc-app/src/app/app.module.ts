@@ -1,11 +1,10 @@
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { APP_BASE_HREF } from '@angular/common';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -18,6 +17,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTreeModule } from '@angular/material/tree';
 
+import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+
+import { environment } from 'src/environments/environment';
 import { ActivitiesComponent } from './activities/activities.component';
 import { PeopleComponent } from './people/people.component';
 import { PersonComponent } from './person/person.component';
@@ -27,7 +29,6 @@ import { CarouselComponent } from './carousel/carousel.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { PhotosComponent } from './photos/photos.component';
 import { HttpClientModule } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 import { LocationComponent } from './location/location.component';
 import { PoolComponent } from './pool/pool.component';
 import { RiverComponent } from './river/river.component';
@@ -37,7 +38,6 @@ import { EventCalendarComponent } from './event-calendar/event-calendar.componen
 import { HomeComponent } from './home/home.component';
 import { JoiningComponent } from './joining/joining.component';
 import { DocumentsComponent } from './documents/documents.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -76,7 +76,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatTableModule,
     MatToolbarModule,
     MatTreeModule,
-    NgbModule,
+    NgbCarouselModule,
   ],
   providers: [{ provide: APP_BASE_HREF, useValue: environment.baseHref }],
   bootstrap: [AppComponent],
