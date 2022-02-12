@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Web;
 using System.Web.Http;
 using sckc.api.Models;
@@ -56,5 +57,19 @@ namespace sckc.api.APIs
             return Json(photoSets);
         }
 
+        public IHttpActionResult GetPhotoSet(string id)
+        {
+            string folder = HttpContext.Current.Server.MapPath("/gallery/" + id);
+
+            if (!Directory.Exists(folder))
+            {
+                throw new Exception("Missing folder");
+            }
+
+            DateTime dt = DateTime.Parse(id.Split('@')[0]);
+            string title = id.Split('@')[1];
+            var photos = Directory.GetFiles(folder).Select(file => string.Format("gallery/{0}/{1}", id, Path.GetFileName(file)));
+            return Json(new { Date = dt, Title = title, Photos = photos });
+        }
     }
 }

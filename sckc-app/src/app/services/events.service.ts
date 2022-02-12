@@ -10,9 +10,11 @@ import { CalendarEvent, CalendarEventMonth } from '../models/calendar-event';
 export class EventsService {
   constructor(private http: HttpClient) {}
 
-  getEvents() {
+  getEvents(count: number) {
     //return MOCK_EVENTS;
-    return this.http.get<CalendarEvent[]>(`${environment.baseApiUrl}GetEvents`);
+    return this.http.get<CalendarEvent[]>(
+      `${environment.baseApiUrl}GetEvents?count=${count}`
+    );
   }
 
   getGroupedEvents() {

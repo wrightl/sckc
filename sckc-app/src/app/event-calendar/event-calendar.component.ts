@@ -20,7 +20,7 @@ export class EventCalendarComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.mode === 'small') {
-      this.eventsService.getEvents().subscribe((data: CalendarEvent[]) => {
+      this.eventsService.getEvents(10).subscribe((data: CalendarEvent[]) => {
         this.events = data;
         this.isReady = true;
       });

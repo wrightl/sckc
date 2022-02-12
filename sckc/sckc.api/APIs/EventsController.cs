@@ -16,9 +16,9 @@ namespace sckc.api.APIs
 	public class EventsController : ApiController
 	{
 		[Route("api/GetEvents")]
-		public IHttpActionResult Get()
+		public IHttpActionResult Get(int count = 10)
 		{
-			return Json(CalendarServiceHelper.GetClubEvents());
+			return Json(CalendarServiceHelper.GetClubEvents(count));
 		}
 
 		[Route("api/GetGroupedEvents")]
@@ -108,7 +108,7 @@ namespace sckc.api.APIs
 
 		}
 
-		public static IEnumerable<ClubEvent> GetClubEvents()
+		public static IEnumerable<ClubEvent> GetClubEvents(int? count = null)
 		{
 			CalendarService calendarService = CreateGoogleCalendarService();
 			EventsResource.ListRequest listRequest = calendarService.Events.List(ClubCalendarId);
@@ -140,7 +140,12 @@ namespace sckc.api.APIs
 			{
 			}
 
-			return list.Where(ev => !ev.Status.Equals("cancelled"));
+			list = list.Where(ev => !ev.Status.Equals("cancelled")).ToList();
+
+			if (count != null && count.HasValue)
+				list = list.Take(count.Value).ToList();
+
+			return list;
 		}
 
 		private static DateTime GetDateTime(EventDateTime dt)
