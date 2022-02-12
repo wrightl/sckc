@@ -155,7 +155,7 @@ jobs:
                   log-level: verbose # optional
 
             - name: ftp-action-api
-              if: ${{ false }} # disable for now?
+              if: ${{ true }} # disable for now?
               uses: SamKirkland/FTP-Deploy-Action@4.2.0
               with:
                   # FTP host
