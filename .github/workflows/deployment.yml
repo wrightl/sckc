@@ -69,13 +69,11 @@ jobs:
               run: |
                   cd ./sckc/sckc.api
                   mkdir deploy
+                  mkdir deploy\data
                   Copy-Item "global.asax" -Destination ".\deploy\" -Force
                   Copy-Item "web.config" -Destination ".\deploy\" -Force
                   Copy-Item ".\bin\*" -Destination ".\deploy\bin" -Recurse -Force
-                  dir
-                  dir data
                   Copy-Item ".\data\*" -Destination ".\deploy\data" -Recurse -Force
-                  dir deploy\data
 
             - name: Upload Artifact
               uses: actions/upload-artifact@v2
@@ -190,7 +188,7 @@ jobs:
                   # Retry all errors, including 4xx (see man curl on --retry-all-errors).
 
             - name: Delete Artifacts
-              if: ${{ false }} # disable for now?
+              if: ${{ true }} # disable for now?
               uses: GeekyEggo/delete-artifact@v1.0.0
               with:
                   # The name of the artifact to delete; multiple names can be supplied on new lines.
