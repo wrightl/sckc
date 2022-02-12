@@ -37,6 +37,7 @@ import { EventCalendarComponent } from './event-calendar/event-calendar.componen
 import { HomeComponent } from './home/home.component';
 import { JoiningComponent } from './joining/joining.component';
 import { DocumentsComponent } from './documents/documents.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import { DocumentsComponent } from './documents/documents.component';
     MatTableModule,
     MatToolbarModule,
     MatTreeModule,
+    NgbModule,
   ],
   providers: [{ provide: APP_BASE_HREF, useValue: environment.baseHref }],
   bootstrap: [AppComponent],
