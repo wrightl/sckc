@@ -72,7 +72,10 @@ jobs:
                   Copy-Item "global.asax" -Destination ".\deploy\" -Force
                   Copy-Item "web.config" -Destination ".\deploy\" -Force
                   Copy-Item ".\bin\*" -Destination ".\deploy\bin" -Recurse -Force
+                  dir
+                  dir data
                   Copy-Item ".\data\*" -Destination ".\deploy\data" -Recurse -Force
+                  dir deploy\data
 
             - name: Upload Artifact
               uses: actions/upload-artifact@v2
