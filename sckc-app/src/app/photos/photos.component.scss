@@ -1,0 +1,29 @@
+a,
+a:hover {
+  text-decoration: none;
+  color: white;
+  text-shadow: 1px 1px 3px rgb(0 0 0 / 80%);
+}
+
+.photosets-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.photoset-container {
+  width: 300px;
+  height: 300px;
+  margin: 12px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.photoset-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%;
+  padding: 12px;
+}

@@ -1,0 +1,18 @@
+.mat-card {
+  width: 320px;
+  box-shadow: none;
+}
+
+.mat-card-header {
+  justify-content: center;
+}
+
+p {
+  text-align: center;
+  min-height: 90px;
+}
+
+.mat-card-actions {
+  display: flex;
+  justify-content: center;
+}

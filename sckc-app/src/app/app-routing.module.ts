@@ -12,6 +12,7 @@ import { ReportsComponent } from './reports/reports.component';
 import { HomeComponent } from './home/home.component';
 import { JoiningComponent } from './joining/joining.component';
 import { DocumentsComponent } from './documents/documents.component';
+import { AboutComponent } from './about/about.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'pool', component: PoolComponent },
   { path: 'river', component: RiverComponent },
   { path: 'reports', component: ReportsComponent },
+  { path: 'about', component: AboutComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
 ];
 

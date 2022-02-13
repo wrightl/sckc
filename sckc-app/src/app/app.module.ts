@@ -11,6 +11,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
@@ -38,6 +39,9 @@ import { EventCalendarComponent } from './event-calendar/event-calendar.componen
 import { HomeComponent } from './home/home.component';
 import { JoiningComponent } from './joining/joining.component';
 import { DocumentsComponent } from './documents/documents.component';
+import { AboutComponent } from './about/about.component';
+import { InfoCardComponent } from './info-card/info-card.component';
+import { PageTitleComponent } from './page-title/page-title.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +63,9 @@ import { DocumentsComponent } from './documents/documents.component';
     HomeComponent,
     JoiningComponent,
     DocumentsComponent,
+    AboutComponent,
+    InfoCardComponent,
+    PageTitleComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,6 +78,7 @@ import { DocumentsComponent } from './documents/documents.component';
     MatGridListModule,
     MatIconModule,
     MatListModule,
+    MatMenuModule,
     MatProgressSpinnerModule,
     MatSidenavModule,
     MatTableModule,
