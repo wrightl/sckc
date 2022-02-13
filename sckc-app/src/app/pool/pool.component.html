@@ -3,160 +3,103 @@
     <div>
       <app-page-title title="Pool Sessions"></app-page-title>
 
-      <p>
-        Pool sessions are held on Tuesday evenings every 2 weeks at Hillborough
-        Leisure Centre. Bookings can be made using the link next to the session
-        you would like to book on our <a href="events.aspx">Events</a> page.
-      </p>
+            <p>Pool sessions are held on Tuesday evenings every 2 weeks at Hillborough Leisure Centre. Bookings can be made using the link next to the session you would like to book on our <a
+                   routerLink="/events">Events</a> page.</p>
 
-      <p>
-        You should arrive at 7:30pm in order to be signed in and changed ready
-        for the session to start at 8:00pm. Sessions last for either 90 minutes
-        for a full session, or 45 minutes if you would prefer to paddle for half
-        a session.
-      </p>
+            <p>You should arrive at 7:30pm in order to be signed in and changed ready for the session to start at
+                8:00pm. Sessions last for either 90 minutes for a full session, or 45 minutes if you would prefer to
+                paddle for half a session.</p>
 
-      <p>
-        The pool provides a nice warm environment for first time paddlers, as
-        well as somewhere for more advanced paddlers to practice their skills or
-        learn to roll.
-      </p>
+            <p>The pool provides a nice warm environment for first time paddlers, as well as somewhere for more advanced
+                paddlers to practice their skills or learn to roll.</p>
 
-      <p>
-        For photos of what we do check out the
-        <a href="poolgallery.aspx">Gallery</a> for photos
-      </p>
+            <!-- <p>For photos of what we do check out the <a routerLink="/poolgallery">Gallery</a> for photos</p> -->
 
-      <h3>Booking</h3>
+            <h3>Booking</h3>
 
-      <p>
-        Bookings should be made using the link on the
-        <a href="events.aspx">Events</a> Page.
-      </p>
+            <p>Bookings should be made using the link on the <a routerLink="/events">Events</a> Page.</p>
 
-      <h3>Pricing</h3>
+            <h3>Pricing</h3>
 
-      <p>
-        The cost of the sessions depend on whether you are a club member, age
-        and status.
-      </p>
-      <p>
-        If you require the use of club equipment there is a small additional
-        charge.
-      </p>
+            <p>The cost of the sessions depend on whether you are a club member, age and status.</p>
+            <p>If you require the use of club equipment there is a small additional charge.</p>
 
-      <p>
-        Please note that while non-members are welcome, you can only attend 3
-        sessions before you must become a member.
-      </p>
-      <p>See the tables below for a full breakdown:</p>
+            <p>Please note that while non-members are welcome, you can only attend 3 sessions before you must become a
+                member.</p>
+            <p>See the tables below for a full breakdown:</p>
 
-      <h4>Pricing for Club Members</h4>
-      <table>
-        <thead>
-          <tr>
-            <th></th>
-            <th>Half Session</th>
-            <th>Full Session</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Adults</td>
-            <td>{{ info.adultHalfSession }}</td>
-            <td>{{ info.adultFullSession }}</td>
-          </tr>
-          <tr>
-            <td>Under 18's, OAP, Unwaged, Students</td>
-            <td>{{ info.childHalfSession }}</td>
-            <td>{{ info.childFullSession }}</td>
-          </tr>
-        </tbody>
-      </table>
+            <h4>Pricing for Club Members</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Half Session</th>
+                        <th>Full Session</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Adults</td>
+                        <td>{{info.adultHalfSession | number: '1.2-2'}}</td>
+                        <td>{{info.adultFullSession | number: '1.2-2'}}</td>
+                    </tr>
+                    <tr>
+                        <td>Under 18's, OAP, Unwaged, Students</td>
+                        <td>{{info.childHalfSession | number: '1.2-2'}}</td>
+                        <td>{{info.childFullSession | number: '1.2-2'}}</td>
+                    </tr>
+                </tbody>
+            </table>
 
-      <h4>Pricing for non-Club Members</h4>
-      <table>
-        <thead>
-          <tr>
-            <th></th>
-            <th>Session Fee</th>
-            <th>Equipment Hire</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Adults</td>
-            <td>{{ info.adultHalfSessionNonMember }}</td>
-            <td>{{ info.adultFullSessionNonMember }}</td>
-          </tr>
-          <tr>
-            <td>Under 18's, OAP, Unwaged, Students</td>
-            <td>{{ info.childHalfSessionNonMember }}</td>
-            <td>{{ info.childFullSessionNonMember }}</td>
-          </tr>
-        </tbody>
-      </table>
+            <h4>Pricing for non-Club Members</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Session Fee</th>
+                        <th>Equipment Hire</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Adults</td>
+                        <td>{{info.adultHalfSessionNonMember | number: '1.2-2'}}</td>
+                        <td>{{info.adultFullSessionNonMember | number: '1.2-2'}}</td>
+                    </tr>
+                    <tr>
+                        <td>Under 18's, OAP, Unwaged, Students</td>
+                        <td>{{info.childHalfSessionNonMember | number: '1.2-2'}}</td>
+                        <td>{{info.childFullSessionNonMember | number: '1.2-2'}}</td>
+                    </tr>
+                </tbody>
+            </table>
 
-      <h3>Parking</h3>
+            <h3>Parking</h3>
 
-      <p>
-        There is ample parking directly outside Hillsborough Leisure Centre.
-      </p>
+            <p>There is ample parking directly outside Hillsborough Leisure Centre.</p>
 
-      <h3 id="location">Location</h3>
-      <p>
-        Our pool sessions are run at the local
-        <a
-          href="https://www.sheffieldcitytrust.org/venues/hillsborough-leisure-centre"
-          target="_blank"
-          >Hillsborough Leisure Centre</a
-        >
-        located at:
-      </p>
-      <p>Hillsborough Leisure Centre</p>
-      <p>Beulah Rd</p>
-      <p>Sheffield</p>
-      <p>
-        <a
-          href="https://www.google.com/maps/place/Hillsborough+Leisure+Centre/@53.4083553,-1.4959149,15z/data=!4m5!3m4!1s0x0:0xa5b527e9437a496c!8m2!3d53.4083553!4d-1.4959149"
-          target="_blank"
-          >S6 2AN</a
-        >
-      </p>
+            <h3 id="location">Location</h3>
+            <p>Our pool sessions are run at the local <a href="https://www.sheffieldcitytrust.org/venues/hillsborough-leisure-centre"
+                   target="_blank">Hillsborough Leisure Centre</a> located at:</p>
+            <p>Hillsborough Leisure Centre</p>
+            <p>Beulah Rd</p>
+            <p>Sheffield</p>
+            <p><a href="https://www.google.com/maps/place/Hillsborough+Leisure+Centre/@53.4083553,-1.4959149,15z/data=!4m5!3m4!1s0x0:0xa5b527e9437a496c!8m2!3d53.4083553!4d-1.4959149"
+                   target="_blank">S6 2AN</a></p>
 
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d9513.447217772366!2d-1.4959149!3d53.4083553!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xa5b527e9437a496c!2sHillsborough%20Leisure%20Centre!5e0!3m2!1sen!2suk!4v1644157868834!5m2!1sen!2suk"
-        width="600"
-        height="450"
-        style="border: 0"
-        allowfullscreen=""
-        loading="lazy"
-      ></iframe>
-      <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2379.3967491726426!2d-1.4901763488898228!3d53.38984237988996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48797885a8f2ca75%3A0xeffb19e21a750e65!2sZest+Centre!5e0!3m2!1sen!2suk!4v1495724062771"
-                    height="450"
-                    frameborder="0"
-                    style="width: 100%; max-width: 600px; border: 0;"
-                    allowfullscreen></iframe> -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d9513.447217772366!2d-1.4959149!3d53.4083553!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xa5b527e9437a496c!2sHillsborough%20Leisure%20Centre!5e0!3m2!1sen!2suk!4v1644157868834!5m2!1sen!2suk" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 
-      <h3>What to Bring</h3>
+            <h3>What to Bring</h3>
 
-      <p>
-        You will need a regular swimming costume and an old t-shirt that you
-        don't mind getting wet. All other equipment such as helmets, buoyancy
-        aids, boats, paddles and spraydecks will be provided.
-      </p>
+            <p>You will need a regular swimming costume and an old t-shirt that you don't mind getting wet. All other
+                equipment such as helmets, buoyancy aids, boats, paddles and spraydecks will be provided.</p>
 
-      <h3>Can I Bring My Own Equipment?</h3>
+            <h3>Can I Bring My Own Equipment?</h3>
 
-      <p>
-        You are welcome to bring all of your own equipment apart from a boat.
-        All of our boats have been prepared for use in the pool and we have a
-        large range of sizes and styles to suit all.
-      </p>
-      <p>
-        Any equipment you bring must be clean, safe, and appropriate for use in
-        a pool.
-      </p>
+            <p>You are welcome to bring all of your own equipment apart from a boat. All of our boats have been prepared
+                for use in the pool and we have a large range of sizes and styles to suit all.</p>
+            <p>Any equipment you bring must be clean, safe, and appropriate for use in a pool.</p>
+
+        </div>
     </div>
-  </div>
 </div>

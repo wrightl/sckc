@@ -1,0 +1,67 @@
+export const MEMBERSHIP_INFO: MemberInfo = {
+  fullOctober: 37,
+  fullMay: 28.25,
+  fullJune: 23,
+  fullJuly: 17.75,
+  fullAugust: 12.5,
+  fullSeptember: 7.25,
+  familyOctober: 44,
+  familyMay: 34,
+  familyJune: 28,
+  familyJuly: 22,
+  familyAugust: 16,
+  familySeptember: 10,
+  additionalOctober: 4,
+  additionalMay: 3.5,
+  additionalJune: 3.2,
+  additionalJuly: 2.9,
+  additionalAugust: 2.6,
+  additionalSeptember: 2.3,
+  concessionOctober: 27,
+  concessionMay: 21.05,
+  concessionJune: 17.3,
+  concessionJuly: 13.55,
+  concessionAugust: 9.8,
+  concessionSeptember: 6.05,
+  youthOctober: 25,
+  youthMay: 18.75,
+  youthJune: 15,
+  youthJuly: 11.25,
+  youthAugust: 7.5,
+  youthSeptember: 3.75,
+  affiliatedGroup: 45,
+};
+
+export interface MemberInfo {
+  fullOctober: number;
+  fullMay: number;
+  fullJune: number;
+  fullJuly: number;
+  fullAugust: number;
+  fullSeptember: number;
+  familyOctober: number;
+  familyMay: number;
+  familyJune: number;
+  familyJuly: number;
+  familyAugust: number;
+  familySeptember: number;
+  additionalOctober: number;
+  additionalMay: number;
+  additionalJune: number;
+  additionalJuly: number;
+  additionalAugust: number;
+  additionalSeptember: number;
+  concessionOctober: number;
+  concessionMay: number;
+  concessionJune: number;
+  concessionJuly: number;
+  concessionAugust: number;
+  concessionSeptember: number;
+  youthOctober: number;
+  youthMay: number;
+  youthJune: number;
+  youthJuly: number;
+  youthAugust: number;
+  youthSeptember: number;
+  affiliatedGroup: number;
+}
