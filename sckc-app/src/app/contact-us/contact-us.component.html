@@ -1,4 +1,6 @@
 <div class="form">
+  <div class="error" *ngIf="error" [innerHTML]="error"></div>
+  <div class="response" *ngIf="response">{{ response }}</div>
   <mat-form-field class="full-width" appearance="fill">
     <mat-label>Name</mat-label>
     <input matInput placeholder="Your Name" [(ngModel)]="name" required />
