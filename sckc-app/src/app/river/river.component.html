@@ -1,9 +1,15 @@
+<app-page-title title="River Sessions"></app-page-title>
+
 <div>
   <div>
     <div>
-      <app-page-title title="River Sessions"></app-page-title>
-
-            <p>River paddle sessions take place on Sunday mornings all year round, and on Thursday evenings through the Summer months. All sessions must be booked in advance to ensure that we have appropriate coaching cover. Bookings can be made using the link next to the session you would like to book on our <a routerLink="/events">Events</a> page.</p>
+      <p>
+        River paddle sessions take place on Sunday mornings all year round, and
+        on Thursday evenings through the Summer months. All sessions must be
+        booked in advance to ensure that we have appropriate coaching cover.
+        Bookings can be made using the link next to the session you would like
+        to book on our <a routerLink="/events">Events</a> page.
+      </p>
 
       <p>
         Sunday sessions start at 9am and typically run until about 12pm, with
@@ -25,11 +31,20 @@
         Goyt alongside the car park.
       </p>
 
-            <p>For photos of what we do check out the <a routerLink="/photos">Gallery</a> for photos</p>
+      <p>
+        For photos of what we do check out the
+        <a routerLink="/photos">Gallery</a> for photos
+      </p>
 
       <h3>Booking</h3>
 
-            <p>Bookings should be made using the link on the <a routerLink="/events">Events</a> Page. As mentioned above, bookings for a Sunday session must be made by the preceeding Thursday, and bookings for a Thursday evening session must be made by the preceeding Tuesday.</p>
+      <p>
+        Bookings should be made using the link on the
+        <a routerLink="/events">Events</a> Page. As mentioned above, bookings
+        for a Sunday session must be made by the preceeding Thursday, and
+        bookings for a Thursday evening session must be made by the preceeding
+        Tuesday.
+      </p>
 
       <h3>Pricing</h3>
 
@@ -43,10 +58,6 @@
       </p>
 
       <p>See the tables below for a full breakdown.</p>
-      <p>
-        See the tables below for a full breakdown, or use the
-        <a href="#calc">calculator</a>:
-      </p>
 
       <h4>Pricing for Club Members</h4>
       <table>
@@ -60,13 +71,13 @@
         <tbody>
           <tr>
             <td>Adults</td>
-            <td>{{ info.adultSessionCost }}</td>
-            <td>{{ info.adultEquipmentHire }}</td>
+            <td>£{{ info.adultSessionCost | number: "0.2-2" }}</td>
+            <td>£{{ info.adultEquipmentHire | number: "0.2-2" }}</td>
           </tr>
           <tr>
             <td>Under 18's, OAP, Unwaged, Students</td>
-            <td>{{ info.childSessionCost }}</td>
-            <td>{{ info.childEquipmentHire }}</td>
+            <td>£{{ info.childSessionCost | number: "0.2-2" }}</td>
+            <td>£{{ info.childEquipmentHire | number: "0.2-2" }}</td>
           </tr>
         </tbody>
       </table>
@@ -83,46 +94,16 @@
         <tbody>
           <tr>
             <td>Adults</td>
-            <td>{{ info.adultSessionCostNonMember }}</td>
-            <td>{{ info.adultEquipmentHireNonMember }}</td>
+            <td>£{{ info.adultSessionCostNonMember | number: "0.2-2" }}</td>
+            <td>£{{ info.adultEquipmentHireNonMember | number: "0.2-2" }}</td>
           </tr>
           <tr>
             <td>Under 18's, OAP, Unwaged, Students</td>
-            <td>{{ info.childSessionCostNonMember }}</td>
-            <td>{{ info.childEquipmentHireNonMember }}</td>
+            <td>£{{ info.childSessionCostNonMember | number: "0.2-2" }}</td>
+            <td>£{{ info.childEquipmentHireNonMember | number: "0.2-2" }}</td>
           </tr>
         </tbody>
       </table>
-
-            <!-- <h4 id="calc">Session Pricing Calculator</h4>
-      <table>
-        <tr>
-          <td>Adult</td>
-          <td><input id="chkAdult" name="adultorchild" type="radio" /></td>
-        </tr>
-        <tr>
-          <td>Child</td>
-          <td><input id="chkChild" name="adultorchild" type="radio" /></td>
-        </tr>
-        <tr>
-          <td>Non-Member</td>
-          <td><input id="chkNonMember" name="adult" type="checkbox" /></td>
-        </tr>
-        <tr>
-          <td>Equipment Hire</td>
-          <td><input id="chkEquipmentHire" name="adult" type="checkbox" /></td>
-        </tr>
-        <tr>
-          <td>Total Session Fee</td>
-          <td>
-            <span
-              id="totalSessionFee"
-              style="color: white; font-size: larger"
-              >{{ sessionFee }}</span
-            >
-          </td>
-        </tr>
-            </table> -->
 
       <h3>Parking</h3>
 
@@ -185,8 +166,13 @@
         to help you improve your skills
       </p>
 
+      <p></p>
       <p>
-            <p>If it's your first time or you are unsure about venturing out onto the water straight away, then attend one of our <a routerLink="/pool">Pool</a> sessions first in a nice warm environment!</p>
+        If it's your first time or you are unsure about venturing out onto the
+        water straight away, then attend one of our
+        <a routerLink="/pool">Pool</a> sessions first in a nice warm
+        environment!
+      </p>
 
       <h3>Awards</h3>
 

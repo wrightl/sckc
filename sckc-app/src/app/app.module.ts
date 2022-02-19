@@ -46,6 +46,8 @@ import { AboutComponent } from './about/about.component';
 import { InfoCardComponent } from './info-card/info-card.component';
 import { PageTitleComponent } from './page-title/page-title.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
+import { ClubHistoryComponent } from './club-history/club-history.component';
+import { TripsComponent } from './trips/trips.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +73,8 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
     InfoCardComponent,
     PageTitleComponent,
     ContactUsComponent,
+    ClubHistoryComponent,
+    TripsComponent,
   ],
   imports: [
     BrowserModule,
