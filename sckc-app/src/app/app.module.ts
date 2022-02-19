@@ -4,12 +4,15 @@ import { AppComponent } from './app.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { APP_BASE_HREF } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -42,6 +45,7 @@ import { DocumentsComponent } from './documents/documents.component';
 import { AboutComponent } from './about/about.component';
 import { InfoCardComponent } from './info-card/info-card.component';
 import { PageTitleComponent } from './page-title/page-title.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
 
 @NgModule({
   declarations: [
@@ -66,17 +70,21 @@ import { PageTitleComponent } from './page-title/page-title.component';
     AboutComponent,
     InfoCardComponent,
     PageTitleComponent,
+    ContactUsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
     MatButtonModule,
     MatCardModule,
     MatExpansionModule,
+    MatFormFieldModule,
     MatGridListModule,
     MatIconModule,
+    MatInputModule,
     MatListModule,
     MatMenuModule,
     MatProgressSpinnerModule,
@@ -86,6 +94,7 @@ import { PageTitleComponent } from './page-title/page-title.component';
     MatTreeModule,
     NgbCarouselModule,
   ],
+  exports: [MatInputModule],
   providers: [{ provide: APP_BASE_HREF, useValue: environment.baseHref }],
   bootstrap: [AppComponent],
 })

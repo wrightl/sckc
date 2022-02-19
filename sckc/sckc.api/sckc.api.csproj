@@ -133,6 +133,7 @@
     <Compile Include="Models\ClubEvent.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="Models\ClubEventMonth.cs" />
+    <Compile Include="APIs\MailController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />

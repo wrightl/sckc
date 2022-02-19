@@ -1,12 +1,16 @@
 <mat-card>
-    <mat-card-subtitle>{{report.trip}}</mat-card-subtitle>
-    <mat-card-subtitle>{{report.date | date: 'longDate'}}</mat-card-subtitle>
-    <mat-card-subtitle>{{report.organiser}}</mat-card-subtitle>
-    <mat-card-subtitle>{{report.start}}</mat-card-subtitle>
-    <mat-card-subtitle>{{report.triplength}}</mat-card-subtitle>
-    <mat-card-subtitle>{{report.paddlers}}</mat-card-subtitle>
-    <mat-card-subtitle>{{report.weather}}</mat-card-subtitle>
-    <mat-card-subtitle>{{report.phrase}}</mat-card-subtitle>
-    <mat-card-subtitle *ngIf="report.photos"><a [routerLink]="'/gallery/' + report.photos">{{report.trip}}</a></mat-card-subtitle>
-    <mat-card-content><div [innerHTML]="report.report"></div></mat-card-content>
+  <mat-card-subtitle>{{ report.trip }}</mat-card-subtitle>
+  <mat-card-subtitle>{{ report.date | date: "longDate" }}</mat-card-subtitle>
+  <mat-card-subtitle>{{ report.organiser }}</mat-card-subtitle>
+  <mat-card-subtitle>{{ report.start }}</mat-card-subtitle>
+  <mat-card-subtitle>{{ report.triplength }}</mat-card-subtitle>
+  <mat-card-subtitle>{{ report.paddlers }}</mat-card-subtitle>
+  <mat-card-subtitle>{{ report.weather }}</mat-card-subtitle>
+  <mat-card-subtitle>{{ report.phrase }}</mat-card-subtitle>
+  <mat-card-subtitle *ngIf="report.photos"
+    ><a [routerLink]="'/gallery/' + report.photos">{{
+      report.trip
+    }}</a></mat-card-subtitle
+  >
+  <mat-card-content><div [innerHTML]="report.report"></div></mat-card-content>
 </mat-card>

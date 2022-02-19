@@ -13,7 +13,12 @@
     justify-content: center;
 
     .mat-button.active {
-      text-decoration: underline;
+      &.mat-button-ripple {
+        // text-decoration: underline;
+        border-bottom: 2px solid white;
+        margin: 0 10px;
+        border-radius: 0;
+      }
     }
   }
 
