@@ -15,15 +15,16 @@ namespace sckc.api.APIs
             MailMessage message = new MailMessage(from, to);
             message.Subject = "Contact Us Enquiry";
             message.Body = string.Format("From: {2}\r\nEmail: {3}\r\nSubject: {0}\r\nMessage:\r\n{1}", info.Subject, info.Message, info.Name, info.Email);
-            SmtpClient client = new SmtpClient("mail.sheffieldcitykayakclub.co.uk");
+            //SmtpClient client = new SmtpClient("mail.sheffieldcitykayakclub.co.uk");
 
-            // Credentials are necessary if the server requires the client
-            // to authenticate before it will send email on the client's behalf.
-            client.UseDefaultCredentials = true;
+            //// Credentials are necessary if the server requires the client
+            //// to authenticate before it will send email on the client's behalf.
+            //client.UseDefaultCredentials = true;
 
             try
             {
-                client.Send(message);
+                //client.Send(message);
+                (new SmtpClient()).Send(message);
             }
             catch (Exception ex)
             {
