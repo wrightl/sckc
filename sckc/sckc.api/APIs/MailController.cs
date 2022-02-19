@@ -11,7 +11,7 @@ namespace sckc.api.APIs
         public IHttpActionResult SendContactUsMail(ContactUsEmailDto info)
         {
             string to = "enquiries@sheffieldcitykayakclub.co.uk";
-            string from = info.FromEmail;
+            string from = info.Email;
             MailMessage message = new MailMessage(from, to);
             message.Subject = "Contact Us Enquiry";
             message.Body = string.Format("From: {2}\r\nEmail: {3}\r\nSubject: {0}\r\nMessage:\r\n{1}", info.Subject, info.Message, info.Name, info.Email);
