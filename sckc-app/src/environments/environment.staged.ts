@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
   baseUrl: '',
-  baseApiUrl: '/api',
+  baseApiUrl: '/api/',
   baseHref: '/app',
 };
