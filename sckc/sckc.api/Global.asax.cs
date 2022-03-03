@@ -1,4 +1,5 @@
 ﻿using System.Web.Http;
+using UrlRewrite;
 
 namespace sckc.api
 {
@@ -6,6 +7,7 @@ namespace sckc.api
     {
         protected void Application_Start()
         {
+            RewriteModule.Initialize(null, url => true, url => true);
             GlobalConfiguration.Configure(WebApiConfig.Register);
         }
     }

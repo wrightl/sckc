@@ -70,8 +70,10 @@ jobs:
                   cd ./sckc/sckc.api
                   mkdir deploy
                   mkdir deploy\data
+                  ((Get-Content -path RewriteRules.config -Raw) -replace '{{deployment_path}}','${{ inputs.deployment_path }}') | Set-Content -Path RewriteRules.config
                   Copy-Item "global.asax" -Destination ".\deploy\" -Force
                   Copy-Item "web.config" -Destination ".\deploy\" -Force
+                  Copy-Item "RewriteRules.config" -Destination ".\deploy\" -Force
                   Copy-Item ".\bin\*" -Destination ".\deploy\bin" -Recurse -Force
                   Copy-Item ".\data\*" -Destination ".\deploy\data" -Recurse -Force
 
