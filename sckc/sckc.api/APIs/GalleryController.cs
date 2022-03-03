@@ -15,14 +15,9 @@ namespace sckc.api.APIs
         {
             string str;
             List<PhotoSet> photoSets = new List<PhotoSet>();
-            string str1 = HttpContext.Current.Server.MapPath("/gallery");
+            string baseFolder = GetBaseFolder();
 
-            if (!Directory.Exists(str1))
-            {
-                throw new Exception("Missing folder");
-            }
-
-            string[] directories = Directory.GetDirectories(str1);
+            string[] directories = Directory.GetDirectories(baseFolder);
             for (int i = 0; i < (int)directories.Length; i++)
             {
                 string str2 = directories[i];
@@ -59,7 +54,8 @@ namespace sckc.api.APIs
 
         public IHttpActionResult GetPhotoSet(string id)
         {
-            string folder = HttpContext.Current.Server.MapPath("/gallery/" + id);
+            string baseFolder = GetBaseFolder();
+            string folder = Path.Combine(baseFolder, id);
 
             if (!Directory.Exists(folder))
             {
@@ -70,6 +66,18 @@ namespace sckc.api.APIs
             string title = id.Split('@')[1].Replace("_", " ");
             var photos = Directory.GetFiles(folder).Select(file => string.Format("gallery/{0}/{1}", id, Path.GetFileName(file)));
             return Json(new { Date = dt, Title = title, Photos = photos });
+        }
+
+        private string GetBaseFolder()
+        {
+            string folder = HttpContext.Current.Server.MapPath("~/gallery");
+
+            if (!Directory.Exists(folder))
+            {
+                throw new Exception("Missing folder");
+            }
+
+            return folder;
         }
     }
 }
