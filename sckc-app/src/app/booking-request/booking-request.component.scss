@@ -1,0 +1,36 @@
+.form {
+    min-width: 150px;
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  .full-width {
+    width: 100%;
+    margin-bottom: 12px;
+  }
+  
+  .error,
+  .response {
+    border-radius: 6px;
+    min-height: 48px;
+    padding: 12px;
+    margin-bottom: 48px;
+  }
+  
+  .error {
+    background-color: #ff020230;
+    border: 1px solid #ff0000;
+  }
+  
+  .response {
+    border: 1px solid #008000;
+    background: #00800024;
+  }
+  
+  textarea {
+    height: 80px;
+  }
+  
+  .mat-error {
+  }

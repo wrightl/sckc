@@ -5,8 +5,28 @@ table {
 
 .heading {
   font-size: 18px;
+  margin-left: 8px;
 }
 
 .date {
   min-width: 100px;
+}
+
+.date-cell {
+  width: 120px;
+}
+
+.book-cell {
+  text-align: right;
+}
+
+.small {
+  font-size: 12px;
+  padding-top: 0;
+  mat-list-item {
+    height: 36px;
+  }
+  mat-list-base mat-list-item .mat-list-item-content {
+    padding: 0;
+  }
 }

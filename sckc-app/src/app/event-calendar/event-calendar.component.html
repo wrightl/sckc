@@ -7,34 +7,26 @@
       <mat-divider></mat-divider>
 
       <table mat-table [dataSource]="month.Events">
-        <!-- Position Column -->
         <ng-container matColumnDef="date">
-          <!-- <th mat-header-cell *matHeaderCellDef>Date</th> -->
-          <td mat-cell *matCellDef="let element">{{ element.LocaleDate }}</td>
+          <td class="date-cell" mat-cell *matCellDef="let element">{{ element.LocaleDate }}</td>
         </ng-container>
 
-        <!-- Name Column -->
         <ng-container matColumnDef="name">
-          <!-- <th mat-header-cell *matHeaderCellDef>Name</th> -->
           <td mat-cell *matCellDef="let element">{{ element.Summary }}</td>
         </ng-container>
 
-        <!-- Weight Column -->
         <ng-container matColumnDef="book">
-          <!-- <th mat-header-cell *matHeaderCellDef>Book</th> -->
-          <td mat-cell *matCellDef="let element">
-            <a
+          <td class="book-cell" mat-cell *matCellDef="let element">
+            <!-- <a
               href="mailto:bookingrequest@sheffieldcitykayakclub.co.uk?subject=Booking%20request%20for%20{{
                 element.Summary
               }}%20on%20{{
                 element.StartDateTime | date: 'longDate'
-              }}&amp;body={Please%20enter%20your%20name,%20name/s%20of%20people%20booking%20and%20contact%20details}"
-              >Book</a
-            >
+              }}&amp;body={Please%20enter%20your%20name,%20name/s%20of%20people%20booking%20and%20contact%20details}">Book</a> -->
+              <a routerLink="/bookingrequest" [state]="element">Book</a>
           </td>
         </ng-container>
 
-        <!-- <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr> -->
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
     </ng-container>
@@ -42,7 +34,7 @@
 </ng-container>
 
 <ng-container *ngIf="isReady && mode === 'small'">
-  <mat-list *ngFor="let event of events">
+  <mat-list *ngFor="let event of events" class="small">
     <mat-list-item>
       <div class="date">{{ event.StartDateTime | date: "ccc d MMM" }}</div>
       <div>{{ event.Summary }}</div>

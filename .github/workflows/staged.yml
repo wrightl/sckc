@@ -20,3 +20,4 @@ jobs:
             ftphost: ${{ secrets.ftphost }}
             ftpuser: ${{ secrets.ftpuser }}
             ftppassword: ${{ secrets.ftppassword }}
+            sendgrid_apikey: ${{ secrets.sendgrid_apikey }}

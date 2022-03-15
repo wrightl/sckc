@@ -2,5 +2,5 @@
 .DS_Store
 .vs/
 
-/sckc/sckc.api/data
-/sckc/sckc.api/web.config
+#development environment files
+/sckc-app/src/environments/environment.local.ts

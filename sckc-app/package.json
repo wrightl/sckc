@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --watch",
+    "start:local": "ng serve --watch --configuration=local",
     "build": "ng build",
     "build:production": "ng build --configuration production",
     "build:staged": "ng build --configuration staged --base-href /app/",

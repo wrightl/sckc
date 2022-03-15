@@ -4,7 +4,7 @@ import { AppComponent } from './app.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { APP_BASE_HREF } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -17,6 +17,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTreeModule } from '@angular/material/tree';
@@ -48,6 +49,8 @@ import { PageTitleComponent } from './page-title/page-title.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { ClubHistoryComponent } from './club-history/club-history.component';
 import { TripsComponent } from './trips/trips.component';
+import { BookingRequestComponent } from './booking-request/booking-request.component';
+import { BookingRequestConfComponent } from './booking-request-conf/booking-request-conf.component';
 
 @NgModule({
   declarations: [
@@ -75,11 +78,14 @@ import { TripsComponent } from './trips/trips.component';
     ContactUsComponent,
     ClubHistoryComponent,
     TripsComponent,
+    BookingRequestComponent,
+    BookingRequestConfComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
     MatButtonModule,
@@ -93,6 +99,7 @@ import { TripsComponent } from './trips/trips.component';
     MatMenuModule,
     MatProgressSpinnerModule,
     MatSidenavModule,
+    MatSnackBarModule,
     MatTableModule,
     MatToolbarModule,
     MatTreeModule,

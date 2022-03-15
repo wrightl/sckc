@@ -1,9 +1,11 @@
-<app-page-title title="People"></app-page-title>
+<app-page-title title="Club Officials"></app-page-title>
 
-<p>
-  If you have any general enquiries send us an email at
-  <a href="mailto:enquiries@sheffieldcitykayakclub.co.uk"
-    >enquiries@sheffieldcitykayakclub.co.uk</a
-  >, or alternatively contact one of our committee members below.
-</p>
-<app-person *ngFor="let person of people" [person]="person"></app-person>
+<div class="person-container">
+  <p>
+    If you have any general enquiries send us an email at
+    <a href="mailto:enquiries@sheffieldcitykayakclub.co.uk"
+      >enquiries@sheffieldcitykayakclub.co.uk</a
+    >, or alternatively contact one of our committee members below.
+  </p>
+  <app-person *ngFor="let person of people" [person]="person"></app-person>
+</div>

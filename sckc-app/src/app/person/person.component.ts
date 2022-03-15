@@ -9,4 +9,8 @@ import { Person } from '../data/people';
 export class PersonComponent {
   @Input()
   person!: Person;
+
+  getMailTo() {
+    return `mailto:${this.person.emailAddress}`;
+  }
 }

@@ -16,6 +16,7 @@ import { AboutComponent } from './about/about.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { ClubHistoryComponent } from './club-history/club-history.component';
 import { TripsComponent } from './trips/trips.component';
+import { BookingRequestComponent } from './booking-request/booking-request.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -34,6 +35,7 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'contactus', component: ContactUsComponent },
   { path: 'history', component: ClubHistoryComponent },
+  { path: 'bookingrequest', component: BookingRequestComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
 ];
 

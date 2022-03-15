@@ -1,10 +1,15 @@
-<mat-card class="example-card">
+<mat-card class="person-card">
   <mat-card-title-group>
     <mat-card-title>{{ person.name }}</mat-card-title>
-    <mat-card-subtitle>{{ person.role }}</mat-card-subtitle>
-    <img *ngIf="person.imageUrl" src="{{ person.imageUrl }}" />
   </mat-card-title-group>
-  <mat-card-content>
-    <div [innerHTML]="person.longText"></div
-  ></mat-card-content>
+  <div class="person-info">
+    <mat-card-content>
+      <mat-card-subtitle>{{ person.role }}</mat-card-subtitle>
+      <div [innerHTML]="person.longText"></div>
+      <a [href]="getMailTo()">{{ person.emailAddress }}</a>
+    </mat-card-content>
+    <div class="person-image">
+      <img *ngIf="person.imageUrl" src="{{ person.imageUrl }}" />
+    </div>
+  </div>
 </mat-card>

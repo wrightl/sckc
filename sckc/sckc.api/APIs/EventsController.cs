@@ -9,6 +9,7 @@ using Google.Apis.Calendar.v3;
 using Google.Apis.Calendar.v3.Data;
 using Google.Apis.Services;
 using Newtonsoft.Json.Linq;
+using sckc.api.Extensions;
 using sckc.api.Models;
 
 namespace sckc.api.APIs
@@ -38,7 +39,7 @@ namespace sckc.api.APIs
 		public static CalendarService CreateGoogleCalendarService()
 		{
 			GoogleCredential googleCredential;
-			using (Stream stream = new FileStream(MapPath("data/sckc.data"), FileMode.Open, FileAccess.Read, FileShare.Read))
+			using (Stream stream = new FileStream(Helper.MapPath("data/sckc.data"), FileMode.Open, FileAccess.Read, FileShare.Read))
 			{
 				googleCredential = GoogleCredential.FromStream(stream);
 			}
@@ -49,19 +50,6 @@ namespace sckc.api.APIs
 				HttpClientInitializer = googleCredential,
 				ApplicationName = "sckc"
 			});
-		}
-
-		public static string MapPath(string path)
-		{
-			if (path.StartsWith("/"))
-			{
-				path = path.Substring(1);
-			}
-			string text = path;
-			char directorySeparatorChar = Path.DirectorySeparatorChar;
-			path = text.Replace("/", directorySeparatorChar.ToString());
-			string physicalApplicationPath = HttpContext.Current.Request.PhysicalApplicationPath;
-			return Path.Combine(physicalApplicationPath, path);
 		}
 
 		public static Event SaveToGoogleCalendar(JObject Booking)
@@ -104,7 +92,7 @@ namespace sckc.api.APIs
         {
 			return GetClubEvents().GroupBy(ev => ev.StartDateTime.ToString("MMMMYYYY"))
 							 .Select((key, group) => new ClubEventMonth()
-							 { Events = key.ToList(), Month = key.FirstOrDefault()?.StartDateTime.ToString("MMMM") });
+							 { Events = key.OrderBy(ev => ev.StartDateTime).ToList(), Month = key.FirstOrDefault()?.StartDateTime.ToString("MMMM") });
 
 		}
 
@@ -199,7 +187,7 @@ namespace sckc.api.APIs
 							ParseRecurrenceEntry(recurrenceParamsArray, out var count, out var freq, out var interval, out var until, out var byday);
 							if (until == DateTime.MinValue)
 							{
-								until = DateTime.Today.AddYears(1);
+								until = DateTime.Today.AddMonths(6);
 							}
 							if (until > DateTime.Today)
 							{

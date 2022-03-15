@@ -1,5 +1,17 @@
-mat-card {
+.person-card {
   margin: 12px 0 12px 0;
+  display: flex;
+  flex-direction: column;
+  width: 900px;
+}
+
+.person-info{
+  flex-direction: row;
+  display: flex;
+}
+
+.person-image{
+  flex: 0 0 auto;
 }
 
 img {

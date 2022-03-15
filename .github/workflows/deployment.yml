@@ -18,6 +18,8 @@ on:
                 required: true
             ftppassword:
                 required: true
+            sendgrid_apikey:
+                required: true
 
 jobs:
     # build api
@@ -52,12 +54,21 @@ jobs:
               working-directory: ./sckc
               run: msbuild sckc.sln /p:Configuration=Release
 
-            - name: Write File
+            - name: Write google secrets file
               uses: DamianReeves/write-file-action@v1.0
               with:
                   path: ./sckc/sckc.api/data/sckc.data
                   # The contents of the file
                   contents: ${{ secrets.google_calendar_creds }}
+                  # The mode of writing to use: `overwrite`, `append`, or `preserve`.
+                  write-mode: overwrite # optional, default is preserve
+
+            - name: Write email api key
+              uses: DamianReeves/write-file-action@v1.0
+              with:
+                  path: ./sckc/sckc.api/data/sendgrid_apikey.data
+                  # The contents of the file
+                  contents: ${{ secrets.sendgrid_apikey }}
                   # The mode of writing to use: `overwrite`, `append`, or `preserve`.
                   write-mode: overwrite # optional, default is preserve
 
