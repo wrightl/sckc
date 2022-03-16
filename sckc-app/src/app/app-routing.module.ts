@@ -36,7 +36,7 @@ const routes: Routes = [
   { path: 'contactus', component: ContactUsComponent },
   { path: 'history', component: ClubHistoryComponent },
   { path: 'bookingrequest', component: BookingRequestComponent },
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '**', redirectTo: '/home', pathMatch: 'full' },
 ];
 
 @NgModule({
