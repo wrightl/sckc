@@ -8,7 +8,9 @@
 
       <table mat-table [dataSource]="month.Events">
         <ng-container matColumnDef="date">
-          <td class="date-cell" mat-cell *matCellDef="let element">{{ element.LocaleDate }}</td>
+          <td class="date-cell" mat-cell *matCellDef="let element">
+            {{ element.LocaleDate }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="name">
@@ -23,7 +25,7 @@
               }}%20on%20{{
                 element.StartDateTime | date: 'longDate'
               }}&amp;body={Please%20enter%20your%20name,%20name/s%20of%20people%20booking%20and%20contact%20details}">Book</a> -->
-              <a routerLink="/bookingrequest" [state]="element">Book</a>
+            <a routerLink="/bookingrequest" [state]="element">Book</a>
           </td>
         </ng-container>
 
@@ -35,9 +37,9 @@
 
 <ng-container *ngIf="isReady && mode === 'small'">
   <mat-list *ngFor="let event of events" class="small">
-    <mat-list-item>
+    <mat-list-item style="padding-left: 0">
       <div class="date">{{ event.StartDateTime | date: "ccc d MMM" }}</div>
-      <div>{{ event.Summary }}</div>
+      <div class="summary">{{ event.Summary }}</div>
     </mat-list-item>
     <mat-divider></mat-divider>
   </mat-list>
