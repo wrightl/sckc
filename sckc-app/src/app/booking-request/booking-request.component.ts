@@ -1,9 +1,8 @@
-import { validateHorizontalPosition } from '@angular/cdk/overlay';
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { BookingRequestConfComponent } from '../booking-request-conf/booking-request-conf.component';
 import { CalendarEvent } from '../models/calendar-event';
@@ -17,6 +16,7 @@ export class BookingRequestComponent implements OnInit {
   booking!: CalendarEvent;
 
   name = new FormControl('', [Validators.required]);
+  number = new FormControl('');
   names = new FormControl('');
   email = new FormControl('', [Validators.required, Validators.email]);
   telno = new FormControl('');
@@ -27,7 +27,6 @@ export class BookingRequestComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private route: ActivatedRoute,
     private _snackBar: MatSnackBar
   ) {}
 
@@ -60,11 +59,13 @@ export class BookingRequestComponent implements OnInit {
     this.response = '';
 
     this.name.markAsTouched();
+    this.number.markAsTouched();
     this.names.markAsTouched();
     this.email.markAsTouched();
     this.telno.markAsTouched();
     this.message.markAsTouched();
     this.name.updateValueAndValidity();
+    this.number.updateValueAndValidity();
     this.names.updateValueAndValidity();
     this.email.updateValueAndValidity();
     this.telno.updateValueAndValidity();
@@ -72,6 +73,7 @@ export class BookingRequestComponent implements OnInit {
 
     if (
       this.name.errors ||
+      this.number.errors ||
       this.names.errors ||
       this.email.errors ||
       this.telno.errors ||
@@ -84,6 +86,7 @@ export class BookingRequestComponent implements OnInit {
         event: this.booking.Summary,
         date: this.booking.LocaleDate,
         name: this.name.value,
+        number: this.number.value,
         names: this.names.value,
         email: this.email.value,
         telno: this.telno.value,
@@ -95,16 +98,10 @@ export class BookingRequestComponent implements OnInit {
           this._snackBar.openFromComponent(BookingRequestConfComponent, {
             duration: 5000,
             verticalPosition: 'top',
-            data: { message: response}
+            data: { message: response },
           });
 
           this.router.navigate(['/events']);
-
-          // this.name.reset();
-          // this.names.reset();
-          // this.telno.reset();
-          // this.email.reset();
-          // this.message.reset();
         },
         (error) =>
           (this.error =
