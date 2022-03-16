@@ -32,7 +32,7 @@ namespace sckc.api.APIs
             var from = new EmailAddress("testbookingrequest@sheffieldcitykayakclub.co.uk", "Booking Request");
             var to = new EmailAddress("testbookingrequest@sheffieldcitykayakclub.co.uk", "Booking Request");
             var subject = $"Booking request for {info.Event} on {info.Date}";
-            var htmlContent = $"From: {info.Name}<br/>Email: <a href=\"mailto:{info.Email}\">{info.Email}</a><br/>People: {info.Names}<br/>TelNo: {info.TelNo}<br/>Message:<br/>{info.Message}";
+            var htmlContent = $"From: {info.Name}<br/>Email: <a href=\"mailto:{info.Email}\">{info.Email}</a><br/>Number of people: {info.Number}<br/>People: {info.Names}<br/>TelNo: {info.TelNo}<br/>Message:<br/>{info.Message}";
             var msg = MailHelper.CreateSingleEmail(from, to, subject, htmlContent, htmlContent);
             msg.ReplyTo = new EmailAddress(info.Email);
 
@@ -63,6 +63,7 @@ namespace sckc.api.APIs
     public class BookingRequestEmailDto
     {
         public string Names { get; set; }
+        public string Number { get; set; }
         public string Message { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
