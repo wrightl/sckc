@@ -10,6 +10,11 @@ table {
 
 .date {
   min-width: 100px;
+  margin-left: -16px;
+}
+
+.summary {
+  margin-right: -16px;
 }
 
 .date-cell {
@@ -29,4 +34,8 @@ table {
   mat-list-base mat-list-item .mat-list-item-content {
     padding: 0;
   }
+}
+
+.small .mat-list-base .mat-list-item .mat-list-item-content {
+  padding-left: 0;
 }
