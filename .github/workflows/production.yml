@@ -21,3 +21,4 @@ jobs:
             ftpuser: ${{ secrets.ftpuser }}
             ftppassword: ${{ secrets.ftppassword }}
             sendgrid_apikey: ${{ secrets.sendgrid_apikey }}
+            stripe_apikey: ${{ secrets.stripe_apikey_test }}

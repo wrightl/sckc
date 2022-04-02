@@ -10,6 +10,8 @@ namespace sckc.api.Models
 
 		public string Summary { get; set; }
 
+		public string EventType { get; set; }
+
 		[JsonIgnore()]
 		public string Description { get; set; }
 

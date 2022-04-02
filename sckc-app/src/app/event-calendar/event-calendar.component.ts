@@ -14,7 +14,7 @@ export class EventCalendarComponent implements OnInit {
   isReady = false;
   events: CalendarEvent[] = [];
   groupedEvents: CalendarEventMonth[] = [];
-  displayedColumns: string[] = ['date', 'name', 'book'];
+  displayedColumns: string[] = ['day', 'date', 'name', 'book'];
 
   constructor(private eventsService: EventsService) {}
 

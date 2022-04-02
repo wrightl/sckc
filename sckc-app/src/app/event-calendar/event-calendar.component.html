@@ -7,14 +7,19 @@
       <mat-divider></mat-divider>
 
       <table mat-table [dataSource]="month.Events">
+        <ng-container matColumnDef="day">
+          <td class="day-cell" mat-cell *matCellDef="let element">
+            {{ element.StartDateTime | date:'EEEE' }}
+          </td>
+        </ng-container>
         <ng-container matColumnDef="date">
           <td class="date-cell" mat-cell *matCellDef="let element">
-            {{ element.LocaleDate }}
+            {{ element.StartDateTime | date:'dd/MM @ h:mm aa' }}
           </td>
         </ng-container>
 
         <ng-container matColumnDef="name">
-          <td mat-cell *matCellDef="let element">{{ element.Summary }}</td>
+          <td class="summary-cell" mat-cell *matCellDef="let element">{{ element.Summary }}</td>
         </ng-container>
 
         <ng-container matColumnDef="book">
@@ -25,7 +30,7 @@
               }}%20on%20{{
                 element.StartDateTime | date: 'longDate'
               }}&amp;body={Please%20enter%20your%20name,%20name/s%20of%20people%20booking%20and%20contact%20details}">Book</a> -->
-            <a routerLink="/bookingrequest" [state]="element">Book</a>
+            <a routerLink="/book" [state]="element">Book</a>
           </td>
         </ng-container>
 
@@ -38,7 +43,7 @@
 <ng-container *ngIf="isReady && mode === 'small'">
   <mat-list *ngFor="let event of events" class="small">
     <mat-list-item style="padding-left: 0">
-      <div class="date">{{ event.StartDateTime | date: "ccc d MMM" }}</div>
+      <a class="date" routerLink="/book" [state]="event">{{ event.StartDateTime | date: "ccc d MMM" }}</a>
       <div class="summary">{{ event.Summary }}</div>
     </mat-list-item>
     <mat-divider></mat-divider>

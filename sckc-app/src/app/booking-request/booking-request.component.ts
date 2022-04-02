@@ -81,6 +81,12 @@ export class BookingRequestComponent implements OnInit {
     )
       return false;
 
+    this._sendBookingRequest();
+
+    return false;
+  }
+
+  private _sendBookingRequest() {
     this.http
       .post(`${environment.baseApiUrl}BookingRequest`, {
         event: this.booking.Summary,
@@ -107,7 +113,5 @@ export class BookingRequestComponent implements OnInit {
           (this.error =
             'Unfortunately an error occurred. Please try again, or send an email to <a href="mailto:bookingrequest@sheffieldcitykayakclub.co.uk">bookingrequest@sheffieldcitykayakclub.co.uk</a>')
       );
-
-    return false;
   }
 }

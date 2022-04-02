@@ -1,4 +1,5 @@
 ﻿using sckc.api.Extensions;
+using sckc.api.Models;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 using System;
@@ -13,7 +14,7 @@ namespace sckc.api.APIs
     {
         [Route("api/ContactUs")]
         [HttpPost]
-        public async Task<IHttpActionResult> SendContactUsMail(ContactUsEmailDto info)
+        public async Task<IHttpActionResult> SendContactUsMail(ContactUsDto info)
         {
             var from = new EmailAddress("contactus@sheffieldcitykayakclub.co.uk", "Contact Us");
             var to = new EmailAddress("contactus@sheffieldcitykayakclub.co.uk", "Contact Us");
@@ -22,12 +23,16 @@ namespace sckc.api.APIs
             var msg = MailHelper.CreateSingleEmail(from, to, subject, htmlContent, htmlContent);
             msg.ReplyTo = new EmailAddress(info.Email);
 
-            return await SendMail(msg);
+            var response = await SendMail(msg);
+
+            if (response)
+                return Ok("Thanks for getting in touch. Someone will reply to your email soon");
+            return InternalServerError();
         }
 
         [Route("api/BookingRequest")]
         [HttpPost]
-        public async Task<IHttpActionResult> SendBookingRequestMail(BookingRequestEmailDto info)
+        public async Task<IHttpActionResult> SendBookingRequestMail(BookingRequestDto info)
         {
             var from = new EmailAddress("testbookingrequest@sheffieldcitykayakclub.co.uk", "Booking Request");
             var to = new EmailAddress("testbookingrequest@sheffieldcitykayakclub.co.uk", "Booking Request");
@@ -36,39 +41,23 @@ namespace sckc.api.APIs
             var msg = MailHelper.CreateSingleEmail(from, to, subject, htmlContent, htmlContent);
             msg.ReplyTo = new EmailAddress(info.Email);
 
-            return await SendMail(msg);
+            var response = await SendMail(msg);
+
+            if (response)
+                return Ok("Thanks for getting in touch. Someone will reply to your email soon");
+            return InternalServerError();
         }
 
-        private async Task<IHttpActionResult> SendMail(SendGridMessage message)
+        public static async Task<bool> SendMail(SendGridMessage message)
         {
             var apiKey = File.ReadAllText(Helper.MapPath("data/sendgrid_apikey.data"));
             var client = new SendGridClient(apiKey);
             var response = await client.SendEmailAsync(message);
 
             if (response?.IsSuccessStatusCode == true)
-                return Ok("Thanks for getting in touch. Someone will reply to your email soon");
+                return true;
 
             throw new Exception(await response.Body.ReadAsStringAsync());
         }
-    }
-
-    public class ContactUsEmailDto
-    {
-        public string Subject { get; set; }
-        public string Message { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
-    }
-
-    public class BookingRequestEmailDto
-    {
-        public string Names { get; set; }
-        public string Number { get; set; }
-        public string Message { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string TelNo { get; set; }
-        public string Event { get; set; }
-        public string Date { get; set; }
     }
 }

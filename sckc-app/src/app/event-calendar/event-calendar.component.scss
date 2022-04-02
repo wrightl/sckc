@@ -9,7 +9,7 @@ table {
 }
 
 .date {
-  min-width: 100px;
+  min-width: 120px;
   margin-left: -16px;
 }
 
@@ -17,8 +17,16 @@ table {
   margin-right: -16px;
 }
 
-.date-cell {
+.day-cell {
   width: 120px;
+}
+
+.date-cell {
+  width: 140px;
+}
+
+.summary-cell {
+  text-align: center;
 }
 
 .book-cell {

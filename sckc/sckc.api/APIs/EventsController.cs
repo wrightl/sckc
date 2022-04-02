@@ -108,28 +108,8 @@ namespace sckc.api.APIs
 			{
 				ProcessEvent(item, list);
 			}
-			//try
-			//{
-			//	listRequest = calendarService.Events.List(SpecialEventsCalendarId);
-			//	listRequest.TimeMin = DateTime.Today;
-			//	events2 = listRequest.Execute();
-			//	List<ClubEvent> list2 = new List<ClubEvent>();
-			//	foreach (Event item2 in events2.Items)
-			//	{
-			//		ProcessEvent(item2, list2);
-			//	}
-			//	list2.ForEach(delegate (ClubEvent entry)
-			//	{
-			//		entry.IsSpecialEvent = true;
-			//	});
-			//	list.AddRange(list2);
-			//}
-			//catch (Exception ex)
-			//{
 
-			//}
-
-			list = list.Where(ev => !ev.Status.Equals("cancelled")).ToList();
+			list = list.Where(ev => !ev.Status.Equals("cancelled")).OrderBy(ev => ev.StartDateTime).ToList();
 
 			if (count != null && count.HasValue)
 				list = list.Take(count.Value).ToList();
@@ -378,7 +358,8 @@ namespace sckc.api.APIs
 						EndDateTime = EndAt,
 						Status = evt.Status,
 						LocaleDate = StartAt.ToString("dd/MM/yy"),
-						StartDateAsString = StartAt.ToString("yyyy-MM-dd HH:mm")
+						StartDateAsString = StartAt.ToString("yyyy-MM-dd HH:mm"),
+						EventType = (evt.Summary.ToLowerInvariant().Contains("pool") ? "pool" : "river")
 					};
 					events.Add(item);
 				}

@@ -15,4 +15,5 @@ export interface CalendarEvent {
   Summary: string;
   Date: Date;
   Month: number;
+  EventType: "river" | "pool" | "trip";
 }

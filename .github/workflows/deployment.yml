@@ -20,6 +20,8 @@ on:
                 required: true
             sendgrid_apikey:
                 required: true
+            stripe_apikey:
+                required: true
 
 jobs:
     # build api
@@ -60,6 +62,15 @@ jobs:
                   path: ./sckc/sckc.api/data/sckc.data
                   # The contents of the file
                   contents: ${{ secrets.google_calendar_creds }}
+                  # The mode of writing to use: `overwrite`, `append`, or `preserve`.
+                  write-mode: overwrite # optional, default is preserve
+
+            - name: Write stripe apikey file
+              uses: DamianReeves/write-file-action@v1.0
+              with:
+                  path: ./sckc/sckc.api/data/stripe.data
+                  # The contents of the file
+                  contents: ${{ secrets.stripe_apikey }}
                   # The mode of writing to use: `overwrite`, `append`, or `preserve`.
                   write-mode: overwrite # optional, default is preserve
 

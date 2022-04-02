@@ -2,7 +2,7 @@ a,
 a:hover {
   text-decoration: none;
   color: white;
-  text-shadow: 1px 1px 3px rgb(0 0 0 / 80%);
+  // text-shadow: 1px 1px 3px rgb(0 0 0 / 80%);
 }
 
 .photosets-container {
@@ -26,4 +26,19 @@ a:hover {
   justify-content: flex-end;
   height: 100%;
   padding: 12px;
+  border-bottom: 70px solid rgb(34 34 34 / 62%);
+
+  h5{
+    margin-bottom: 0.5rem;;
+  }
+  
+  h6{
+    margin-bottom: -4.5rem;;
+  }
 }
+
+// .caption-background{
+//   position: absolute;
+//   color: pink;
+  
+// }
