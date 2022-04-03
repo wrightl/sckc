@@ -100,7 +100,7 @@ namespace sckc.api.APIs
 		{
 			CalendarService calendarService = CreateGoogleCalendarService();
 			EventsResource.ListRequest listRequest = calendarService.Events.List(ClubCalendarId);
-			listRequest.TimeMin = DateTime.Today;
+			listRequest.TimeMin = DateTime.Now;
 			listRequest.TimeMax = DateTime.Today.AddMonths(6);
 			Events events2 = listRequest.Execute();
 			List<ClubEvent> list = new List<ClubEvent>();
@@ -169,7 +169,7 @@ namespace sckc.api.APIs
 							{
 								until = DateTime.Today.AddMonths(6);
 							}
-							if (until > DateTime.Today)
+							if (until > DateTime.Now)
 							{
 								switch (freq)
 								{
@@ -205,7 +205,7 @@ namespace sckc.api.APIs
 											int num = 0;
 											while (dateTime3 <= until)
 											{
-												if (dateTime3 >= DateTime.Today && CheckDay(dateTime3, byday) && AddEvent(evt, dateTime3, new DateTime(dateTime3.Year, dateTime3.Month, dateTime3.Day, dateTime2.Hour, dateTime2.Minute, 0), events))
+												if (dateTime3 >= DateTime.Now && CheckDay(dateTime3, byday) && AddEvent(evt, dateTime3, new DateTime(dateTime3.Year, dateTime3.Month, dateTime3.Day, dateTime2.Hour, dateTime2.Minute, 0), events))
 												{
 													num++;
 												}
@@ -227,7 +227,7 @@ namespace sckc.api.APIs
 											int num = 0;
 											while (dateTime3 <= until)
 											{
-												if (dateTime3 >= DateTime.Today && CheckDay(dateTime3, byday) && AddEvent(evt, dateTime3, new DateTime(dateTime3.Year, dateTime3.Month, dateTime3.Day, dateTime2.Hour, dateTime2.Minute, 0), events))
+												if (dateTime3 >= DateTime.Now && CheckDay(dateTime3, byday) && AddEvent(evt, dateTime3, new DateTime(dateTime3.Year, dateTime3.Month, dateTime3.Day, dateTime2.Hour, dateTime2.Minute, 0), events))
 												{
 													num++;
 												}
@@ -249,7 +249,7 @@ namespace sckc.api.APIs
 											int num = 0;
 											while (dateTime3 <= until)
 											{
-												if (dateTime3 >= DateTime.Today && CheckDay(dateTime3, byday) && AddEvent(evt, dateTime3, new DateTime(dateTime3.Year, dateTime3.Month, dateTime3.Day, dateTime2.Hour, dateTime2.Minute, 0), events))
+												if (dateTime3 >= DateTime.Now && CheckDay(dateTime3, byday) && AddEvent(evt, dateTime3, new DateTime(dateTime3.Year, dateTime3.Month, dateTime3.Day, dateTime2.Hour, dateTime2.Minute, 0), events))
 												{
 													num++;
 												}

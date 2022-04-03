@@ -1,5 +1,6 @@
 ﻿using sckc.api.Extensions;
 using sckc.api.Models;
+using SendGrid.Helpers.Mail;
 using Stripe;
 using Stripe.Checkout;
 using System.Collections.Generic;
@@ -20,6 +21,30 @@ namespace sckc.api.APIs
         [HttpPost]
         public async Task<IHttpActionResult> Book(BookingDto info)
         {
+            if (info.payNow)
+            {
+                return Ok(await this.payNow(info));
+            }
+            else
+            {
+                var from = new EmailAddress("bookings@sheffieldcitykayakclub.co.uk", "Booking Request");
+                var to = new EmailAddress("bookings@sheffieldcitykayakclub.co.uk", "Booking Request");
+                var subject = $"Booking request for {info.Event} on {info.Date}";
+                var htmlContent = $"From: {info.Name}<br/>Email: <a href=\"mailto:{info.Email}\">{info.Email}</a><br/>TelNo: {info.TelNo}<br/>Message:<br/>{info.Message}<br/><br/>" +
+                    $"People:<br/>{ConvertToMessage(info.Items)}";
+                var msg = MailHelper.CreateSingleEmail(from, to, subject, htmlContent, htmlContent);
+                msg.ReplyTo = new EmailAddress(info.Email);
+
+                var response = await Helper.SendMail(msg);
+                if (response)
+                    return Ok("Thanks for getting in touch. Someone will reply to your email soon");
+            }
+
+            return InternalServerError();
+        }
+
+        private async Task<string> payNow(BookingDto info) 
+        { 
             var items = ConvertItems(info.Items);
 
             var options = new SessionCreateOptions
@@ -35,17 +60,7 @@ namespace sckc.api.APIs
             var service = new SessionService();
             Session session = service.Create(options);
 
-            return Ok(session.Url);
-
-
-            //var from = new EmailAddress("testbookingrequest@sheffieldcitykayakclub.co.uk", "Booking Request");
-            //var to = new EmailAddress("testbookingrequest@sheffieldcitykayakclub.co.uk", "Booking Request");
-            //var subject = $"Booking request for {info.Event} on {info.Date}";
-            //var htmlContent = $"From: {info.Name}<br/>Email: <a href=\"mailto:{info.Email}\">{info.Email}</a><br/>Number of people: {info.Number}<br/>People: {info.Names}<br/>TelNo: {info.TelNo}<br/>Message:<br/>{info.Message}";
-            //var msg = MailHelper.CreateSingleEmail(from, to, subject, htmlContent, htmlContent);
-            //msg.ReplyTo = new EmailAddress(info.Email);
-
-            //return await SendMail(msg);
+            return session.Url;
         }
 
         private List<SessionLineItemOptions> ConvertItems(List<BookingItemDto> items)
@@ -64,6 +79,11 @@ namespace sckc.api.APIs
                 },
                 Quantity = x.Quantity,
             }).ToList();
+        }
+
+        private string ConvertToMessage(List<BookingItemDto> items)
+        {
+            return string.Join("<br/>", items.Where(x => x.Quantity > 0).Select(x => $"{x.Quantity} {x.Description}").ToList());
         }
     }
 }

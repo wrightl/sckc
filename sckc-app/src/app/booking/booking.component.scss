@@ -46,3 +46,31 @@ span {
 .booking-items {
   margin-bottom: 20px;
 }
+
+td.mat-cell:first-of-type,
+th.mat-header-cell:first-of-type,
+td.mat-footer-cell:first-of-type {
+  padding-left: 0;
+}
+
+@media only screen and (max-width: 600px) {
+  .regular-qty-picker {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 601px) {
+  .mini-qty-picker {
+    display: none;
+  }
+}
+
+.buttons-container {
+
+  display: flex;
+  flex-direction: row;
+
+  button {
+    margin-right: 20px;
+  }
+}

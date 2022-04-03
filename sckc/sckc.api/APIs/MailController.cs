@@ -23,7 +23,7 @@ namespace sckc.api.APIs
             var msg = MailHelper.CreateSingleEmail(from, to, subject, htmlContent, htmlContent);
             msg.ReplyTo = new EmailAddress(info.Email);
 
-            var response = await SendMail(msg);
+            var response = await Helper.SendMail(msg);
 
             if (response)
                 return Ok("Thanks for getting in touch. Someone will reply to your email soon");
@@ -34,30 +34,18 @@ namespace sckc.api.APIs
         [HttpPost]
         public async Task<IHttpActionResult> SendBookingRequestMail(BookingRequestDto info)
         {
-            var from = new EmailAddress("testbookingrequest@sheffieldcitykayakclub.co.uk", "Booking Request");
-            var to = new EmailAddress("testbookingrequest@sheffieldcitykayakclub.co.uk", "Booking Request");
+            var from = new EmailAddress("bookingrequest@sheffieldcitykayakclub.co.uk", "Booking Request");
+            var to = new EmailAddress("bookingrequest@sheffieldcitykayakclub.co.uk", "Booking Request");
             var subject = $"Booking request for {info.Event} on {info.Date}";
             var htmlContent = $"From: {info.Name}<br/>Email: <a href=\"mailto:{info.Email}\">{info.Email}</a><br/>Number of people: {info.Number}<br/>People: {info.Names}<br/>TelNo: {info.TelNo}<br/>Message:<br/>{info.Message}";
             var msg = MailHelper.CreateSingleEmail(from, to, subject, htmlContent, htmlContent);
             msg.ReplyTo = new EmailAddress(info.Email);
 
-            var response = await SendMail(msg);
+            var response = await Helper.SendMail(msg);
 
             if (response)
                 return Ok("Thanks for getting in touch. Someone will reply to your email soon");
             return InternalServerError();
-        }
-
-        public static async Task<bool> SendMail(SendGridMessage message)
-        {
-            var apiKey = File.ReadAllText(Helper.MapPath("data/sendgrid_apikey.data"));
-            var client = new SendGridClient(apiKey);
-            var response = await client.SendEmailAsync(message);
-
-            if (response?.IsSuccessStatusCode == true)
-                return true;
-
-            throw new Exception(await response.Body.ReadAsStringAsync());
         }
     }
 }

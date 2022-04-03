@@ -4,6 +4,8 @@ namespace sckc.api.Models
 {
     public class BookingDto : BookingRequestDto
     {
+        public bool payNow { get; set; }
+
         public List<BookingItemDto> Items { get; set; }
     }
 

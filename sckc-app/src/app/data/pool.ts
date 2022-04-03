@@ -11,22 +11,22 @@ export const POOLINFO: PoolInfo = {
 
 export const POOL_BOOKING_ITEMS: BookingItem[] = [
   {
-    description: 'Adult Session - Member',
+    description: 'Adult Member',
     cost: POOLINFO.adultFullSession,
     quantity: 0,
   },
   {
-    description: 'Adult Session - Non-Member',
+    description: 'Adult Non-Member',
     cost: POOLINFO.adultFullSessionNonMember,
     quantity: 0,
   },
   {
-    description: 'Child Session - Member',
+    description: 'Child Member',
     cost: POOLINFO.childFullSession,
     quantity: 0,
   },
   {
-    description: 'Child Session - Non-Member',
+    description: 'Child Non-Member',
     cost: POOLINFO.childFullSessionNonMember,
     quantity: 0,
   },

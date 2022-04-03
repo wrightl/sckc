@@ -1,4 +1,8 @@
-﻿using System.IO;
+﻿using SendGrid;
+using SendGrid.Helpers.Mail;
+using System;
+using System.IO;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace sckc.api.Extensions
@@ -16,6 +20,18 @@ namespace sckc.api.Extensions
 			path = text.Replace("/", directorySeparatorChar.ToString());
 			string physicalApplicationPath = HttpContext.Current.Request.PhysicalApplicationPath;
 			return Path.Combine(physicalApplicationPath, path);
+		}
+
+		public static async Task<bool> SendMail(SendGridMessage message)
+		{
+			var apiKey = File.ReadAllText(Helper.MapPath("data/sendgrid_apikey.data"));
+			var client = new SendGridClient(apiKey);
+			var response = await client.SendEmailAsync(message);
+
+			if (response?.IsSuccessStatusCode == true)
+				return true;
+
+			throw new Exception(await response.Body.ReadAsStringAsync());
 		}
 	}
 }

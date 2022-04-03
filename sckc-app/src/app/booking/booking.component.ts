@@ -2,9 +2,11 @@ import { DOCUMENT } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { MatSelectChange } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { BookingRequestConfComponent } from '../booking-request-conf/booking-request-conf.component';
 import { MEMBERSHIP_INFO } from '../data/membership';
 import { BookingItem, POOLINFO, POOL_BOOKING_ITEMS } from '../data/pool';
 import { RIVERINFO, RIVER_BOOKING_ITEMS } from '../data/river';
@@ -26,7 +28,6 @@ export class BookingComponent implements OnInit {
 
   name = new FormControl('', [Validators.required]);
   number = new FormControl('');
-  names = new FormControl('');
   email = new FormControl('', [Validators.required, Validators.email]);
   telno = new FormControl('');
   message = new FormControl('');
@@ -65,6 +66,9 @@ export class BookingComponent implements OnInit {
       case 'trip':
         break;
     }
+
+    // Reset all quantities, bit crap
+    this.bookingItems.forEach((x) => (x.quantity = 0));
   }
 
   getErrorMessage(field: FormControl) {
@@ -76,26 +80,28 @@ export class BookingComponent implements OnInit {
   }
 
   book() {
+    this._book();
+  }
+
+  bookAndPay() {
+    this._book(true);
+  }
+
+  private _book(payNow = false) {
     this.error = '';
     this.response = '';
 
     this.name.markAsTouched();
-    // this.number.markAsTouched();
-    // this.names.markAsTouched();
     this.email.markAsTouched();
     this.telno.markAsTouched();
     this.message.markAsTouched();
     this.name.updateValueAndValidity();
-    // this.number.updateValueAndValidity();
-    // this.names.updateValueAndValidity();
     this.email.updateValueAndValidity();
     this.telno.updateValueAndValidity();
     this.message.updateValueAndValidity();
 
     if (
       this.name.errors ||
-      // this.number.errors ||
-      // this.names.errors ||
       this.email.errors ||
       this.telno.errors ||
       this.message.errors
@@ -107,12 +113,6 @@ export class BookingComponent implements OnInit {
       return false;
     }
 
-    this._payForBooking();
-
-    return false;
-  }
-
-  private _payForBooking() {
     this.http
       .post(`${environment.baseApiUrl}Book`, {
         event: this.booking.Summary,
@@ -121,17 +121,31 @@ export class BookingComponent implements OnInit {
         email: this.email.value,
         telno: this.telno.value,
         message: this.message.value,
-        items: this.bookingItems.filter(x => x.quantity > 0),
+        items: this.bookingItems.filter((x) => x.quantity > 0),
+        payNow: payNow,
       })
       .subscribe(
         (result) => {
           const response = result.toString();
-          this.document.location.href = response;
+
+          if (payNow) {
+            this.document.location.href = response;
+          } else {
+            this._snackBar.openFromComponent(BookingRequestConfComponent, {
+              duration: 5000,
+              verticalPosition: 'top',
+              data: { message: response },
+            });
+
+            this.router.navigate(['/events']);
+          }
         },
         (error) =>
           (this.error =
             'Unfortunately an error occurred. Please try again, or send an email to <a href="mailto:bookingrequest@sheffieldcitykayakclub.co.uk">bookingrequest@sheffieldcitykayakclub.co.uk</a>')
       );
+
+    return false;
   }
 
   public getTotalQuantity() {
@@ -148,33 +162,6 @@ export class BookingComponent implements OnInit {
     return this.bookingItems
       .map((t) => t.cost * t.quantity)
       .reduce((acc, value) => acc + value, 0);
-
-    // let amount = 0;
-    // let child_member = 0;
-    // let child_nonmember = 0;
-    // let adult_member = 0;
-    // let adult_nonmember = 0;
-
-    // switch (this.booking.EventType) {
-    //   case 'pool':
-    //     child_member = this.pool_info.childFullSession;
-    //     child_nonmember = this.pool_info.childFullSessionNonMember;
-    //     adult_member = this.pool_info.adultFullSession;
-    //     adult_nonmember = this.pool_info.adultFullSessionNonMember;
-    //     break;
-    //   case 'river':
-    //     child_member = this.river_info.childSessionCost;
-    //     child_nonmember = this.river_info.childSessionCostNonMember;
-    //     adult_member = this.river_info.adultSessionCost;
-    //     adult_nonmember = this.river_info.adultSessionCostNonMember;
-    //     break;
-    //   case 'trip':
-    //     break;
-    // }
-
-    // amount += parseInt(this.number.value) * adult_member;
-
-    // return amount;
   }
 
   decreaseQuantity(row: BookingItem) {
@@ -191,5 +178,9 @@ export class BookingComponent implements OnInit {
 
   disableIncreaseQuantity(row: BookingItem) {
     return row.quantity >= 4;
+  }
+
+  updateQuantity(ev: MatSelectChange, row: BookingItem) {
+    // row.quantity = parseInt(ev...value);
   }
 }
