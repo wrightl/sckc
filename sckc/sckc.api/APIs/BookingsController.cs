@@ -3,6 +3,7 @@ using sckc.api.Models;
 using SendGrid.Helpers.Mail;
 using Stripe;
 using Stripe.Checkout;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -47,14 +48,15 @@ namespace sckc.api.APIs
         { 
             var items = ConvertItems(info.Items);
 
+            var uri = (new Uri(this.ControllerContext.Request.Headers.Referrer, "./")).ToString();
+
             var options = new SessionCreateOptions
             {
                 LineItems = items,
                 Mode = "payment",
                 CustomerEmail = info.Email,
-                //PaymentIntentData = new SessionPaymentIntentDataOptions() {  ReceiptEmail = info.Email },
-                SuccessUrl = $"{this.ControllerContext.Request.Headers.Referrer.ToString()}bookingsuccess",
-                CancelUrl = $"{this.ControllerContext.Request.Headers.Referrer.ToString()}events",
+                SuccessUrl = $"{uri}bookingsuccess",
+                CancelUrl = $"{uri}events",
             };
 
             var service = new SessionService();
