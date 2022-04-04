@@ -5,11 +5,11 @@ table {
 
 .heading {
   font-size: 18px;
-  margin-left: 8px;
+  margin-left: -16px;
 }
 
 .date {
-  min-width: 120px;
+  min-width: 110px;
   margin-left: -16px;
 }
 
@@ -18,11 +18,11 @@ table {
 }
 
 .day-cell {
-  width: 120px;
+  max-width: 120px;
 }
 
 .date-cell {
-  width: 140px;
+  max-width: 140px;
 }
 
 .summary-cell {
@@ -31,6 +31,7 @@ table {
 
 .book-cell {
   text-align: right;
+  max-width: 120px;
 }
 
 .small {
@@ -39,11 +40,10 @@ table {
   mat-list-item {
     height: 36px;
   }
-  mat-list-base mat-list-item .mat-list-item-content {
-    padding: 0;
-  }
 }
 
-.small .mat-list-base .mat-list-item .mat-list-item-content {
+td.mat-cell:first-of-type,
+th.mat-header-cell:first-of-type,
+td.mat-footer-cell:first-of-type {
   padding-left: 0;
 }

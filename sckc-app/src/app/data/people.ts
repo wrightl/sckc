@@ -20,7 +20,7 @@ export const PEOPLE: Person[] = [
     role: 'Welfare Officer',
     longText:
       '<p>Kevin started kayaking around 2004 as something he could do with his kids. The girls soon surpassed his abilities and took up slalom competition and are both currently in div 1.</p><p>Kevin has gained his BC 3* and level 1 coaching award as well as UK sport child protection and coaching disabled courses. He is also a cub scout leader, nsra club airgun instructor, archery instructor and climbing wall instructor within scouting, and holds a rya level 2 in dingy sailing. Most of his spare time goes into either scouting or kayaking (especially as logistics support to his kids for slalom competitions all over the country).</p>',
-    emailAddress: 'kevin@sheffieldcitykayakclub.co.uk',
+    emailAddress: 'welfare@sheffieldcitykayakclub.co.uk',
     imageUrl: 'assets/kevinplumb.jpg',
   },
   {

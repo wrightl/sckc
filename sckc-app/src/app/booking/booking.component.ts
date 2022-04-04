@@ -100,16 +100,19 @@ export class BookingComponent implements OnInit {
     this.telno.updateValueAndValidity();
     this.message.updateValueAndValidity();
 
+    if (this.getTotalQuantity() <= 0) {
+      this.error = 'Please select the number of participants';
+    }
+
     if (
       this.name.errors ||
       this.email.errors ||
       this.telno.errors ||
-      this.message.errors
-    )
-      return false;
-
-    if (this.getTotalQuantity() <= 0) {
-      this.error = 'Please select the number of participants';
+      this.message.errors ||
+      this.error
+    ) {
+      const el = document.getElementsByClassName('router-container');
+      if (el?.length > 0) el[0].scrollTop = 0;
       return false;
     }
 

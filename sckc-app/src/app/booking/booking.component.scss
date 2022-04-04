@@ -9,9 +9,9 @@
   width: 100%;
 }
 
-table {
-  width: 100%;
-}
+// table {
+//   width: 100%;
+// }
 
 .error,
 .response {
@@ -35,42 +35,81 @@ textarea {
   height: 60px;
 }
 
-.footer-row {
-  font-weight: bold;
+// .footer-row {
+//   font-weight: bold;
+// }
+
+.qty-value {
+  margin: 0 16px;
 }
 
-span {
-  margin: 0 12px;
-}
+// td.mat-cell:first-of-type,
+// th.mat-header-cell:first-of-type,
+// td.mat-footer-cell:first-of-type {
+//   padding-left: 0;
+// }
 
-.booking-items {
-  margin-bottom: 20px;
-}
+// @media only screen and (max-width: 600px) {
+//   .regular-qty-picker {
+//     display: none;
+//   }
+// }
 
-td.mat-cell:first-of-type,
-th.mat-header-cell:first-of-type,
-td.mat-footer-cell:first-of-type {
-  padding-left: 0;
-}
-
-@media only screen and (max-width: 600px) {
-  .regular-qty-picker {
-    display: none;
-  }
-}
-
-@media only screen and (min-width: 601px) {
-  .mini-qty-picker {
-    display: none;
-  }
-}
+// @media only screen and (min-width: 601px) {
+//   .mini-qty-picker {
+//     display: none;
+//   }
+// }
 
 .buttons-container {
-
   display: flex;
   flex-direction: row;
+  margin: 12px 0;
 
   button {
     margin-right: 20px;
   }
+}
+
+.participants-label {
+  font-size: x-large;
+}
+
+.booking-card {
+  display: flex;
+  flex-direction: row;
+  margin: 12px 0;
+}
+
+.qty-container {
+  margin-left: 12px;
+}
+
+.qty-input {
+  display: inline-block;
+}
+
+.item-total {
+  flex-grow: 0;
+  flex-shrink: 0;
+  font-size: x-large;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.qty-label {
+  font-size: small;
+  margin-right: 12px;
+}
+
+.details {
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+.total-row {
+  margin: 16px 0;
+  font-size: x-large;
+  text-align: end;
 }

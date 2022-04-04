@@ -10,15 +10,6 @@
     <input matInput placeholder="Your Name" [formControl]="name" required />
     <mat-error *ngIf="name.invalid">{{ getErrorMessage(name) }}</mat-error>
   </mat-form-field>
-  <!-- <mat-form-field class="full-width" appearance="fill">
-    <mat-label>Names of participants</mat-label>
-    <input
-      matInput
-      placeholder="Names of all participants"
-      [formControl]="names"
-    />
-    <mat-error *ngIf="names.invalid">{{ getErrorMessage(names) }}</mat-error>
-  </mat-form-field> -->
   <mat-form-field class="full-width" appearance="fill">
     <mat-label>Email</mat-label>
     <input
@@ -50,59 +41,124 @@
   </mat-form-field>
 
   <div class="booking-items">
-
-    <table mat-table [dataSource]="bookingItems" >
-        <ng-container matColumnDef="description">
-          <th mat-header-cell *matHeaderCellDef> Description </th>
-          <td mat-cell *matCellDef="let element"> {{element.description}} </td>
-          <td mat-footer-cell *matFooterCellDef> Total </td>
-        </ng-container>
-        <ng-container matColumnDef="cost">
-          <th mat-header-cell *matHeaderCellDef> Cost </th>
-          <td mat-cell *matCellDef="let element"> {{element.cost | currency:'GBP'}} </td>
-          <td mat-footer-cell *matFooterCellDef></td>
-        </ng-container>
-        <ng-container matColumnDef="quantity">
-          <th mat-header-cell *matHeaderCellDef> Quantity </th>
-          <td mat-cell *matCellDef="let element">
-            <div class="mini-qty-picker">
-              <mat-select (selectionChange)="updateQuantity($event, element)">
-                <mat-option value="0" selected>0</mat-option>
-                <mat-option value="1">1</mat-option>
-                <mat-option value="2">2</mat-option>
-                <mat-option value="3">3</mat-option>
-                <mat-option value="4">4</mat-option>
-              </mat-select>
-            </div>
-            <div class="regular-qty-picker">
-              <button mat-mini-fab color="primary" aria-label="Decrease Quantity" (click)="decreaseQuantity(element)" [disabled]="disableDecreaseQuantity(element)">
-                  <mat-icon>remove</mat-icon>
+    <p class="participants-label">Select Participants:</p>
+    <mat-divider></mat-divider>
+    <ng-container *ngFor="let element of bookingItems">
+      <div class="booking-card">
+        <div class="details">
+          <p class="description">{{ element.description }}</p>
+          <div class="qty-container">
+            <span class="qty-label">Quantity:</span>
+            <div class="qty-input">
+              <button
+                mat-mini-fab
+                color="primary"
+                aria-label="Decrease Quantity"
+                (click)="decreaseQuantity(element)"
+                [disabled]="disableDecreaseQuantity(element)"
+              >
+                <mat-icon>remove</mat-icon>
               </button>
-              <span>{{element.quantity}}</span>
-              <button mat-mini-fab color="primary" aria-label="Increase Quantity" (click)="increaseQuantity(element)" [disabled]="disableIncreaseQuantity(element)">
-                  <mat-icon>add</mat-icon>
+              <span class="qty-value">{{ element.quantity }}</span>
+              <button
+                mat-mini-fab
+                color="primary"
+                aria-label="Increase Quantity"
+                (click)="increaseQuantity(element)"
+                [disabled]="disableIncreaseQuantity(element)"
+              >
+                <mat-icon>add</mat-icon>
               </button>
             </div>
-          </td>
-          <td mat-footer-cell *matFooterCellDef> {{getTotalQuantity()}} </td>
-        </ng-container>
-        <ng-container matColumnDef="total">
-          <th mat-header-cell *matHeaderCellDef> Total </th>
-          <td mat-cell *matCellDef="let element"> {{getItemTotal(element) | currency:'GBP'}} </td>
-          <td mat-footer-cell *matFooterCellDef> {{getTotalCost() | currency:'GBP'}} </td>
-        </ng-container>
-      
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          </div>
+        </div>
+        <div class="item-total">
+          <span>{{ getItemTotal(element) | currency: "GBP" }}</span>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+    </ng-container>
+    <div class="total-row">
+      Total: <span>{{ getTotalCost() | currency: "GBP" }}</span>
+    </div>
+    <!-- 
+    <table mat-table [dataSource]="bookingItems">
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef>Description</th>
+        <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+        <td mat-footer-cell *matFooterCellDef>Total</td>
+      </ng-container>
+      <ng-container matColumnDef="cost">
+        <th mat-header-cell *matHeaderCellDef>Cost</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.cost | currency: "GBP" }}
+        </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+      <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef>Quantity</th>
+        <td mat-cell *matCellDef="let element">
+          <div class="mini-qty-picker">
+            <mat-select (selectionChange)="updateQuantity($event, element)">
+              <mat-option value="0" selected>0</mat-option>
+              <mat-option value="1">1</mat-option>
+              <mat-option value="2">2</mat-option>
+              <mat-option value="3">3</mat-option>
+              <mat-option value="4">4</mat-option>
+            </mat-select>
+          </div>
+          <div class="regular-qty-picker">
+            <button
+              mat-mini-fab
+              color="primary"
+              aria-label="Decrease Quantity"
+              (click)="decreaseQuantity(element)"
+              [disabled]="disableDecreaseQuantity(element)"
+            >
+              <mat-icon>remove</mat-icon>
+            </button>
+            <span>{{ element.quantity }}</span>
+            <button
+              mat-mini-fab
+              color="primary"
+              aria-label="Increase Quantity"
+              (click)="increaseQuantity(element)"
+              [disabled]="disableIncreaseQuantity(element)"
+            >
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+        </td>
+        <td mat-footer-cell *matFooterCellDef>{{ getTotalQuantity() }}</td>
+      </ng-container>
+      <ng-container matColumnDef="total">
+        <th mat-header-cell *matHeaderCellDef>Total</th>
+        <td mat-cell *matCellDef="let element">
+          {{ getItemTotal(element) | currency: "GBP" }}
+        </td>
+        <td mat-footer-cell *matFooterCellDef>
+          {{ getTotalCost() | currency: "GBP" }}
+        </td>
+      </ng-container>
 
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
 
-        <tr mat-footer-row *matFooterRowDef="displayedColumns" class="footer-row"></tr>
-      </table>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 
+      <tr
+        mat-footer-row
+        *matFooterRowDef="displayedColumns"
+        class="footer-row"
+      ></tr>
+    </table> -->
   </div>
 
   <div class="buttons-container">
-    <button mat-flat-button color="accent" (click)="bookAndPay()">Pay Now</button>
-    <button mat-flat-button color="accent" (click)="book()">Pay on the day</button>
+    <button mat-flat-button color="accent" (click)="bookAndPay()">
+      Pay Now
+    </button>
+    <button mat-flat-button color="accent" (click)="book()">
+      Pay on the day
+    </button>
   </div>
 </div>

@@ -32,10 +32,6 @@
       </mat-menu>
     </div>
     <div class="menu-buttons-right">
-      <!-- <button mat-icon-button>
-        <mat-icon aria-hidden="false" aria-label="Search">search</mat-icon>
-      </button> -->
-      <!-- <input type="search" /> -->
       <button mat-flat-button color="accent" routerLink="events">Book</button>
     </div>
   </mat-toolbar>
@@ -44,62 +40,4 @@
     <router-outlet></router-outlet>
   </div>
   <app-footer></app-footer>
-
-  <!-- 
-  <mat-sidenav-container
-    class="sidenav-container"
-    [style.marginTop.px]="mobileQuery.matches ? 56 : 0"
-  >
-    <mat-sidenav
-      #snav
-      [opened]="true"
-      [mode]="mobileQuery.matches ? 'over' : 'side'"
-      [fixedInViewport]="mobileQuery.matches"
-      fixedTopGap="56"
-    >
-      <mat-nav-list>
-        <mat-list-item routerLink=".">Home</mat-list-item>
-        <mat-expansion-panel [class.mat-elevation-z0]="true">
-          <mat-expansion-panel-header> Activities </mat-expansion-panel-header>
-          <mat-nav-list>
-            <a mat-list-item routerLink="/pool"> Pool </a>
-            <a mat-list-item routerLink="/river"> River </a>
-            <a mat-list-item routerLink="/trips"> Trips </a>
-            <a mat-list-item routerLink="/coaching"> Coaching? </a>
-            <a mat-list-item routerLink="/reports"> Trip Reports </a>
-          </mat-nav-list>
-        </mat-expansion-panel>
-        <mat-list-item routerLink="/events">Events</mat-list-item>
-        <mat-expansion-panel [class.mat-elevation-z0]="true">
-          <mat-expansion-panel-header>
-            Club Information
-          </mat-expansion-panel-header>
-          <mat-nav-list>
-            <a mat-list-item routerLink="/location"> Location </a>
-            <a mat-list-item routerLink="/prices"> Prices </a>
-            <a mat-list-item routerLink="/coaches"> Coaches? </a>
-            <a mat-list-item routerLink="/people"> Club Officials </a>
-            <a mat-list-item routerLink="/history"> Club History </a>
-            <a mat-list-item routerLink="/documents"> Documents & Policies </a>
-            <a mat-list-item routerLink="/conduct"> Code of Conduct </a>
-            <a mat-list-item routerLink="/covid"> COVID </a>
-          </mat-nav-list>
-        </mat-expansion-panel>
-        <mat-expansion-panel [class.mat-elevation-z0]="true">
-          <mat-expansion-panel-header> Membership </mat-expansion-panel-header>
-          <mat-nav-list>
-            <a mat-list-item routerLink="/joining"> Joining </a>
-          </mat-nav-list>
-        </mat-expansion-panel>
-        <mat-list-item routerLink="/photos">Photos</mat-list-item>
-      </mat-nav-list>
-    </mat-sidenav>
-
-    <mat-sidenav-content>
-      <div class="router-container">
-        <router-outlet></router-outlet>
-      </div>
-      <app-footer></app-footer>
-    </mat-sidenav-content>
-  </mat-sidenav-container> -->
 </div>
