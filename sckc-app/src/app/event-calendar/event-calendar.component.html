@@ -9,17 +9,19 @@
       <table mat-table [dataSource]="month.Events">
         <ng-container matColumnDef="day">
           <td class="day-cell" mat-cell *matCellDef="let element">
-            {{ element.StartDateTime | date:'EEEE' }}
+            {{ element.StartDateTime | date: "EEEE" }}
           </td>
         </ng-container>
         <ng-container matColumnDef="date">
           <td class="date-cell" mat-cell *matCellDef="let element">
-            {{ element.StartDateTime | date:'dd/MM @ h:mm aa' }}
+            {{ element.StartDateTime | date: "dd/MM @ h:mm aa" }}
           </td>
         </ng-container>
 
         <ng-container matColumnDef="name">
-          <td class="summary-cell" mat-cell *matCellDef="let element">{{ element.Summary }}</td>
+          <td class="summary-cell" mat-cell *matCellDef="let element">
+            {{ element.Summary }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="book">
@@ -42,8 +44,10 @@
 
 <ng-container *ngIf="isReady && mode === 'small'">
   <mat-list *ngFor="let event of events" class="small">
-    <mat-list-item style="padding-left: 0">
-      <a class="date" routerLink="/book" [state]="event">{{ event.StartDateTime | date: "ccc d MMM" }}</a>
+    <mat-list-item style="padding-left: 0; font-size: small">
+      <a class="date" routerLink="/book" [state]="event">{{
+        event.StartDateTime | date: "ccc d MMM"
+      }}</a>
       <div class="summary">{{ event.Summary }}</div>
     </mat-list-item>
     <mat-divider></mat-divider>
