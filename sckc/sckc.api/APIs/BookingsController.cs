@@ -15,7 +15,7 @@ namespace sckc.api.APIs
     {
         public BookingsController()
         {
-            StripeConfiguration.ApiKey = System.IO.File.ReadAllText(Helper.MapPath("data/stripe.data")).Trim();
+            StripeConfiguration.ApiKey = System.IO.File.ReadAllText(Helper.MapPath("data/stripe_apikey.data")).Trim();
         }
 
         [Route("api/Book")]
