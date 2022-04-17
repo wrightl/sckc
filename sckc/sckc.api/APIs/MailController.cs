@@ -1,5 +1,6 @@
 ﻿using sckc.api.Extensions;
 using sckc.api.Models;
+using sckc.core.Models;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 using System;

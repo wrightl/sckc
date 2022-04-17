@@ -6,6 +6,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { APP_BASE_HREF } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -33,10 +34,8 @@ import { PeopleComponent } from './people/people.component';
 import { PersonComponent } from './person/person.component';
 import { FooterComponent } from './footer/footer.component';
 import { EventsComponent } from './events/events.component';
-import { CarouselComponent } from './carousel/carousel.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { PhotosComponent } from './photos/photos.component';
-import { HttpClientModule } from '@angular/common/http';
 import { LocationComponent } from './location/location.component';
 import { PoolComponent } from './pool/pool.component';
 import { RiverComponent } from './river/river.component';
@@ -65,7 +64,6 @@ import { BookingComponent } from './booking/booking.component';
     PersonComponent,
     FooterComponent,
     EventsComponent,
-    CarouselComponent,
     GalleryComponent,
     PhotosComponent,
     LocationComponent,

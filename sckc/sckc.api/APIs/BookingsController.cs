@@ -1,12 +1,15 @@
 ﻿using sckc.api.Extensions;
-using sckc.api.Models;
+using sckc.core.Models;
 using SendGrid.Helpers.Mail;
 using Stripe;
 using Stripe.Checkout;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 
 namespace sckc.api.APIs
@@ -33,10 +36,22 @@ namespace sckc.api.APIs
                 var subject = $"Booking request for {info.Event} on {info.Date}";
                 var htmlContent = $"From: {info.Name}<br/>Email: <a href=\"mailto:{info.Email}\">{info.Email}</a><br/>TelNo: {info.TelNo}<br/>Message:<br/>{info.Message}<br/><br/>" +
                     $"People:<br/>{ConvertToMessage(info.Items)}";
+
+                if (!info.isLiveBooking)
+                {
+                    subject = $"***TEST TEST {subject} TEST TEST***";
+                }
+
                 var msg = MailHelper.CreateSingleEmail(from, to, subject, htmlContent, htmlContent);
                 msg.ReplyTo = new EmailAddress(info.Email);
 
                 var response = await Helper.SendMail(msg);
+
+                // Log the booking request
+                HttpClient client = new HttpClient();
+                var result = await client.PostAsJsonAsync("https://sckc.azurewebsites.net/api/booking", info);
+
+
                 if (response)
                     return Ok("Thanks for getting in touch. Someone will reply to your email soon");
             }
@@ -44,8 +59,8 @@ namespace sckc.api.APIs
             return InternalServerError();
         }
 
-        private async Task<string> payNow(BookingDto info) 
-        { 
+        private async Task<string> payNow(BookingDto info)
+        {
             var items = ConvertItems(info.Items);
 
             var uri = (new Uri(this.ControllerContext.Request.Headers.Referrer, "./")).ToString();
@@ -57,6 +72,15 @@ namespace sckc.api.APIs
                 CustomerEmail = info.Email,
                 SuccessUrl = $"{uri}bookingsuccess",
                 CancelUrl = $"{uri}events",
+                Metadata = new Dictionary<string, string>()
+                {
+                    { "Event", info.Event.Replace(" ", string.Empty) },
+                    { "Date", info.Date },
+                    { "Name", info.Name },
+                    { "TelNo", info.TelNo },
+                    { "Email", info.Email },
+                    { "People", items.Count.ToString() }
+                }
             };
 
             var service = new SessionService();

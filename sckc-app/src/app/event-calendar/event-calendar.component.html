@@ -24,12 +24,6 @@
 
         <ng-container matColumnDef="book">
           <td class="book-cell" mat-cell *matCellDef="let element">
-            <!-- <a
-              href="mailto:bookingrequest@sheffieldcitykayakclub.co.uk?subject=Booking%20request%20for%20{{
-                element.Summary
-              }}%20on%20{{
-                element.StartDateTime | date: 'longDate'
-              }}&amp;body={Please%20enter%20your%20name,%20name/s%20of%20people%20booking%20and%20contact%20details}">Book</a> -->
             <a routerLink="/book" [state]="element">Book</a>
           </td>
         </ng-container>
@@ -40,12 +34,16 @@
   </mat-list>
 </ng-container>
 
-<ng-container *ngIf="isReady && mode === 'small'">
-  <mat-list *ngFor="let event of events" class="small">
-    <mat-list-item style="padding-left: 0">
-      <a class="date" routerLink="/book" [state]="event">{{ event.StartDateTime | date: "ccc d MMM" }}</a>
-      <div class="summary">{{ event.Summary }}</div>
-    </mat-list-item>
-    <mat-divider></mat-divider>
-  </mat-list>
-</ng-container>
+<div class="small-container" *ngIf="isReady && mode === 'small'">
+  <h3>Events</h3>
+  <img src="assets/river.png" width="70"/>
+  <h4>River Sessions</h4>
+  <div *ngFor="let event of riverSessions" class="link-container">
+    <a routerLink="/book" [state]="event">{{ event.StartDateTime | date: "ccc d MMMM" }}</a>
+  </div>
+  <img src="assets/pool.png" width="70"/>
+  <h4>Pool Sessions</h4>
+  <div *ngFor="let event of poolSessions" class="link-container">
+    <a routerLink="/book" [state]="event">{{ event.StartDateTime | date: "ccc d MMMM" }}</a>
+  </div>
+</div>

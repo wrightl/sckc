@@ -12,7 +12,8 @@ export class EventCalendarComponent implements OnInit {
   mode: 'normal' | 'small' = 'normal';
 
   isReady = false;
-  events: CalendarEvent[] = [];
+  riverSessions: CalendarEvent[] = [];
+  poolSessions: CalendarEvent[] = [];
   groupedEvents: CalendarEventMonth[] = [];
   displayedColumns: string[] = ['day', 'date', 'name', 'book'];
 
@@ -20,10 +21,13 @@ export class EventCalendarComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.mode === 'small') {
-      this.eventsService.getEvents(10).subscribe((data: CalendarEvent[]) => {
-        this.events = data;
-        this.isReady = true;
+      this.eventsService.getEventsOfType('river', 5).subscribe((data: CalendarEvent[]) => {
+        this.riverSessions = data;
       });
+      this.eventsService.getEventsOfType('pool', 3).subscribe((data: CalendarEvent[]) => {
+        this.poolSessions = data;
+      });
+      this.isReady = true;
     } else {
       this.eventsService
         .getGroupedEvents()

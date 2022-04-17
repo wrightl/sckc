@@ -16,14 +16,32 @@ namespace sckc.api.APIs
 {
 	public class EventsController : ApiController
 	{
-		[Route("api/GetEvents")]
-		public IHttpActionResult Get(int count = 10)
+        [Route("api/GetEvents")]
+        public IHttpActionResult GetEvents(int count = 10)
 		{
+			if (count <= 10)
+				count = 10;
+			else if (count > 100)
+				count = 100;
+
 			return Json(CalendarServiceHelper.GetClubEvents(count));
 		}
 
-		[Route("api/GetGroupedEvents")]
-		public IHttpActionResult GetGroupedEvent()
+        [Route("api/GetEventsOfType")]
+        public IHttpActionResult GetEventsOfType(string type, int count = 5)
+		{
+			if (count <= 1)
+				count = 1;
+			else if (count > 100)
+				count = 100;
+
+			var events = CalendarServiceHelper.GetClubEvents().Where(ev => ev.EventType.ToLowerInvariant().Contains(type)).Take(count);
+
+			return Json(events);
+		}
+
+        [Route("api/GetGroupedEvents")]
+        public IHttpActionResult GetGroupedEvent()
 		{
 			return Json(CalendarServiceHelper.GetGroupedClubEvents());
 		}
@@ -34,7 +52,7 @@ namespace sckc.api.APIs
 
 		private static string BookingsCalendarId = "6ao4i5trvae0te3v63csl39208@group.calendar.google.com";
 		private static string ClubCalendarId = "sheffieldcitykayakclub@gmail.com";
-		private static string SpecialEventsCalendarId = "n6fiiet0qjudl4obhnldfj6r4@group.calendar.google.com";
+		//private static string SpecialEventsCalendarId = "n6fiiet0qjudl4obhnldfj6r4@group.calendar.google.com";
 
 		public static CalendarService CreateGoogleCalendarService()
 		{

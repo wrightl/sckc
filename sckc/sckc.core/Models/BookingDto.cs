@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 
-namespace sckc.api.Models
+namespace sckc.core.Models
 {
     public class BookingDto : BookingRequestDto
     {
         public bool payNow { get; set; }
+        public bool isLiveBooking { get; set; }
 
         public List<BookingItemDto> Items { get; set; }
     }

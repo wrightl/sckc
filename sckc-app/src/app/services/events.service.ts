@@ -11,16 +11,20 @@ export class EventsService {
   constructor(private http: HttpClient) {}
 
   getEvents(count: number) {
-    //return MOCK_EVENTS;
     return this.http.get<CalendarEvent[]>(
       `${environment.baseApiUrl}GetEvents?count=${count}`
     );
   }
 
   getGroupedEvents() {
-    //return MOCK_EVENTS;
     return this.http.get<CalendarEventMonth[]>(
       `${environment.baseApiUrl}GetGroupedEvents`
+    );
+  }
+
+  getEventsOfType(type: string, count: number) {
+    return this.http.get<CalendarEvent[]>(
+      `${environment.baseApiUrl}getEventsOfType?type=${type}&count=${count}`
     );
   }
 }

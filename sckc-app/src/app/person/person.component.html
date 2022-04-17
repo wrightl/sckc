@@ -6,10 +6,10 @@
     <mat-card-content>
       <mat-card-subtitle>{{ person.role }}</mat-card-subtitle>
       <div [innerHTML]="person.longText"></div>
-      <a [href]="getMailTo()">{{ person.emailAddress }}</a>
     </mat-card-content>
     <div class="person-image">
       <img *ngIf="person.imageUrl" src="{{ person.imageUrl }}" />
     </div>
   </div>
+  <a [href]="getMailTo()">{{ person.emailAddress }}</a>
 </mat-card>

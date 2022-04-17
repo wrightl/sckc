@@ -126,6 +126,7 @@ export class BookingComponent implements OnInit {
         message: this.message.value,
         items: this.bookingItems.filter((x) => x.quantity > 0),
         payNow: payNow,
+        isLiveBooking: environment.production,
       })
       .subscribe(
         (result) => {

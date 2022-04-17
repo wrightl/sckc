@@ -1,61 +1,46 @@
-<div class="container">
-  <div>
-    <ngb-carousel
-      #carousel
-      [interval]="3000"
-      [pauseOnHover]="true"
-      [pauseOnFocus]="true"
-    >
-      <ng-template ngbSlide *ngFor="let img of images; index as i">
-        <!-- <div class="carousel-caption">
-                    <h3>My slide {{i + 1}} title</h3>
-                </div> -->
-        <!-- <a href="{{img}}" target="_blank" rel="nofollow noopener noreferrer"> -->
-        <div class="picsum-img-wrapper">
-          <img [src]="img" alt="My image {{ i + 1 }} description" />
-        </div>
-        <!-- </a> -->
-      </ng-template>
-    </ngb-carousel>
+<div class="homepage-container">
+  <div class="homepage-main">
+    <div>
+      <ngb-carousel
+        #carousel
+        [interval]="5000"
+        [pauseOnHover]="true"
+        [pauseOnFocus]="true"
+      >
+        <ng-template ngbSlide *ngFor="let img of images; index as i">
+          <div class="img-wrapper">
+            <img [src]="img" alt="Image {{ i + 1 }} description" />
+          </div>
+        </ng-template>
+      </ngb-carousel>
+    </div>
+    <h2>About</h2>
+    <p>
+      Sheffield City Kayak Club is a family friendly club who aim to make
+      kayaking accessible to everyone, young and old and can arrange
+      membership from age 7 years with no upper limit. We can supply all the
+      equipment you need apart from clothing and no experience is necessary.
+    </p>
+    <p>
+      We have regular club sessions on the <a routerLink="/river">river</a> at
+      our home on <a routerLink="/location">Kelham Island</a> on a Sunday
+      morning and on Thursday evening during the summer. We also have
+      <a routerLink="/pool">pool</a> sessions every other Tuesday at
+      Hillsborough Leisure Centre.
+    </p>
+    <p>
+      As well as our regular sessions we run regular
+      <a routerLink="/trips">trips</a> around the country for beginners and
+      more experienced paddlers on a variety on rivers, lakes and the sea in
+      different types of boat.
+    </p>
+    <p>
+      To book on any of our regular sessions or trips use the links on the
+      <a routerLink="/events">Booking</a>
+      page.
+    </p>
   </div>
-
-  <div class="row">
-    <div class="col-md-8">
-      <h2>About</h2>
-      <p>
-        Sheffield City Kayak Club is a family friendly club who aim to make
-        kayaking accessible to everyone, young and old and can arrange
-        membership from age 7 years with no upper limit. We can supply all the
-        equipment you need apart from clothing and no experience is necessary.
-      </p>
-      <p>
-        We have regular club sessions on the <a routerLink="/river">river</a> at
-        our home on <a routerLink="/location">Kelham Island</a> on a Sunday
-        morning and on Thursday evening during the summer. We also have
-        <a routerLink="/pool">pool</a> sessions every other Tuesday at
-        Hillsborough Leisure Centre.
-      </p>
-      <p>
-        As well as our regular sessions we run regular
-        <a routerLink="/trips">trips</a> around the country for beginners and
-        more experienced paddlers on a variety on rivers, lakes and the sea in
-        different types of boat.
-      </p>
-      <p>
-        To book on any of our regular sessions or trips use the links on the
-        <a routerLink="/events">Booking</a>
-        page.
-      </p>
-    </div>
-    <div class="col-md-4">
-      <a routerLink="/events">
-        <div class="sckc-latest-heading">UPCOMING EVENTS</div>
-      </a>
-      <app-event-calendar [mode]="'small'"></app-event-calendar>
-      <!-- <div id="news"><a routerLink="/news">
-                    <div class="sckc-latest-heading">LATEST NEWS</div>
-                </a>
-            </div> -->
-    </div>
+  <div class="homepage-sidebar">
+    <app-event-calendar [mode]="'small'"></app-event-calendar>
   </div>
 </div>

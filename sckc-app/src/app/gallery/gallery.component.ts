@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { Image } from '../carousel/interfaces';
 import { GalleryService } from '../services/gallery.service';
 
 @Component({
@@ -11,7 +10,7 @@ import { GalleryService } from '../services/gallery.service';
 })
 export class GalleryComponent implements OnInit {
   isReady = false;
-  images: Image[] = [];
+  images: { path: string }[] = [];
   title = '';
   date?: Date;
 

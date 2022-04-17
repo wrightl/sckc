@@ -1,4 +1,4 @@
-﻿namespace sckc.api.Models
+﻿namespace sckc.core.Models
 {
     public class BookingRequestDto
     {
