@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.809.9
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sckc.api", "sckc.api\sckc.api.csproj", "{723CA91B-5FA6-4855-990A-E99FED6FD657}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sckc.api.Tests", "sckc.api.Tests\sckc.api.Tests.csproj", "{2253A9C5-726B-46AC-8F54-DBFA5E289BF7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sckc.core", "sckc.core\sckc.core.csproj", "{F4925437-5507-4F4A-A31C-3CF98A453D40}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{2253A9C5-726B-46AC-8F54-DBFA5E289BF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2253A9C5-726B-46AC-8F54-DBFA5E289BF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2253A9C5-726B-46AC-8F54-DBFA5E289BF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4925437-5507-4F4A-A31C-3CF98A453D40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4925437-5507-4F4A-A31C-3CF98A453D40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4925437-5507-4F4A-A31C-3CF98A453D40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4925437-5507-4F4A-A31C-3CF98A453D40}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
