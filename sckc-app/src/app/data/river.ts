@@ -18,13 +18,13 @@ export const RIVER_BOOKING_ITEMS: BookingItem[] = [
     quantity: 0,
   },
   {
-    description: 'Adult Member',
-    cost: RIVERINFO.adultSessionCost,
+    description: 'Adult Non-Member - With Equipment Hire',
+    cost: RIVERINFO.adultSessionCostNonMember + RIVERINFO.adultEquipmentHire,
     quantity: 0,
   },
   {
-    description: 'Adult Non-Member - With Equipment Hire',
-    cost: RIVERINFO.adultSessionCostNonMember + RIVERINFO.adultEquipmentHire,
+    description: 'Adult Member',
+    cost: RIVERINFO.adultSessionCost,
     quantity: 0,
   },
   {
@@ -38,13 +38,13 @@ export const RIVER_BOOKING_ITEMS: BookingItem[] = [
     quantity: 0,
   },
   {
-    description: 'Child Member',
-    cost: RIVERINFO.childSessionCost,
+    description: 'Child Non-Member - With Equipment Hire',
+    cost: RIVERINFO.childSessionCostNonMember + RIVERINFO.adultEquipmentHire,
     quantity: 0,
   },
   {
-    description: 'Child Non-Member - With Equipment Hire',
-    cost: RIVERINFO.childSessionCostNonMember + RIVERINFO.adultEquipmentHire,
+    description: 'Child Member',
+    cost: RIVERINFO.childSessionCost,
     quantity: 0,
   },
   {

@@ -16,13 +16,13 @@ export const POOL_BOOKING_ITEMS: BookingItem[] = [
     quantity: 0,
   },
   {
-    description: 'Adult Non-Member',
-    cost: POOLINFO.adultFullSessionNonMember,
+    description: 'Child Member',
+    cost: POOLINFO.childFullSession,
     quantity: 0,
   },
   {
-    description: 'Child Member',
-    cost: POOLINFO.childFullSession,
+    description: 'Adult Non-Member',
+    cost: POOLINFO.adultFullSessionNonMember,
     quantity: 0,
   },
   {

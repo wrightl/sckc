@@ -22,6 +22,8 @@ on:
                 required: true
             stripe_apikey:
                 required: true
+            stripe_webhook_secret:
+                required: true
 
 jobs:
     # build api
@@ -68,9 +70,18 @@ jobs:
             - name: Write stripe apikey file
               uses: DamianReeves/write-file-action@v1.0
               with:
-                  path: ./sckc/sckc.api/data/stripe.data
+                  path: ./sckc/sckc.api/data/stripe_apikey.data
                   # The contents of the file
                   contents: ${{ secrets.stripe_apikey }}
+                  # The mode of writing to use: `overwrite`, `append`, or `preserve`.
+                  write-mode: overwrite # optional, default is preserve
+
+            - name: Write stripe webhook secret file
+              uses: DamianReeves/write-file-action@v1.0
+              with:
+                  path: ./sckc/sckc.api/data/stripe_webhook_secret.data
+                  # The contents of the file
+                  contents: ${{ secrets.stripe_webhook_secret }}
                   # The mode of writing to use: `overwrite`, `append`, or `preserve`.
                   write-mode: overwrite # optional, default is preserve
 
