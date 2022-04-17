@@ -166,8 +166,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\BookingDto.cs" />
-    <Compile Include="Models\BookingRequestDto.cs" />
     <Compile Include="Models\ContactUsDto.cs" />
     <Compile Include="Models\Report.cs" />
     <Compile Include="Models\PhotoSet.cs" />
@@ -198,6 +196,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\sckc.core\sckc.core.csproj">
+      <Project>{f4925437-5507-4f4a-a31c-3cf98a453d40}</Project>
+      <Name>sckc.core</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
