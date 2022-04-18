@@ -25,3 +25,4 @@ jobs:
             stripe_webhook_live_secret: ${{ secrets.stripe_webhook_secret_live }}
             stripe_webhook_test_secret: ${{ secrets.stripe_webhook_secret_test }}
             azure_storage_connstring: ${{ secrets.azure_storage_connstring }}
+            azure_credentials: ${{ secrets.azure_credentials }}
