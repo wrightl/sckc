@@ -22,9 +22,14 @@ on:
                 required: true
             stripe_apikey:
                 required: true
-            stripe_webhook_secret:
+            stripe_webhook_live_secret:
                 required: true
-
+            stripe_webhook_test_secret:
+                required: true
+            azure_storage_connstring:
+                required: true
+            azure_credentials:
+                required: true
 jobs:
     # build api
     api:
@@ -75,16 +80,7 @@ jobs:
                   contents: ${{ secrets.stripe_apikey }}
                   # The mode of writing to use: `overwrite`, `append`, or `preserve`.
                   write-mode: overwrite # optional, default is preserve
-
-            - name: Write stripe webhook secret file
-              uses: DamianReeves/write-file-action@v1.0
-              with:
-                  path: ./sckc/sckc.api/data/stripe_webhook_secret.data
-                  # The contents of the file
-                  contents: ${{ secrets.stripe_webhook_secret }}
-                  # The mode of writing to use: `overwrite`, `append`, or `preserve`.
-                  write-mode: overwrite # optional, default is preserve
-
+                  
             - name: Write email api key
               uses: DamianReeves/write-file-action@v1.0
               with:
@@ -98,7 +94,7 @@ jobs:
             #
             #
 
-            - name: Copy deployment files
+            - name: Copy sckc.api deployment files
               run: |
                   cd ./sckc/sckc.api
                   mkdir deploy
@@ -158,8 +154,85 @@ jobs:
               with:
                   name: published_app
                   path: ./sckc-app/dist/sckc-app
+                  
+    # build azure site
+    azure:
+        runs-on: windows-latest
+        steps:
+            # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+            - name: Checkout code
+              uses: actions/checkout@v2
 
-    # build app
+            - name: setup-msbuild
+              uses: microsoft/setup-msbuild@v1.1
+              #with:
+              # Folder location of where vswhere.exe is located if a self-hosted agent
+              #vswhere-path: # optional
+              # Version of Visual Studio to search; defaults to latest if not specified
+              #vs-version: # optional/p:DeployOnBuild=true /p:PublishProfile=FolderProfile
+              # Enable searching for pre-release versions of Visual Studio/MSBuild
+              #vs-prerelease: # optional
+              # The preferred processor architecture of MSBuild. Can be either "x86" or "x64". "x64" is only available from Visual Studio version 17.0 and later.
+              #msbuild-architecture: # optional, default is x86
+
+            - name: Setup nuget
+              uses: NuGet/setup-nuget@v1.0.5
+
+            - name: Restore NuGet Packages
+              working-directory: ./sckc
+              run: nuget restore sckc.azure.sln
+
+            - name: Build Web App
+              working-directory: ./sckc
+              run: msbuild sckc.azure.sln /p:Configuration=Release
+
+            # TODO: run unit test
+            #
+            #
+     
+            #
+            # replace sckc.azure secrets
+            #
+            
+            - name: Write stripe webhook secret file
+              uses: DamianReeves/write-file-action@v1.0
+              with:
+                  path: ./sckc/sckc.azure/data/stripe_webhook_live_secret.data
+                  contents: ${{ secrets.stripe_webhook_live_secret }}
+                  write-mode: overwrite
+
+            - name: Write stripe webhook secret file
+              uses: DamianReeves/write-file-action@v1.0
+              with:
+                  path: ./sckc/sckc.azure/data/stripe_webhook_test_secret.data
+                  contents: ${{ secrets.stripe_webhook_test_secret }}
+                  write-mode: overwrite
+
+            - name: Write azure storage connstring file
+              uses: DamianReeves/write-file-action@v1.0
+              with:
+                  path: ./sckc/sckc.azure/data/azure_storage_connstring.data
+                  contents: ${{ secrets.azure_storage_connstring }}
+                  write-mode: overwrite
+
+            - name: Write sendgrid apikey file
+              uses: DamianReeves/write-file-action@v1.0
+              with:
+                  path: ./sckc/sckc.azure/data/sendgrid_apikey.data
+                  contents: ${{ secrets.sendgrid_apikey }}
+                  write-mode: overwrite
+                  
+            - uses: azure/login@v1
+              with:
+                creds: ${{ secrets.azure_credentials }}
+
+            - name: Deploy Azure WebApp
+              uses: Azure/webapps-deploy@v2
+              with:
+                app-name: sckc
+                publish-profile: ${{ secrets.azure_publish_profile }}
+
+    # deploy main webapp to host
     ftp:
         needs: [angular-app, api]
         if: ${{ true }} # disable for now?
@@ -221,9 +294,15 @@ jobs:
                   # Follow redirected location in case request resulted in 3XX status code
                   follow-redirect: false # optional, default is false
                   # Retry all errors, including 4xx (see man curl on --retry-all-errors).
+                  
+    cleanup:
+        needs: [angular-app, api, ftp, azure]
+        if: always()
+        # The type of runner that the job will run on
+        runs-on: ubuntu-latest
+        steps:
 
             - name: Delete Artifacts
-              if: ${{ true }} # disable for now?
               uses: GeekyEggo/delete-artifact@v1.0.0
               with:
                   # The name of the artifact to delete; multiple names can be supplied on new lines.
