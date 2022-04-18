@@ -22,7 +22,11 @@ on:
                 required: true
             stripe_apikey:
                 required: true
-            stripe_webhook_secret:
+            stripe_webhook_live_secret:
+                required: true
+            stripe_webhook_test_secret:
+                required: true
+            azure_storage_connstring:
                 required: true
 
 jobs:
@@ -75,16 +79,7 @@ jobs:
                   contents: ${{ secrets.stripe_apikey }}
                   # The mode of writing to use: `overwrite`, `append`, or `preserve`.
                   write-mode: overwrite # optional, default is preserve
-
-            - name: Write stripe webhook secret file
-              uses: DamianReeves/write-file-action@v1.0
-              with:
-                  path: ./sckc/sckc.api/data/stripe_webhook_secret.data
-                  # The contents of the file
-                  contents: ${{ secrets.stripe_webhook_secret }}
-                  # The mode of writing to use: `overwrite`, `append`, or `preserve`.
-                  write-mode: overwrite # optional, default is preserve
-
+                  
             - name: Write email api key
               uses: DamianReeves/write-file-action@v1.0
               with:
@@ -98,7 +93,7 @@ jobs:
             #
             #
 
-            - name: Copy deployment files
+            - name: Copy sckc.api deployment files
               run: |
                   cd ./sckc/sckc.api
                   mkdir deploy
@@ -115,6 +110,44 @@ jobs:
               with:
                   name: published_api
                   path: ./sckc/sckc.api/deploy
+     
+            #
+            # replace sckc.azure secrets
+            #
+            
+            - name: Write stripe webhook secret file
+              uses: DamianReeves/write-file-action@v1.0
+              with:
+                  path: ./sckc/sckc.azure/data/stripe_webhook_live_secret.data
+                  contents: ${{ secrets.stripe_webhook_live_secret }}
+                  write-mode: overwrite
+
+            - name: Write stripe webhook secret file
+              uses: DamianReeves/write-file-action@v1.0
+              with:
+                  path: ./sckc/sckc.azure/data/stripe_webhook_test_secret.data
+                  contents: ${{ secrets.stripe_webhook_test_secret }}
+                  write-mode: overwrite
+
+            - name: Write azure storage connstring file
+              uses: DamianReeves/write-file-action@v1.0
+              with:
+                  path: ./sckc/sckc.azure/data/azure_storage_connstring.data
+                  contents: ${{ secrets.azure_storage_connstring }}
+                  write-mode: overwrite
+
+            - name: Write sendgrid apikey file
+              uses: DamianReeves/write-file-action@v1.0
+              with:
+                  path: ./sckc/sckc.azure/data/sendgrid_apikey.data
+                  contents: ${{ secrets.sendgrid_apikey }}
+                  write-mode: overwrite
+
+            - name: Deploy Azure WebApp
+              uses: Azure/webapps-deploy@v2
+              with:
+                app-name: sckc
+                publish-profile: ${{ secrets.azure_publish_profile }}
 
     # build app
     angular-app:
@@ -159,7 +192,7 @@ jobs:
                   name: published_app
                   path: ./sckc-app/dist/sckc-app
 
-    # build app
+    # deploy main webapp to host
     ftp:
         needs: [angular-app, api]
         if: ${{ true }} # disable for now?
