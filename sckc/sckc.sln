@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sckc.api.Tests", "sckc.api.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sckc.core", "sckc.core\sckc.core.csproj", "{F4925437-5507-4F4A-A31C-3CF98A453D40}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sckc.azure", "sckc.azure\sckc.azure.csproj", "{6F5F459F-FA3B-46B3-9796-5A231F9F3303}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{F4925437-5507-4F4A-A31C-3CF98A453D40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4925437-5507-4F4A-A31C-3CF98A453D40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F4925437-5507-4F4A-A31C-3CF98A453D40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F5F459F-FA3B-46B3-9796-5A231F9F3303}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F5F459F-FA3B-46B3-9796-5A231F9F3303}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F5F459F-FA3B-46B3-9796-5A231F9F3303}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F5F459F-FA3B-46B3-9796-5A231F9F3303}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

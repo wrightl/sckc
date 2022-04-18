@@ -1,0 +1,95 @@
+﻿@using sckc.azure.Models
+@model IEnumerable<Booking>
+
+@{
+    ViewBag.Title = "Bookings Summary";
+}
+
+@if (Request.IsAuthenticated || true)
+{
+    <div class="row">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BookingType)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Amount)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.People)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Where(bk => bk.IsLiveBooking))
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BookingType)
+                    </td>
+                    <td>
+                        @(item.Amount!=null && item.Amount.HasValue ? item.Amount.Value.ToString("C") : String.Empty)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.People)
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                }
+                @foreach (var item in Model.Where(bk => !bk.IsLiveBooking))
+                {
+                <tr style="background-color: red;">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BookingType)
+                    </td>
+                    <td>
+                        @(item.Amount!=null && item.Amount.HasValue ? item.Amount.Value.ToString("C") : String.Empty)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.People)
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>@Model.Sum(booking => booking.Amount).Value.ToString("C")</td>
+                    <td>@Model.Sum(booking => booking.People)</td>
+                </tr>
+            </tfoot>
+        </table>
+
+    </div>
+}
+else
+{
+    <p>You must be logged in</p>
+}
