@@ -28,7 +28,8 @@ on:
                 required: true
             azure_storage_connstring:
                 required: true
-
+            azure_credentials:
+                required: true
 jobs:
     # build api
     api:
@@ -142,6 +143,10 @@ jobs:
                   path: ./sckc/sckc.azure/data/sendgrid_apikey.data
                   contents: ${{ secrets.sendgrid_apikey }}
                   write-mode: overwrite
+                  
+            - uses: azure/login@v1
+              with:
+                creds: ${{ secrets.azure_credentials }}
 
             - name: Deploy Azure WebApp
               uses: Azure/webapps-deploy@v2
