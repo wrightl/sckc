@@ -22,7 +22,3 @@ jobs:
             ftppassword: ${{ secrets.ftppassword }}
             sendgrid_apikey: ${{ secrets.sendgrid_apikey }}
             stripe_apikey: ${{ secrets.stripe_apikey_live }}
-            stripe_webhook_live_secret: ${{ secrets.stripe_webhook_secret_live }}
-            stripe_webhook_test_secret: ${{ secrets.stripe_webhook_secret_test }}
-            azure_storage_connstring: ${{ secrets.azure_storage_connstring }}
-            azure_credentials: ${{ secrets.azure_credentials }}
