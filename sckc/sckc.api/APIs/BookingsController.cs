@@ -49,7 +49,7 @@ namespace sckc.api.APIs
 
                 // Log the booking request
                 HttpClient client = new HttpClient();
-                var result = await client.PostAsJsonAsync("https://sckc.azurewebsites.net/api/booking", info);
+                var result = await client.PostAsJsonAsync("https://sckc.azurewebsites.net/api/payments/booking", info);
 
 
                 if (response)
