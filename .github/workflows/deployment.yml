@@ -231,6 +231,7 @@ jobs:
               with:
                 app-name: sckc
                 publish-profile: ${{ secrets.azure_publish_profile }}
+                package: './sckc/sckc.azure'
 
     # deploy main webapp to host
     ftp:
