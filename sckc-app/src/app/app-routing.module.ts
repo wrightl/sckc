@@ -16,9 +16,9 @@ import { AboutComponent } from './about/about.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { ClubHistoryComponent } from './club-history/club-history.component';
 import { TripsComponent } from './trips/trips.component';
-import { BookingRequestComponent } from './booking-request/booking-request.component';
 import { BookingSuccessComponent } from './booking-success/booking-success.component';
 import { BookingComponent } from './booking/booking.component';
+import { BookingRequestConfComponent } from './booking-request-conf/booking-request-conf.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -38,8 +38,8 @@ const routes: Routes = [
   { path: 'contactus', component: ContactUsComponent },
   { path: 'history', component: ClubHistoryComponent },
   { path: 'book', component: BookingComponent },
-  { path: 'bookingrequest', component: BookingRequestComponent },
   { path: 'bookingsuccess', component: BookingSuccessComponent },
+  { path: 'booking-conf', component: BookingRequestConfComponent },
   { path: '**', redirectTo: '/home', pathMatch: 'full' },
 ];
 

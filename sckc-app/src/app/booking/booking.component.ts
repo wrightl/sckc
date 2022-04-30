@@ -130,18 +130,12 @@ export class BookingComponent implements OnInit {
       })
       .subscribe(
         (result) => {
-          const response = result.toString();
 
           if (payNow) {
+            const response = result.toString();
             this.document.location.href = response;
           } else {
-            this._snackBar.openFromComponent(BookingRequestConfComponent, {
-              duration: 5000,
-              verticalPosition: 'top',
-              data: { message: response },
-            });
-
-            this.router.navigate(['/events']);
+            this.router.navigate(['/booking-conf']);
           }
         },
         (error) =>

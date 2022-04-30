@@ -51,7 +51,6 @@ import { PageTitleComponent } from './page-title/page-title.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { ClubHistoryComponent } from './club-history/club-history.component';
 import { TripsComponent } from './trips/trips.component';
-import { BookingRequestComponent } from './booking-request/booking-request.component';
 import { BookingSuccessComponent } from './booking-success/booking-success.component';
 import { BookingRequestConfComponent } from './booking-request-conf/booking-request-conf.component';
 import { BookingComponent } from './booking/booking.component';
@@ -81,7 +80,6 @@ import { BookingComponent } from './booking/booking.component';
     ContactUsComponent,
     ClubHistoryComponent,
     TripsComponent,
-    BookingRequestComponent,
     BookingRequestConfComponent,
     BookingSuccessComponent,
     BookingComponent,

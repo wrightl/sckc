@@ -47,16 +47,22 @@ namespace sckc.api.APIs
 
                 var response = await Helper.SendMail(msg);
 
-                // Log the booking request
-                HttpClient client = new HttpClient();
-                var result = await client.PostAsJsonAsync("https://sckc.azurewebsites.net/api/payments/booking", info);
+                try
+                {
+                    // Log the booking request
+                    HttpClient client = new HttpClient();
+                    var result = await client.PostAsJsonAsync("https://sckc.azurewebsites.net/api/payments/booking", info);
 
-
-                if (response)
-                    return Ok("Thanks for getting in touch. Someone will reply to your email soon");
+                    if (!response)
+                        throw new Exception(await result.Content.ReadAsStringAsync());
+                }
+                catch (Exception ex)
+                {
+                    return InternalServerError(ex);
+                }
             }
 
-            return InternalServerError();
+            return Ok();
         }
 
         private async Task<string> payNow(BookingDto info)

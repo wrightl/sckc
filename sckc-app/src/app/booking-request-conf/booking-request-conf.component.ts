@@ -1,5 +1,4 @@
-import { Component, Inject, Input } from '@angular/core';
-import { MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-booking-request-conf',
@@ -7,10 +6,4 @@ import { MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
   styleUrls: ['./booking-request-conf.component.scss']
 })
 export class BookingRequestConfComponent {
-
-  constructor(@Inject(MAT_SNACK_BAR_DATA) public data: any){
-    this.message = this.message || data.message;
-  }
-
-  @Input() message = '';
 }
