@@ -19,10 +19,7 @@ namespace sckc.api.APIs
         [Route("api/GetEvents")]
         public IHttpActionResult GetEvents(int count = 10)
 		{
-			if (count <= 10)
-				count = 10;
-			else if (count > 100)
-				count = 100;
+			count = validateCount(count);
 
 			return Json(CalendarServiceHelper.GetClubEvents(count));
 		}
@@ -30,10 +27,7 @@ namespace sckc.api.APIs
         [Route("api/GetEventsOfType")]
         public IHttpActionResult GetEventsOfType(string type, int count = 5)
 		{
-			if (count <= 1)
-				count = 1;
-			else if (count > 100)
-				count = 100;
+			count = validateCount(count);
 
 			var events = CalendarServiceHelper.GetClubEvents().Where(ev => ev.EventType.ToLowerInvariant().Contains(type)).Take(count);
 
@@ -44,6 +38,16 @@ namespace sckc.api.APIs
         public IHttpActionResult GetGroupedEvent()
 		{
 			return Json(CalendarServiceHelper.GetGroupedClubEvents());
+		}
+
+		private int validateCount(int count)
+        {
+			if (count <= 5)
+				count = 5;
+			else if (count > 100)
+				count = 100;
+
+			return count;
 		}
 	}
 
