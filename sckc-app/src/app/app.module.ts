@@ -54,6 +54,8 @@ import { TripsComponent } from './trips/trips.component';
 import { BookingSuccessComponent } from './booking-success/booking-success.component';
 import { BookingRequestConfComponent } from './booking-request-conf/booking-request-conf.component';
 import { BookingComponent } from './booking/booking.component';
+import { MemberCheckComponent } from './member-check/member-check.component';
+import { EnquireComponent } from './enquire/enquire.component';
 
 @NgModule({
   declarations: [
@@ -83,6 +85,8 @@ import { BookingComponent } from './booking/booking.component';
     BookingRequestConfComponent,
     BookingSuccessComponent,
     BookingComponent,
+    MemberCheckComponent,
+    EnquireComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

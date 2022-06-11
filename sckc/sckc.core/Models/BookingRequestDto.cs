@@ -10,5 +10,6 @@
         public string TelNo { get; set; }
         public string Event { get; set; }
         public string Date { get; set; }
+        public string MemberNo { get; set; }
     }
 }

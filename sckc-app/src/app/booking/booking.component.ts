@@ -6,7 +6,6 @@ import { MatSelectChange } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { BookingRequestConfComponent } from '../booking-request-conf/booking-request-conf.component';
 import { MEMBERSHIP_INFO } from '../data/membership';
 import { BookingItem, POOLINFO, POOL_BOOKING_ITEMS } from '../data/pool';
 import { RIVERINFO, RIVER_BOOKING_ITEMS } from '../data/river';
@@ -29,6 +28,7 @@ export class BookingComponent implements OnInit {
   name = new FormControl('', [Validators.required]);
   number = new FormControl('');
   email = new FormControl('', [Validators.required, Validators.email]);
+  memberno = new FormControl('', [Validators.required]);
   telno = new FormControl('');
   message = new FormControl('');
   error = '';
@@ -93,11 +93,13 @@ export class BookingComponent implements OnInit {
 
     this.name.markAsTouched();
     this.email.markAsTouched();
+    this.memberno.markAsTouched();
     this.telno.markAsTouched();
     this.message.markAsTouched();
     this.name.updateValueAndValidity();
     this.email.updateValueAndValidity();
     this.telno.updateValueAndValidity();
+    this.memberno.updateValueAndValidity();
     this.message.updateValueAndValidity();
 
     if (this.getTotalQuantity() <= 0) {
@@ -108,6 +110,7 @@ export class BookingComponent implements OnInit {
       this.name.errors ||
       this.email.errors ||
       this.telno.errors ||
+      this.memberno.errors ||
       this.message.errors ||
       this.error
     ) {
@@ -122,6 +125,7 @@ export class BookingComponent implements OnInit {
         date: this.booking.LocaleDate,
         name: this.name.value,
         email: this.email.value,
+        memberno: this.memberno.value,
         telno: this.telno.value,
         message: this.message.value,
         items: this.bookingItems.filter((x) => x.quantity > 0),

@@ -19,6 +19,8 @@ import { TripsComponent } from './trips/trips.component';
 import { BookingSuccessComponent } from './booking-success/booking-success.component';
 import { BookingComponent } from './booking/booking.component';
 import { BookingRequestConfComponent } from './booking-request-conf/booking-request-conf.component';
+import { MemberCheckComponent } from './member-check/member-check.component';
+import { EnquireComponent } from './enquire/enquire.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -31,12 +33,14 @@ const routes: Routes = [
   { path: 'photos', component: PhotosComponent },
   { path: 'location', component: LocationComponent },
   { path: 'pool', component: PoolComponent },
+  { path: 'enquire', component: EnquireComponent },
   { path: 'river', component: RiverComponent },
   { path: 'reports', component: ReportsComponent },
   { path: 'trips', component: TripsComponent },
   { path: 'about', component: AboutComponent },
   { path: 'contactus', component: ContactUsComponent },
   { path: 'history', component: ClubHistoryComponent },
+  { path: 'member-check', component: MemberCheckComponent },
   { path: 'book', component: BookingComponent },
   { path: 'bookingsuccess', component: BookingSuccessComponent },
   { path: 'booking-conf', component: BookingRequestConfComponent },

@@ -31,9 +31,9 @@ namespace sckc.api.APIs
             return InternalServerError();
         }
 
-        [Route("api/BookingRequest")]
+        [Route("api/BookingEnquiry")]
         [HttpPost]
-        public async Task<IHttpActionResult> SendBookingRequestMail(BookingRequestDto info)
+        public async Task<IHttpActionResult> SendBookingEnquiry(BookingRequestDto info)
         {
             var from = new EmailAddress("bookingrequest@sheffieldcitykayakclub.co.uk", "Booking Request");
             var to = new EmailAddress("bookingrequest@sheffieldcitykayakclub.co.uk", "Booking Request");
@@ -45,7 +45,18 @@ namespace sckc.api.APIs
             var response = await Helper.SendMail(msg);
 
             if (response)
+            {
+                // Send template email
+                to = new EmailAddress(info.Email);
+                subject = $"Booking request for {info.Event} on {info.Date}";
+
+                htmlContent = $"Here's some info....";
+                msg = MailHelper.CreateSingleEmail(from, to, subject, htmlContent, htmlContent);
+
+                response = await Helper.SendMail(msg);
+
                 return Ok("Thanks for getting in touch. Someone will reply to your email soon");
+            }
             return InternalServerError();
         }
     }

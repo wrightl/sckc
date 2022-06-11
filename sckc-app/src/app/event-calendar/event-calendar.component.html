@@ -26,7 +26,7 @@
 
         <ng-container matColumnDef="book">
           <td class="book-cell" mat-cell *matCellDef="let element">
-            <a routerLink="/book" [state]="element">Book</a>
+            <a routerLink="/member-check" [state]="element">Book</a>
           </td>
         </ng-container>
 
@@ -41,11 +41,11 @@
   <img src="assets/river.png" width="70"/>
   <h4>River Sessions</h4>
   <div *ngFor="let event of riverSessions" class="link-container">
-    <a routerLink="/book" [state]="event">{{ event.StartDateTime | date: "ccc d MMMM" }}</a>
+    <span>{{ event.StartDateTime | date: "ccc d MMMM" }}</span>
   </div>
   <img src="assets/pool.png" width="70"/>
   <h4>Pool Sessions</h4>
   <div *ngFor="let event of poolSessions" class="link-container">
-    <a routerLink="/book" [state]="event">{{ event.StartDateTime | date: "ccc d MMMM" }}</a>
+    <a routerLink="/member-check" [state]="event">{{ event.StartDateTime | date: "ccc d MMMM" }}</a>
   </div>
 </div>
