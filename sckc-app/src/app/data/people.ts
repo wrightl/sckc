@@ -1,11 +1,11 @@
 export const PEOPLE: Person[] = [
   {
-    name: 'Tony Canning',
-    role: 'Chairman & Equipment Officer',
+    name: 'Dave Wright',
+    role: 'Chairman',
     longText:
-      "<p>Tony first got into kayaking in his teens at Bewerley Park outward bound school in north yorkshire in the 60's. After a long time away from it he went on a kayaking trip down the Wanganui river in new zealand and his interest of all things water-related had been rekindled. Tony is now a level 2 coach and is able to assess 1 & 2 star awards.</p><p>He is probably Sheffields first and last coracle maker.</p><p>As well as being chairman of sckc, he is a trustee on the Upper Don walk trust and special adviser to the board of the Sheffield river stewardship company.</p>",
+      "",
     emailAddress: 'chairman@sheffieldcitykayakclub.co.uk',
-    imageUrl: 'assets/tonycanning.jpg',
+    imageUrl: 'assets/river.png',
   },
   {
     name: 'Steve Cheetham',
@@ -16,27 +16,48 @@ export const PEOPLE: Person[] = [
     imageUrl: 'assets/stevecheetham.jpg',
   },
   {
-    name: 'Kevin Plumb',
+    name: 'Gary Edwards',
     role: 'Welfare Officer',
     longText:
-      '<p>Kevin started kayaking around 2004 as something he could do with his kids. The girls soon surpassed his abilities and took up slalom competition and are both currently in div 1.</p><p>Kevin has gained his BC 3* and level 1 coaching award as well as UK sport child protection and coaching disabled courses. He is also a cub scout leader, nsra club airgun instructor, archery instructor and climbing wall instructor within scouting, and holds a rya level 2 in dingy sailing. Most of his spare time goes into either scouting or kayaking (especially as logistics support to his kids for slalom competitions all over the country).</p>',
+      '',
     emailAddress: 'welfare@sheffieldcitykayakclub.co.uk',
-    imageUrl: 'assets/kevinplumb.jpg',
+    imageUrl: 'assets/river.png',
   },
   {
-    name: 'Neil Furmidge',
+    name: 'Andy Green',
+    role: 'Equipment Officer',
+    longText: '',
+    emailAddress: 'equipment@sheffieldcitykayakclub.co.uk',
+    imageUrl: 'assets/river.png',
+  },
+  {
+    name: 'Neil Webster',
+    role: 'Safety Officer',
+    longText: '',
+    emailAddress: 'safety@sheffieldcitykayakclub.co.uk',
+    imageUrl: 'assets/river.png',
+  },
+  {
+    name: '????',
     role: 'Trip Coordinator',
     longText:
-      '<p>Neil is a paraglider and mountain biker who started kayaking again in 2010 after not paddling since childhood. Paddling white water, sea kayaks and open boats, Neil regularly heads off on paddling trips around the UK. Neil is a level 1 BC coach and holds an outdoor first aid certificate, safeguarding children, 4 star white water leader, 4 star sea kayak and 3 star canoe BCU awards.</p>',
+      '',
     emailAddress: 'trips@sheffieldcitykayakclub.co.uk',
-    imageUrl: 'assets/neil.jpg',
+    imageUrl: 'assets/river.png',
   },
   {
-    name: 'Dave Wright',
+    name: 'Lee Wright',
     role: 'Treasurer',
     longText: '',
     emailAddress: 'treasurer@sheffieldcitykayakclub.co.uk',
-    imageUrl: '',
+    imageUrl: 'assets/river.png',
+  },
+  {
+    name: 'Neil Taylor',
+    role: 'Publicity Officer',
+    longText: '',
+    emailAddress: 'publicity@sheffieldcitykayakclub.co.uk',
+    imageUrl: 'assets/river.png',
   },
 ];
 
