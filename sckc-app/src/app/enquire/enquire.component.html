@@ -6,23 +6,36 @@
   <mat-form-field class="full-width" appearance="fill">
     <mat-label>Name</mat-label>
     <input matInput placeholder="Your Name" [formControl]="name" required />
-    <mat-error *ngIf="name.invalid">{{getErrorMessage(name)}}</mat-error>
+    <mat-error *ngIf="name.invalid">{{ getErrorMessage(name) }}</mat-error>
   </mat-form-field>
   <mat-form-field class="full-width" appearance="fill">
     <mat-label>Email</mat-label>
-    <input matInput placeholder="bob@example.com" [formControl]="email" type="email" required />
-    <mat-error *ngIf="email.invalid">{{getErrorMessage(email)}}</mat-error>
+    <input
+      matInput
+      placeholder="bob@example.com"
+      [formControl]="email"
+      type="email"
+      required
+    />
+    <mat-error *ngIf="email.invalid">{{ getErrorMessage(email) }}</mat-error>
   </mat-form-field>
   <mat-form-field class="full-width" appearance="fill">
     <mat-label>Contact Telephone</mat-label>
-    <input matInput [formControl]="email" type="tel" />
-    <mat-error *ngIf="telno.invalid">{{getErrorMessage(telno)}}</mat-error>
+    <input matInput [formControl]="telno" type="tel" />
+    <mat-error *ngIf="telno.invalid">{{ getErrorMessage(telno) }}</mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width" appearance="fill">
     <mat-label>Details</mat-label>
-    <textarea matInput placeholder="Enter number of people and any relevant information" [formControl]="message" required ></textarea>
-    <mat-error *ngIf="message.invalid">{{getErrorMessage(message)}}</mat-error>
+    <textarea
+      matInput
+      placeholder="Enter number of people and any relevant information"
+      [formControl]="message"
+      required
+    ></textarea>
+    <mat-error *ngIf="message.invalid">{{
+      getErrorMessage(message)
+    }}</mat-error>
   </mat-form-field>
 
   <button mat-flat-button color="accent" (click)="sendMessage()">Send</button>
