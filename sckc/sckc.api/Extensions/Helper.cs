@@ -1,4 +1,5 @@
-﻿using SendGrid;
+﻿using sckc.core.Models;
+using SendGrid;
 using SendGrid.Helpers.Mail;
 using System;
 using System.IO;
@@ -33,5 +34,17 @@ namespace sckc.api.Extensions
 
 			throw new Exception(await response.Body.ReadAsStringAsync());
 		}
+
+		public static string ReplaceTemplatePlaceholders(string template, BookingRequestDto info)
+        {
+			var s = template;
+
+            foreach (var pi in info.GetType().GetProperties())
+            {
+				s = s.Replace($"{{{{{pi.Name}}}}}", pi.GetValue(info)?.ToString());
+            }
+
+			return s;
+        }
 	}
 }

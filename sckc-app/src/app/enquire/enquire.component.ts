@@ -74,10 +74,13 @@ export class EnquireComponent {
 
     this.http
       .post(`${environment.baseApiUrl}BookingEnquiry`, {
+        event: this.booking.Summary,
+        date: this.booking.LocaleDate,
         name: this.name.value,
         email: this.email.value,
         telno: this.telno.value,
         message: this.message.value,
+        type: this.booking.EventType,
       })
       .subscribe(
         (result) => {

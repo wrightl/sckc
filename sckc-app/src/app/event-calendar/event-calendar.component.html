@@ -20,13 +20,15 @@
 
         <ng-container matColumnDef="name">
           <td class="summary-cell" mat-cell *matCellDef="let element">
-            {{ element.Summary }}
+            <a *ngIf="element.EventType === 'pool'" routerLink="/pool" [state]="element">{{ element.Summary }}</a>
+            <a *ngIf="element.EventType === 'river'" routerLink="/river" [state]="element">{{ element.Summary }}</a>
           </td>
         </ng-container>
 
         <ng-container matColumnDef="book">
           <td class="book-cell" mat-cell *matCellDef="let element">
-            <a routerLink="/member-check" [state]="element">Book</a>
+            <a *ngIf="element.EventType === 'pool'" routerLink="/member-check" [state]="element">Book</a>
+            <a *ngIf="element.EventType === 'river'" routerLink="/enquire" [state]="element">Enquire</a>
           </td>
         </ng-container>
 
@@ -41,7 +43,7 @@
   <img src="assets/river.png" width="70"/>
   <h4>River Sessions</h4>
   <div *ngFor="let event of riverSessions" class="link-container">
-    <span>{{ event.StartDateTime | date: "ccc d MMMM" }}</span>
+    <a routerLink="/enquire" [state]="event">{{ event.StartDateTime | date: "ccc d MMMM" }}</a>
   </div>
   <img src="assets/pool.png" width="70"/>
   <h4>Pool Sessions</h4>

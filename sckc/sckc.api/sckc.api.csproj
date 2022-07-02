@@ -175,6 +175,8 @@
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="Models\ClubEventMonth.cs" />
     <Compile Include="APIs\MailController.cs" />
+    <Content Include="Resources\pool_booking_request_response.html" />
+    <Content Include="Resources\river_booking_request_response.html" />
     <Content Include="RewriteRules.config" />
   </ItemGroup>
   <ItemGroup>

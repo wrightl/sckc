@@ -65,6 +65,36 @@ namespace sckc.api.APIs
             return Ok();
         }
 
+        [Route("api/BookingEnquiry")]
+        [HttpPost]
+        public async Task<IHttpActionResult> SendBookingEnquiry(BookingRequestDto info)
+        {
+            var from = new EmailAddress("bookingrequest@sheffieldcitykayakclub.co.uk", "Booking Request");
+            var to = new EmailAddress("bookingrequest@sheffieldcitykayakclub.co.uk", "Booking Request");
+            var subject = $"Booking request for {info.Event} on {info.Date}";
+            var htmlContent = $"From: {info.Name}<br/>Email: <a href=\"mailto:{info.Email}\">{info.Email}</a><br/>Number of people: {info.Number}<br/>People: {info.Names}<br/>TelNo: {info.TelNo}<br/>Message:<br/>{info.Message}";
+            var msg = MailHelper.CreateSingleEmail(from, to, subject, htmlContent, htmlContent);
+            msg.ReplyTo = new EmailAddress(info.Email);
+
+            var response = await Helper.SendMail(msg);
+
+            if (response)
+            {
+                // Send template email
+                to = new EmailAddress(info.Email);
+                subject = $"Booking request for {info.Event} on {info.Date}";
+
+                var autoReplyContent = Helper.ReplaceTemplatePlaceholders(System.IO.File.ReadAllText(Helper.MapPath($"Resources/{info.Type}_booking_request_response.html")).Trim(), info);
+
+                msg = MailHelper.CreateSingleEmail(from, to, subject, autoReplyContent, autoReplyContent);
+
+                await Helper.SendMail(msg);
+
+                return Ok("Thanks for getting in touch. Someone will reply to your email soon");
+            }
+            return InternalServerError();
+        }
+
         private async Task<string> payNow(BookingDto info)
         {
             var items = ConvertItems(info.Items);

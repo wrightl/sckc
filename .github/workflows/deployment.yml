@@ -97,6 +97,7 @@ jobs:
                   Copy-Item "RewriteRules.config" -Destination ".\deploy\" -Force
                   Copy-Item ".\bin\*" -Destination ".\deploy\bin" -Recurse -Force
                   Copy-Item ".\data\*" -Destination ".\deploy\data" -Recurse -Force
+                  Copy-Item ".\Resource\*" -Destination ".\deploy\Resource" -Recurse -Force
 
             - name: Upload Artifact
               uses: actions/upload-artifact@v2
@@ -158,23 +159,8 @@ jobs:
         steps:
             - name: Download all workflow run artifacts
               uses: actions/download-artifact@v2
-              
-            - name: Warm up the website
-              uses: Jtalk/url-health-check-action@v2
-              continue-on-error: true
-              with:
-                  # Target URL(s), split by |
-                  url: ${{ format('http://www.sheffieldcitykayakclub.co.uk/{0}api/GetEvents?count=1', inputs.deployment_path) }}
-                  # Number of unsuccessful attempts to call URL before giving up
-                  max-attempts: 3 # optional, default is 1
-                  # Time between attempts (e.g. 3s, 1m)
-                  retry-delay: 10s # optional, default is 3s
-                  # Follow redirected location in case request resulted in 3XX status code
-                  follow-redirect: false # optional, default is false
-                  # Retry all errors, including 4xx (see man curl on --retry-all-errors).
 
             - name: ftp-action-app
-              if: ${{ true }} # disable for now?
               uses: SamKirkland/FTP-Deploy-Action@4.3.0
               with:
                   # FTP host
@@ -193,7 +179,6 @@ jobs:
                   log-level: verbose # optional
 
             - name: ftp-action-api
-              if: ${{ true }} # disable for now?
               uses: SamKirkland/FTP-Deploy-Action@4.3.0
               with:
                   # FTP host
@@ -211,7 +196,6 @@ jobs:
                   log-level: verbose
 
             - name: URL Health Check
-              if: ${{ true }} # disable for now?
               uses: Jtalk/url-health-check-action@v2
               with:
                   # Target URL(s), split by |
