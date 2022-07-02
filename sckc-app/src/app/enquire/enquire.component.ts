@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -11,7 +11,7 @@ import { CalendarEvent } from '../models/calendar-event';
   templateUrl: './enquire.component.html',
   styleUrls: ['./enquire.component.scss']
 })
-export class EnquireComponent {
+export class EnquireComponent implements OnInit {
 
   booking!: CalendarEvent;
 
