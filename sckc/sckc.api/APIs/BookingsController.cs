@@ -43,7 +43,7 @@ namespace sckc.api.APIs
                 }
 
                 var msg = MailHelper.CreateSingleEmail(from, to, subject, htmlContent, htmlContent);
-                msg.ReplyTo = new EmailAddress(info.Email);
+                msg.ReplyTo = new EmailAddress(info.Email.Trim());
 
                 var response = await Helper.SendMail(msg);
 
@@ -80,8 +80,12 @@ namespace sckc.api.APIs
 
             if (response)
             {
+                // Log the booking request
+                HttpClient client = new HttpClient();
+                var result = await client.PostAsJsonAsync("https://sckc.azurewebsites.net/api/payments/booking", info);
+
                 // Send template email
-                to = new EmailAddress(info.Email);
+                to = new EmailAddress(info.Email.Trim());
                 subject = $"Booking request for {info.Event} on {info.Date}";
 
                 var autoReplyContent = Helper.ReplaceTemplatePlaceholders(System.IO.File.ReadAllText(Helper.MapPath($"Resources/{info.Type}_booking_request_response.html")).Trim(), info);
