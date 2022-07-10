@@ -1,0 +1,18 @@
+<button
+  mat-flat-button
+  [color]="colour"
+  (click)="onClick()"
+  [attr.disabled]="busy"
+>
+  <div class="button-content-wrapper">
+    <span>{{ label }}</span>
+    <mat-progress-spinner
+      [class.visible]="busy"
+      diameter="24"
+      class="spinner"
+      color="primary"
+      mode="indeterminate"
+    >
+    </mat-progress-spinner>
+  </div>
+</button>

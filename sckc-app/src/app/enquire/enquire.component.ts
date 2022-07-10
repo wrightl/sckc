@@ -9,10 +9,9 @@ import { CalendarEvent } from '../models/calendar-event';
 @Component({
   selector: 'app-enquire',
   templateUrl: './enquire.component.html',
-  styleUrls: ['./enquire.component.scss']
+  styleUrls: ['./enquire.component.scss'],
 })
 export class EnquireComponent implements OnInit {
-
   booking!: CalendarEvent;
 
   name = new FormControl('', [Validators.required]);
@@ -21,6 +20,8 @@ export class EnquireComponent implements OnInit {
   message = new FormControl('', [Validators.required]);
   error = '';
   response = '';
+
+  isBusy = false;
 
   constructor(
     private http: HttpClient,
@@ -65,12 +66,10 @@ export class EnquireComponent implements OnInit {
     this.email.updateValueAndValidity();
     this.message.updateValueAndValidity();
 
-    if (
-      this.name.errors ||
-      this.email.errors ||
-      this.message.errors
-    )
+    if (this.name.errors || this.email.errors || this.message.errors)
       return false;
+
+    this.isBusy = true;
 
     this.http
       .post(`${environment.baseApiUrl}BookingEnquiry`, {
@@ -90,13 +89,16 @@ export class EnquireComponent implements OnInit {
           this.email.reset();
           this.telno.reset();
           this.message.reset();
+
+          this.isBusy = false;
         },
-        (error) =>
-          (this.error =
-            'Unfortunately an error occurred. Please try again, or send an email to <a href="mailto:enquiries@sheffieldcitykayakclub.co.uk">enquiries@sheffieldcitykayakclub.co.uk</a>')
+        (error) => {
+          this.error =
+            'Unfortunately an error occurred. Please try again, or send an email to <a href="mailto:enquiries@sheffieldcitykayakclub.co.uk">enquiries@sheffieldcitykayakclub.co.uk</a>';
+          this.isBusy = false;
+        }
       );
 
     return false;
   }
-
 }

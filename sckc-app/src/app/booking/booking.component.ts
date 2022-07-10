@@ -34,6 +34,8 @@ export class BookingComponent implements OnInit {
   error = '';
   response = '';
 
+  isBusy = false;
+
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private http: HttpClient,
@@ -119,6 +121,8 @@ export class BookingComponent implements OnInit {
       return false;
     }
 
+    this.isBusy = true;
+
     this.http
       .post(`${environment.baseApiUrl}Book`, {
         event: this.booking.Summary,
@@ -134,17 +138,19 @@ export class BookingComponent implements OnInit {
       })
       .subscribe(
         (result) => {
-
           if (payNow) {
             const response = result.toString();
             this.document.location.href = response;
           } else {
             this.router.navigate(['/booking-conf']);
           }
+          this.isBusy = false;
         },
-        (error) =>
-          (this.error =
-            'Unfortunately an error occurred. Please try again, or send an email to <a href="mailto:bookingrequest@sheffieldcitykayakclub.co.uk">bookingrequest@sheffieldcitykayakclub.co.uk</a>')
+        (error) => {
+          this.error =
+            'Unfortunately an error occurred. Please try again, or send an email to <a href="mailto:bookingrequest@sheffieldcitykayakclub.co.uk">bookingrequest@sheffieldcitykayakclub.co.uk</a>';
+          this.isBusy = false;
+        }
       );
 
     return false;

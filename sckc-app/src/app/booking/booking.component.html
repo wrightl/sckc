@@ -23,20 +23,12 @@
   </mat-form-field>
   <mat-form-field class="full-width" appearance="fill">
     <mat-label>Membership Number</mat-label>
-    <input
-      matInput
-      [formControl]="memberno"
-      required
-    />
+    <input matInput [formControl]="memberno" required />
     <mat-error *ngIf="email.invalid">{{ getErrorMessage(email) }}</mat-error>
   </mat-form-field>
   <mat-form-field class="full-width" appearance="fill">
     <mat-label>Contact Telephone</mat-label>
-    <input
-      matInput
-      [formControl]="telno"
-      type="tel"
-    />
+    <input matInput [formControl]="telno" type="tel" />
     <mat-error *ngIf="telno.invalid">{{ getErrorMessage(telno) }}</mat-error>
   </mat-form-field>
 
@@ -92,11 +84,15 @@
   </div>
 
   <div class="buttons-container">
-    <button mat-flat-button color="accent" (click)="bookAndPay()">
-      Pay Now
-    </button>
-    <button mat-flat-button color="accent" (click)="book()">
-      Pay on the day
-    </button>
+    <app-busy-button
+      label="Pay Now"
+      (clickButton)="bookAndPay()"
+      [busy]="isBusy"
+    ></app-busy-button>
+    <app-busy-button
+      label="Pay on the day"
+      (clickButton)="book()"
+      [busy]="isBusy"
+    ></app-busy-button>
   </div>
 </div>

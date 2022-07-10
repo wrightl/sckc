@@ -1,0 +1,13 @@
+.button-content-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.spinner {
+  margin: 6px 0px 6px 8px;
+  display: none;
+}
+
+.visible {
+  display: block;
+}

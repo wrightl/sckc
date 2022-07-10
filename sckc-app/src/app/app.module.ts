@@ -56,6 +56,7 @@ import { BookingRequestConfComponent } from './booking-request-conf/booking-requ
 import { BookingComponent } from './booking/booking.component';
 import { MemberCheckComponent } from './member-check/member-check.component';
 import { EnquireComponent } from './enquire/enquire.component';
+import { BusyButtonComponent } from './busy-button/busy-button.component';
 
 @NgModule({
   declarations: [
@@ -87,6 +88,7 @@ import { EnquireComponent } from './enquire/enquire.component';
     BookingComponent,
     MemberCheckComponent,
     EnquireComponent,
+    BusyButtonComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
