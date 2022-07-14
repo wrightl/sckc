@@ -13,7 +13,13 @@
     </mat-form-field>
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Email</mat-label>
-      <input matInput placeholder="bob@example.com" [formControl]="email" type="email" required />
+      <input
+        matInput
+        placeholder="bob@example.com"
+        [formControl]="email"
+        type="email"
+        required
+      />
       <mat-error *ngIf="email.invalid">{{ getErrorMessage(email) }}</mat-error>
     </mat-form-field>
     <mat-form-field class="full-width" appearance="fill">
@@ -24,13 +30,34 @@
 
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Details</mat-label>
-      <textarea matInput placeholder="Enter number of people and any relevant information" [formControl]="message"
-        required></textarea>
+      <textarea
+        matInput
+        placeholder="Enter number of people and any relevant information"
+        [formControl]="message"
+        required
+      ></textarea>
       <mat-error *ngIf="message.invalid">{{
         getErrorMessage(message)
-        }}</mat-error>
+      }}</mat-error>
     </mat-form-field>
 
-    <button mat-flat-button color="accent" (click)="sendMessage()">Send</button>
+    <app-busy-button
+      label="Send"
+      (clickButton)="sendMessage()"
+      [busy]="isBusy"
+    ></app-busy-button>
+
+    <!-- <button mat-flat-button color="accent" (click)="sendMessage()">
+      <div class="button-content-wrapper">
+        <span>Send</span>
+        <mat-progress-spinner
+          diameter="24"
+          class="spinner"
+          color="primary"
+          mode="indeterminate"
+        >
+        </mat-progress-spinner>
+      </div>
+    </button> -->
   </div>
 </div>

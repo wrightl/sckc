@@ -2,8 +2,7 @@ export const PEOPLE: Person[] = [
   {
     name: 'Dave Wright',
     role: 'Chairman',
-    longText:
-      "",
+    longText: '',
     emailAddress: 'chairman@sheffieldcitykayakclub.co.uk',
     imageUrl: 'assets/river.png',
   },
@@ -19,9 +18,9 @@ export const PEOPLE: Person[] = [
     name: 'Gary Edwards',
     role: 'Welfare Officer',
     longText:
-      '',
+      '<p>First tried kayaking as a scout back in the 80’s generally on murky ponds whilst on camp. Followed by sporadic river trips whilst at college.  Skip 30 years and you could say Paddlesport has become an obsession.</p><p>Currently Working as a Canoe/Kayak & Raft Guide for Rapid Horizons.</p><p>Volunteer Water Search and Rescue Technician</p><br><p>Qualifications:</p><p><ul><li>Paddlesport Instructor</li><li>Paddlesport Touring Leader</li><li>FREC 3 First Aid</li><li>Level 1 Safeguarding (adults & children)</li><li>DBS',
     emailAddress: 'welfare@sheffieldcitykayakclub.co.uk',
-    imageUrl: 'assets/river.png',
+    imageUrl: 'assets/gary.jpeg',
   },
   {
     name: 'Andy Green',
@@ -40,8 +39,7 @@ export const PEOPLE: Person[] = [
   {
     name: '????',
     role: 'Trip Coordinator',
-    longText:
-      '',
+    longText: '',
     emailAddress: 'trips@sheffieldcitykayakclub.co.uk',
     imageUrl: 'assets/river.png',
   },
