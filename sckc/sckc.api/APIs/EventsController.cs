@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Web.Http;
-using Google.Apis.Auth.OAuth2;
+﻿using Google.Apis.Auth.OAuth2;
 using Google.Apis.Calendar.v3;
 using Google.Apis.Calendar.v3.Data;
 using Google.Apis.Services;
 using sckc.api.Extensions;
 using sckc.api.Models;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Web.Http;
 
 namespace sckc.api.APIs
 {
-	public class EventsController : ApiController
+    public class EventsController : ApiController
 	{
         [Route("api/GetEvents")]
         public IHttpActionResult GetEvents(int count = 10)
@@ -22,8 +22,8 @@ namespace sckc.api.APIs
 			return Json(CalendarServiceHelper.GetClubEvents(count));
 		}
 
-		[Route("api/test")]
-		public IHttpActionResult Test()
+		[Route("api/health")]
+		public IHttpActionResult Health()
         {
 			return Ok();
         }
@@ -58,9 +58,7 @@ namespace sckc.api.APIs
 	public static class CalendarServiceHelper
 	{
 
-		private static string BookingsCalendarId = "6ao4i5trvae0te3v63csl39208@group.calendar.google.com";
-		private static string ClubCalendarId = "sheffieldcitykayakclub@gmail.com";
-		//private static string SpecialEventsCalendarId = "n6fiiet0qjudl4obhnldfj6r4@group.calendar.google.com";
+		private static string ClubCalendarId = Constants.GoogleCalendarId;
 
 		public static CalendarService CreateGoogleCalendarService()
 		{

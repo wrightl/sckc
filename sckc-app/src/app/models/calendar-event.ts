@@ -3,6 +3,8 @@ export interface CalendarEventMonth {
   Events: CalendarEvent[];
 }
 
+export type CalendarEventType = "river" | "pool" | "trip";
+
 export interface CalendarEvent {
   Description: string | null;
   EndDateTime: Date;
@@ -15,5 +17,5 @@ export interface CalendarEvent {
   Summary: string;
   Date: Date;
   Month: number;
-  EventType: "river" | "pool" | "trip";
+  EventType: CalendarEventType;
 }

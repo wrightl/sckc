@@ -1,10 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+// import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
+// import { environment } from 'src/environments/environment';
 import { CalendarEvent } from '../models/calendar-event';
+import { BookingService } from '../services/booking.service';
 
 @Component({
   selector: 'app-enquire',
@@ -24,7 +25,7 @@ export class EnquireComponent implements OnInit {
   isBusy = false;
 
   constructor(
-    private http: HttpClient,
+    private bookingService: BookingService,
     private router: Router,
     private _snackBar: MatSnackBar
   ) {}
@@ -71,8 +72,8 @@ export class EnquireComponent implements OnInit {
 
     this.isBusy = true;
 
-    this.http
-      .post(`${environment.baseApiUrl}BookingEnquiry`, {
+    this.bookingService
+      .enquire({
         event: this.booking.Summary,
         date: this.booking.LocaleDate,
         name: this.name.value,
@@ -98,6 +99,34 @@ export class EnquireComponent implements OnInit {
           this.isBusy = false;
         }
       );
+
+    // this.http
+    //   .post(`${environment.baseApiUrl}BookingEnquiry`, {
+    //     event: this.booking.Summary,
+    //     date: this.booking.LocaleDate,
+    //     name: this.name.value,
+    //     email: this.email.value,
+    //     telno: this.telno.value,
+    //     message: this.message.value,
+    //     type: this.booking.EventType,
+    //   })
+    //   .subscribe(
+    //     (result) => {
+    //       this.response = result.toString();
+
+    //       this.name.reset();
+    //       this.email.reset();
+    //       this.telno.reset();
+    //       this.message.reset();
+
+    //       this.isBusy = false;
+    //     },
+    //     (error) => {
+    //       this.error =
+    //         'Unfortunately an error occurred. Please try again, or send an email to <a href="mailto:enquiries@sheffieldcitykayakclub.co.uk">enquiries@sheffieldcitykayakclub.co.uk</a>';
+    //       this.isBusy = false;
+    //     }
+    //   );
 
     return false;
   }

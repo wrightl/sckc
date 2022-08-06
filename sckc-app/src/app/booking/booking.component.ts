@@ -1,15 +1,13 @@
 import { DOCUMENT } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { MatSelectChange } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
 import { MEMBERSHIP_INFO } from '../data/membership';
 import { BookingItem, POOLINFO, POOL_BOOKING_ITEMS } from '../data/pool';
 import { RIVERINFO, RIVER_BOOKING_ITEMS } from '../data/river';
 import { CalendarEvent } from '../models/calendar-event';
+import { BookingService } from '../services/booking.service';
 
 @Component({
   selector: 'app-booking',
@@ -38,7 +36,7 @@ export class BookingComponent implements OnInit {
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
-    private http: HttpClient,
+    private bookingService: BookingService,
     private router: Router,
     private _snackBar: MatSnackBar
   ) {}
@@ -123,8 +121,8 @@ export class BookingComponent implements OnInit {
 
     this.isBusy = true;
 
-    this.http
-      .post(`${environment.baseApiUrl}Book`, {
+    this.bookingService
+      .book({
         event: this.booking.Summary,
         date: this.booking.LocaleDate,
         name: this.name.value,
@@ -134,7 +132,6 @@ export class BookingComponent implements OnInit {
         message: this.message.value,
         items: this.bookingItems.filter((x) => x.quantity > 0),
         payNow: payNow,
-        isLiveBooking: environment.production,
       })
       .subscribe(
         (result) => {
@@ -186,9 +183,5 @@ export class BookingComponent implements OnInit {
 
   disableIncreaseQuantity(row: BookingItem) {
     return row.quantity >= 4;
-  }
-
-  updateQuantity(ev: MatSelectChange, row: BookingItem) {
-    // row.quantity = parseInt(ev...value);
   }
 }

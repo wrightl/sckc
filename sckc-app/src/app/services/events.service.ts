@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { CalendarEvent, CalendarEventMonth } from '../models/calendar-event';
-// import { MOCK_EVENTS } from './mock-events';
 
 @Injectable({
   providedIn: 'root',

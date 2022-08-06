@@ -6,10 +6,8 @@ using Stripe.Checkout;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Http;
 
 namespace sckc.api.APIs
@@ -31,8 +29,8 @@ namespace sckc.api.APIs
             }
             else
             {
-                var from = new EmailAddress("bookings@sheffieldcitykayakclub.co.uk", "Booking Request");
-                var to = new EmailAddress("bookings@sheffieldcitykayakclub.co.uk", "Booking Request");
+                var from = new EmailAddress(Constants.BookingsEmailAddress, Constants.BookingsEmailName);
+                var to = new EmailAddress(Constants.BookingsEmailAddress, Constants.BookingsEmailName);
                 var subject = $"Booking request for {info.Event} on {info.Date}";
                 var htmlContent = $"From: {info.Name}<br/>Email: <a href=\"mailto:{info.Email}\">{info.Email}</a><br/>TelNo: {info.TelNo}<br/>Message:<br/>{info.Message}<br/><br/>" +
                     $"People:<br/>{ConvertToMessage(info.Items)}";
@@ -51,7 +49,7 @@ namespace sckc.api.APIs
                 {
                     // Log the booking request
                     HttpClient client = new HttpClient();
-                    var result = await client.PostAsJsonAsync("https://sckc.azurewebsites.net/api/payments/booking", info);
+                    var result = await client.PostAsJsonAsync($"{Constants.AdminSiteBaseUrl}/payments/booking", info);
 
                     if (!response)
                         throw new Exception(await result.Content.ReadAsStringAsync());
@@ -69,8 +67,8 @@ namespace sckc.api.APIs
         [HttpPost]
         public async Task<IHttpActionResult> SendBookingEnquiry(BookingRequestDto info)
         {
-            var from = new EmailAddress("bookingrequest@sheffieldcitykayakclub.co.uk", "Booking Request");
-            var to = new EmailAddress("bookingrequest@sheffieldcitykayakclub.co.uk", "Booking Request");
+            var from = new EmailAddress(Constants.BookingRequestEmailAddress, Constants.BookingRequestEmailName);
+            var to = new EmailAddress(Constants.BookingRequestEmailAddress, Constants.BookingRequestEmailName);
             var subject = $"Booking request for {info.Event} on {info.Date}";
             var htmlContent = $"From: {info.Name}<br/>Email: <a href=\"mailto:{info.Email}\">{info.Email}</a><br/>Number of people: {info.Number}<br/>People: {info.Names}<br/>TelNo: {info.TelNo}<br/>Message:<br/>{info.Message}";
             var msg = MailHelper.CreateSingleEmail(from, to, subject, htmlContent, htmlContent);
@@ -82,7 +80,7 @@ namespace sckc.api.APIs
             {
                 // Log the booking request
                 HttpClient client = new HttpClient();
-                var result = await client.PostAsJsonAsync("https://sckc.azurewebsites.net/api/payments/enquiry", info);
+                var result = await client.PostAsJsonAsync($"{Constants.AdminSiteBaseUrl}payments/enquiry", info);
 
                 // Send template email
                 to = new EmailAddress(info.Email.Trim());

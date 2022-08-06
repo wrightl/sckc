@@ -8,6 +8,7 @@ import { Meta, Title } from '@angular/platform-browser';
 })
 export class PageTitleComponent implements OnInit, OnDestroy {
   @Input() title = '';
+  @Input() pageTitle? : string = undefined;
   @Input() keywords = '';
 
   private _tag: HTMLMetaElement | null | undefined;
@@ -21,7 +22,7 @@ export class PageTitleComponent implements OnInit, OnDestroy {
       content: this.keywords,
     });
 
-    this.titleService.setTitle(`${this.title} - Sheffield City Kayak Club`);
+    this.titleService.setTitle(`${this.pageTitle ?? this.title} - Sheffield City Kayak Club`);
   }
 
   ngOnDestroy(): void {

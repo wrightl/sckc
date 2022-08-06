@@ -1,11 +1,6 @@
 ﻿using sckc.api.Extensions;
 using sckc.api.Models;
-using sckc.core.Models;
-using SendGrid;
 using SendGrid.Helpers.Mail;
-using System;
-using System.IO;
-using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -17,8 +12,8 @@ namespace sckc.api.APIs
         [HttpPost]
         public async Task<IHttpActionResult> SendContactUsMail(ContactUsDto info)
         {
-            var from = new EmailAddress("contactus@sheffieldcitykayakclub.co.uk", "Contact Us");
-            var to = new EmailAddress("contactus@sheffieldcitykayakclub.co.uk", "Contact Us");
+            var from = new EmailAddress(Constants.ContactUsEmailAddress, Constants.ContactUsEmailAddress);
+            var to = new EmailAddress(Constants.ContactUsEmailAddress, Constants.ContactUsEmailAddress);
             var subject = "Contact Us Enquiry";
             var htmlContent = string.Format("From: {2}<br/>Email: <a href=\"mailto:{3}\">{3}</a><br/>Subject: {0}<br/>Message:<br/>{1}", info.Subject, info.Message, info.Name, info.Email);
             var msg = MailHelper.CreateSingleEmail(from, to, subject, htmlContent, htmlContent);
