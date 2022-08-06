@@ -22,12 +22,6 @@ namespace sckc.api.APIs
 			return Json(CalendarServiceHelper.GetClubEvents(count));
 		}
 
-		[Route("api/health")]
-		public IHttpActionResult Health()
-        {
-			return Ok();
-        }
-
 		[Route("api/GetEventsOfType")]
         public IHttpActionResult GetEventsOfType(string type, int count = 5)
 		{
