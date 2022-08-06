@@ -13,8 +13,8 @@ jobs:
     call-deployment-workflow:
         uses: ./.github/workflows/deployment.yml
         with:
-            env_type: staged
-            deployment_path: app/ # need to change this back once v1 is released and I move to PR's/staged environment
+            env_type: production
+            deployment_path: '' # need to change this back once v1 is released and I move to PR's/staged environment
         secrets:
             google_calendar_creds: ${{ secrets.google_calendar_creds }}
             ftphost: ${{ secrets.ftphost }}
