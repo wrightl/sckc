@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Web;
 using System.Web.Http;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Calendar.v3;
 using Google.Apis.Calendar.v3.Data;
 using Google.Apis.Services;
-using Newtonsoft.Json.Linq;
 using sckc.api.Extensions;
 using sckc.api.Models;
 
@@ -24,7 +22,13 @@ namespace sckc.api.APIs
 			return Json(CalendarServiceHelper.GetClubEvents(count));
 		}
 
-        [Route("api/GetEventsOfType")]
+		[Route("api/test")]
+		public IHttpActionResult Test()
+        {
+			return Ok();
+        }
+
+		[Route("api/GetEventsOfType")]
         public IHttpActionResult GetEventsOfType(string type, int count = 5)
 		{
 			count = validateCount(count);
