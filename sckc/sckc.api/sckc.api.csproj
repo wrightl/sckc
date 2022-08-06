@@ -159,6 +159,7 @@
   <ItemGroup>
     <Compile Include="APIs\BookingsController.cs" />
     <Compile Include="APIs\Constants.cs" />
+    <Compile Include="APIs\HealthController.cs" />
     <Compile Include="APIs\ReportsController.cs" />
     <Compile Include="APIs\GalleryController.cs" />
     <None Include="App_Start\RouteConfig.cs" />
