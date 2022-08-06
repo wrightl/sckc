@@ -10,7 +10,7 @@ on:
     workflow_dispatch:
 
 jobs:
-    call-deployment-workflow:
+    deploy-prod:
         uses: ./.github/workflows/deployment.yml
         with:
             env_type: production
