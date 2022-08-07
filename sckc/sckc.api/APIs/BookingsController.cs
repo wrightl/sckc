@@ -49,7 +49,7 @@ namespace sckc.api.APIs
                 {
                     // Log the booking request
                     HttpClient client = new HttpClient();
-                    var result = await client.PostAsJsonAsync($"{Constants.AdminSiteBaseUrl}/payments/booking", info);
+                    var result = await client.PostAsJsonAsync($"{Constants.AdminSiteBaseUrl}payments/booking", info);
 
                     if (!response)
                         throw new Exception(await result.Content.ReadAsStringAsync());
