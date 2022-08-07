@@ -72,7 +72,7 @@ namespace sckc.api.APIs
 
 		public static IEnumerable<ClubEventMonth> GetGroupedClubEvents()
         {
-			return GetClubEvents().GroupBy(ev => ev.StartDateTime.ToString("MMMMYYYY"))
+			return GetClubEvents().GroupBy(ev => ev.StartDateTime.ToString("MMMMyyyy"))
 							 .Select((key, group) => new ClubEventMonth()
 							 { Events = key.OrderBy(ev => ev.StartDateTime).ToList(), Month = key.FirstOrDefault()?.StartDateTime.ToString("MMMM") });
 		}
