@@ -35,7 +35,7 @@ namespace sckc.api.APIs
                 var htmlContent = $"From: {info.Name}<br/>Email: <a href=\"mailto:{info.Email}\">{info.Email}</a><br/>TelNo: {info.TelNo}<br/>Message:<br/>{info.Message}<br/><br/>" +
                     $"People:<br/>{ConvertToMessage(info.Items)}";
 
-                if (!info.isLiveBooking)
+                if (!info.isLive)
                 {
                     subject = $"***TEST TEST {subject} TEST TEST***";
                 }
@@ -85,6 +85,11 @@ namespace sckc.api.APIs
                 // Send template email
                 to = new EmailAddress(info.Email.Trim());
                 subject = $"Booking request for {info.Event} on {info.Date}";
+
+                if (!info.isLive)
+                {
+                    subject = $"***TEST TEST {subject} TEST TEST***";
+                }
 
                 var autoReplyContent = Helper.ReplaceTemplatePlaceholders(System.IO.File.ReadAllText(Helper.MapPath($"Resources/{info.Type}_booking_request_response.html")).Trim(), info);
 

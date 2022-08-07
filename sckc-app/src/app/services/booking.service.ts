@@ -11,13 +11,16 @@ export class BookingService {
   constructor(private http: HttpClient) {}
 
   enquire(enquiry: Enquiry) {
-    return this.http.post(`${environment.baseApiUrl}BookingEnquiry`, enquiry);
+    return this.http.post(`${environment.baseApiUrl}BookingEnquiry`, {
+      ...enquiry,
+      isLive: environment.production,
+    });
   }
 
   book(booking: Booking) {
     return this.http.post(`${environment.baseApiUrl}Book`, {
       ...booking,
-      isLiveBooking: environment.production,
+      isLive: environment.production,
     });
   }
 }
