@@ -49,7 +49,7 @@ namespace sckc.api.APIs
                 {
                     // Log the booking request
                     HttpClient client = new HttpClient();
-                    var result = await client.PostAsJsonAsync($"{Constants.AdminSiteBaseUrl}payments/booking", info);
+                    var result = await client.PostAsJsonAsync($"{Constants.AdminSiteBaseUrl}{Constants.AdminSiteBookingsApi}/book", info);
 
                     if (!response)
                         throw new Exception(await result.Content.ReadAsStringAsync());
@@ -80,7 +80,7 @@ namespace sckc.api.APIs
             {
                 // Log the booking request
                 HttpClient client = new HttpClient();
-                var result = await client.PostAsJsonAsync($"{Constants.AdminSiteBaseUrl}payments/enquiry", info);
+                var result = await client.PostAsJsonAsync($"{Constants.AdminSiteBaseUrl}{Constants.AdminSiteBookingsApi}/enquiry", info);
 
                 // Send template email
                 to = new EmailAddress(info.Email.Trim());

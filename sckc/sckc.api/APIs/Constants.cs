@@ -15,5 +15,6 @@
         public const string GoogleCalendarId = "sheffieldcitykayakclub@gmail.com";
 
         public const string AdminSiteBaseUrl = "https://sckc.azurewebsites.net/api/";
+        public const string AdminSiteBookingsApi = "bookings";
     }
 }
