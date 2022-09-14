@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'sckc-she-paddles',
+  selector: 'app-she-paddles',
   templateUrl: './she-paddles.component.html',
   styleUrls: ['./she-paddles.component.scss'],
 })
