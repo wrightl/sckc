@@ -21,6 +21,7 @@ import { BookingComponent } from './booking/booking.component';
 import { BookingRequestConfComponent } from './booking-request-conf/booking-request-conf.component';
 import { MemberCheckComponent } from './member-check/member-check.component';
 import { EnquireComponent } from './enquire/enquire.component';
+import { ShePaddlesComponent } from './she-paddles/she-paddles.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -44,6 +45,7 @@ const routes: Routes = [
   { path: 'book', component: BookingComponent },
   { path: 'bookingsuccess', component: BookingSuccessComponent },
   { path: 'booking-conf', component: BookingRequestConfComponent },
+  { path: 'she-paddles', component: ShePaddlesComponent },
   { path: '**', redirectTo: '/home', pathMatch: 'full' },
 ];
 

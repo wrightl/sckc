@@ -2,7 +2,8 @@ export const PEOPLE: Person[] = [
   {
     name: 'Dave Wright',
     role: 'Chairman',
-    longText: "<p>David has been involved in outdoor activities for over 40 years; he only started getting involved in paddlesports 12 or so years ago but wishes he'd started much sooner!</p><p>He enjoys stand up paddle boarding, canoeing and kayaking, he is a Level 3 British Canoeing Coach and gets great satisfaction out of introducing new people to the sport.</p><p>David holds a Certificate in Outdoor First Aid, is a British Canoeing Mentor and Coach Developer, is DBS Certified and holds a Certificate in Safeguarding and Protecting Children  </p>",
+    longText:
+      "<p>David has been involved in outdoor activities for over 40 years; he only started getting involved in paddlesports 12 or so years ago but wishes he'd started much sooner!</p><p>He enjoys stand up paddle boarding, canoeing and kayaking, he is a Level 3 British Canoeing Coach and gets great satisfaction out of introducing new people to the sport.</p><p>David holds a Certificate in Outdoor First Aid, is a British Canoeing Mentor and Coach Developer, is DBS Certified and holds a Certificate in Safeguarding and Protecting Children  </p>",
     emailAddress: 'chairman@sheffieldcitykayakclub.co.uk',
     imageUrl: 'assets/dave.jpg',
   },
@@ -25,14 +26,16 @@ export const PEOPLE: Person[] = [
   {
     name: 'Andy Green',
     role: 'Equipment Officer',
-    longText: '<p>I first sat in a kayak on the river tees in the now infamous Barnard Castle 20+ years ago, joined the local canoe club and was hooked. Since then I’ve paddled mainly within mainland Europe, but have enjoyed a few slightly more exotic destinations. This has mainly been whitewater kayak but recently I’ve been paddling more canoe, sea kayak and SUP which brings a new set of opportunities to paddlesports for me and my family.</p><p>After many years of paddling with mates I thought it was about time I joined a club again so joined Sheffield City Kayak club just before lockdown and was welcomed by the great bunch of paddlers and coaches, unfortunate timing for me as things wound down for the covid pandemic and then post lockdown I joined the committee to help bring things back up to speed.</p><p>I’ve had so many fantastic experiences in and around the river, I love the idea of opening up these experiences to more people which is why I continue to coach and river lead. P.s. the number of boats you should have is “b+1”, where “b” is the number of boats you currently own. </p>',
+    longText:
+      '<p>I first sat in a kayak on the river tees in the now infamous Barnard Castle 20+ years ago, joined the local canoe club and was hooked. Since then I’ve paddled mainly within mainland Europe, but have enjoyed a few slightly more exotic destinations. This has mainly been whitewater kayak but recently I’ve been paddling more canoe, sea kayak and SUP which brings a new set of opportunities to paddlesports for me and my family.</p><p>After many years of paddling with mates I thought it was about time I joined a club again so joined Sheffield City Kayak club just before lockdown and was welcomed by the great bunch of paddlers and coaches, unfortunate timing for me as things wound down for the covid pandemic and then post lockdown I joined the committee to help bring things back up to speed.</p><p>I’ve had so many fantastic experiences in and around the river, I love the idea of opening up these experiences to more people which is why I continue to coach and river lead. P.s. the number of boats you should have is “b+1”, where “b” is the number of boats you currently own. </p>',
     emailAddress: 'equipment@sheffieldcitykayakclub.co.uk',
     imageUrl: 'assets/andy.png',
   },
   {
     name: 'Neil Webster',
     role: 'Safety Officer',
-    longText: '<p>Neil joined the club early 2022 but has kayaked in his younger years with the scouts and recently sea kayaked whilst working in jersey in the Channel Islands. Neil has worked in the construction industry for over 30 years in senior roles that heavily involved health and safety in some form or another on a daily basis and achieved several safety qualifications and awards </p><p>He looks forward to the Challenge of safety office with the club</p>',
+    longText:
+      '<p>Neil joined the club early 2022 but has kayaked in his younger years with the scouts and recently sea kayaked whilst working in jersey in the Channel Islands. Neil has worked in the construction industry for over 30 years in senior roles that heavily involved health and safety in some form or another on a daily basis and achieved several safety qualifications and awards </p><p>He looks forward to the Challenge of safety office with the club</p>',
     emailAddress: 'safety@sheffieldcitykayakclub.co.uk',
     imageUrl: 'assets/neilw.png',
   },
@@ -44,9 +47,18 @@ export const PEOPLE: Person[] = [
   //   imageUrl: 'assets/river.png',
   // },
   {
+    name: 'Tracy Edwards',
+    role: 'She Paddles Club Ambassador',
+    longText:
+      '<p>My role as the She Paddles Club Ambassador will be to help all female paddlers feel supported and enjoy their time on the water with the club.  If you have any concerns about paddling or need any information about taking part in sessions on the river or the pool, please contact me via the ‘Contact Us’ section on our website.  I look forward to seeing you on the water</p>',
+    emailAddress: 'shepaddles@sheffieldcitykayakclub.co.uk',
+    imageUrl: 'assets/tracy.jpg',
+  },
+  {
     name: 'Lee Wright',
     role: 'Treasurer',
-    longText: "<p>Lee joined the club back in 2012 after watching the kayaking events at the London Olympics and deciding he and his wife needed a joint hobby.</p><p>Since then he's got into white water rivers and paddles both locally and further afield, with his favourite paddling destination so far being Slovenia which he experienced on a week long trip in 2022.</p>",
+    longText:
+      "<p>Lee joined the club back in 2012 after watching the kayaking events at the London Olympics and deciding he and his wife needed a joint hobby.</p><p>Since then he's got into white water rivers and paddles both locally and further afield, with his favourite paddling destination so far being Slovenia which he experienced on a week long trip in 2022.</p>",
     emailAddress: 'treasurer@sheffieldcitykayakclub.co.uk',
     imageUrl: 'assets/lee.jpg',
   },

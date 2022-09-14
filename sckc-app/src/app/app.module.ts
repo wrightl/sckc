@@ -57,6 +57,7 @@ import { BookingComponent } from './booking/booking.component';
 import { MemberCheckComponent } from './member-check/member-check.component';
 import { EnquireComponent } from './enquire/enquire.component';
 import { BusyButtonComponent } from './busy-button/busy-button.component';
+import { ShePaddlesComponent } from './she-paddles/she-paddles.component';
 
 @NgModule({
   declarations: [
@@ -89,6 +90,7 @@ import { BusyButtonComponent } from './busy-button/busy-button.component';
     MemberCheckComponent,
     EnquireComponent,
     BusyButtonComponent,
+    ShePaddlesComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
