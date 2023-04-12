@@ -56,7 +56,7 @@ jobs:
               run: msbuild sckc.sln /p:Configuration=Release
 
             - name: Write google secrets file
-              uses: DamianReeves/write-file-action@v1.0
+              uses: DamianReeves/write-file-action@v1.2
               with:
                   path: ./sckc/sckc.api/data/sckc.data
                   # The contents of the file
@@ -65,7 +65,7 @@ jobs:
                   write-mode: overwrite # optional, default is preserve
 
             - name: Write stripe apikey file
-              uses: DamianReeves/write-file-action@v1.0
+              uses: DamianReeves/write-file-action@v1.2
               with:
                   path: ./sckc/sckc.api/data/stripe_apikey.data
                   # The contents of the file
@@ -74,7 +74,7 @@ jobs:
                   write-mode: overwrite # optional, default is preserve
                   
             - name: Write email api key
-              uses: DamianReeves/write-file-action@v1.0
+              uses: DamianReeves/write-file-action@v1.2
               with:
                   path: ./sckc/sckc.api/data/sendgrid_apikey.data
                   # The contents of the file
