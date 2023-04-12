@@ -115,7 +115,7 @@ jobs:
         # Steps represent a sequence of tasks that will be executed as part of the job
         steps:
             # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v3.5.1
 
             - name: Setup Node.js environment
               uses: actions/setup-node@v2.5.2
@@ -144,7 +144,7 @@ jobs:
               run: npm run test:${{ inputs.env_type }}
 
             - name: Upload Artifact
-              uses: actions/upload-artifact@v2
+              uses: actions/upload-artifact@v3.1.2
               with:
                   name: published_app
                   path: ./sckc-app/dist/sckc-app
@@ -159,10 +159,10 @@ jobs:
         # Steps represent a sequence of tasks that will be executed as part of the job
         steps:
             - name: Download all workflow run artifacts
-              uses: actions/download-artifact@v2
+              uses: actions/download-artifact@v2.1.1
 
             - name: ftp-action-app
-              uses: SamKirkland/FTP-Deploy-Action@4.3.4
+              uses: SamKirkland/FTP-Deploy-Action@v4.3.4
               with:
                   # FTP host
                   server: ${{ secrets.ftphost}}
@@ -180,7 +180,7 @@ jobs:
                   log-level: verbose # optional
 
             - name: ftp-action-api
-              uses: SamKirkland/FTP-Deploy-Action@4.3.4
+              uses: SamKirkland/FTP-Deploy-Action@v4.3.4
               with:
                   # FTP host
                   server: ${{ secrets.ftphost}}
