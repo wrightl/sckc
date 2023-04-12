@@ -9,26 +9,46 @@
       <table mat-table [dataSource]="month.Events">
         <ng-container matColumnDef="day">
           <td class="day-cell" mat-cell *matCellDef="let element">
-            {{ element.StartDateTime | date: "EEEE" }}
+            {{ element.StartDateTime | date : "EEEE" }}
           </td>
         </ng-container>
         <ng-container matColumnDef="date">
           <td class="date-cell" mat-cell *matCellDef="let element">
-            {{ element.StartDateTime | date: "dd/MM @ h:mm aa" }}
+            {{ element.StartDateTime | date : "dd/MM @ h:mm aa" }}
           </td>
         </ng-container>
 
         <ng-container matColumnDef="name">
           <td class="summary-cell" mat-cell *matCellDef="let element">
-            <a *ngIf="element.EventType === 'pool'" routerLink="/pool" [state]="element">{{ element.Summary }}</a>
-            <a *ngIf="element.EventType === 'river'" routerLink="/river" [state]="element">{{ element.Summary }}</a>
+            <a
+              *ngIf="element.EventType === 'pool'"
+              routerLink="/pool"
+              [state]="element"
+              >{{ element.Summary }}</a
+            >
+            <a
+              *ngIf="element.EventType === 'river'"
+              routerLink="/river"
+              [state]="element"
+              >{{ element.Summary }}</a
+            >
           </td>
         </ng-container>
 
         <ng-container matColumnDef="book">
           <td class="book-cell" mat-cell *matCellDef="let element">
-            <a *ngIf="element.EventType === 'pool'" routerLink="/member-check" [state]="element">Book</a>
-            <a *ngIf="element.EventType === 'river'" routerLink="/enquire" [state]="element">Enquire</a>
+            <a
+              *ngIf="element.EventType === 'pool'"
+              routerLink="/member-check"
+              [state]="element"
+              >Book</a
+            >
+            <a
+              *ngIf="element.EventType === 'river'"
+              routerLink="/enquire"
+              [state]="element"
+              >Register Interest</a
+            >
           </td>
         </ng-container>
 
@@ -40,14 +60,18 @@
 
 <div class="small-container" *ngIf="isReady && mode === 'small'">
   <h3>Events</h3>
-  <img src="assets/river.png" width="70"/>
+  <img src="assets/river.png" width="70" />
   <h4>River Sessions</h4>
   <div *ngFor="let event of riverSessions" class="link-container">
-    <a routerLink="/enquire" [state]="event">{{ event.StartDateTime | date: "ccc d MMMM" }}</a>
+    <a routerLink="/enquire" [state]="event">{{
+      event.StartDateTime | date : "ccc d MMMM"
+    }}</a>
   </div>
-  <img src="assets/pool.png" width="70"/>
+  <img src="assets/pool.png" width="70" />
   <h4>Pool Sessions</h4>
   <div *ngFor="let event of poolSessions" class="link-container">
-    <a routerLink="/member-check" [state]="event">{{ event.StartDateTime | date: "ccc d MMMM" }}</a>
+    <a routerLink="/member-check" [state]="event">{{
+      event.StartDateTime | date : "ccc d MMMM"
+    }}</a>
   </div>
 </div>

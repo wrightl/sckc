@@ -1,8 +1,19 @@
 <app-page-title
-  [title]="'Booking Enquiry - ' + booking.Summary + ' on ' + booking.LocaleDate"
+  [title]="
+    'Register Interest - ' + booking.Summary + ' on ' + booking.LocaleDate
+  "
 ></app-page-title>
 
 <div class="form">
+  <p>
+    By registering your interest for a session you'll be added to our mailing
+    list and contacted via email about this, and future events.
+  </p>
+  <p>
+    If we don't hear from you within 90 days you'll automatically be taken off
+    the mailing list, or you can contact us at
+    contactus@sheffieldcitykayakclub.co.uk
+  </p>
   <div class="error" *ngIf="error" [innerHTML]="error"></div>
   <div class="response" *ngIf="response">{{ response }}</div>
   <div *ngIf="!response">

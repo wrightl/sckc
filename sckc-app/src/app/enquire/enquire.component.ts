@@ -100,34 +100,6 @@ export class EnquireComponent implements OnInit {
         }
       );
 
-    // this.http
-    //   .post(`${environment.baseApiUrl}BookingEnquiry`, {
-    //     event: this.booking.Summary,
-    //     date: this.booking.LocaleDate,
-    //     name: this.name.value,
-    //     email: this.email.value,
-    //     telno: this.telno.value,
-    //     message: this.message.value,
-    //     type: this.booking.EventType,
-    //   })
-    //   .subscribe(
-    //     (result) => {
-    //       this.response = result.toString();
-
-    //       this.name.reset();
-    //       this.email.reset();
-    //       this.telno.reset();
-    //       this.message.reset();
-
-    //       this.isBusy = false;
-    //     },
-    //     (error) => {
-    //       this.error =
-    //         'Unfortunately an error occurred. Please try again, or send an email to <a href="mailto:enquiries@sheffieldcitykayakclub.co.uk">enquiries@sheffieldcitykayakclub.co.uk</a>';
-    //       this.isBusy = false;
-    //     }
-    //   );
-
     return false;
   }
 }
