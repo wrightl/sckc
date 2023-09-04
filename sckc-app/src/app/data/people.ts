@@ -61,14 +61,7 @@ export const PEOPLE: Person[] = [
       "<p>Lee joined the club back in 2012 after watching the kayaking events at the London Olympics and deciding he and his wife needed a joint hobby.</p><p>Since then he's got into white water rivers and paddles both locally and further afield, with his favourite paddling destination so far being Slovenia which he experienced on a week long trip in 2022.</p>",
     emailAddress: 'treasurer@sheffieldcitykayakclub.co.uk',
     imageUrl: 'assets/lee.jpg',
-  },
-  {
-    name: 'Neil Taylor',
-    role: 'Publicity Officer',
-    longText: '',
-    emailAddress: 'publicity@sheffieldcitykayakclub.co.uk',
-    imageUrl: 'assets/river.png',
-  },
+  }
 ];
 
 export interface Person {
