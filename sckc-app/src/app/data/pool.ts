@@ -1,6 +1,6 @@
 export const POOLINFO: PoolInfo = {
   adultThirtyMinuteSession: 6,
-  adultSixtMinuteSession: 12,
+  adultSixtyMinuteSession: 12,
   adultFullSession: 16,
   childThirtyMinuteSession: 3,
   childSixtyMinuteSession: 6,
@@ -22,7 +22,7 @@ export const POOL_BOOKING_ITEMS: BookingItem[] = [
 
 export interface PoolInfo {
   adultThirtyMinuteSession: number;
-  adultSixtMinuteSession: number;
+  adultSixtyMinuteSession: number;
   adultFullSession: number;
   childThirtyMinuteSession: number;
   childSixtyMinuteSession: number;
