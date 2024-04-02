@@ -44,43 +44,23 @@
     <thead>
       <tr>
         <th></th>
-        <th>Half Session</th>
-        <th>Full Session</th>
+        <th>30 Minute Session</th>
+        <th>60 Minute Session</th>
+        <th>90 Minute Session</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td>Adults</td>
-        <td>{{ info.adultHalfSession | number: "1.2-2" }}</td>
-        <td>{{ info.adultFullSession | number: "1.2-2" }}</td>
+        <td>{{ info.adultThirtyMinuteSession | number : "1.2-2" }}</td>
+        <td>{{ info.adultSixtyMinuteSession | number : "1.2-2" }}</td>
+        <td>{{ info.adultFullSession | number : "1.2-2" }}</td>
       </tr>
       <tr>
         <td>Under 18's, OAP, Unwaged, Students</td>
-        <td>{{ info.childHalfSession | number: "1.2-2" }}</td>
-        <td>{{ info.childFullSession | number: "1.2-2" }}</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h4>Pricing for non-Club Members</h4>
-  <table>
-    <thead>
-      <tr>
-        <th></th>
-        <th>Half Session</th>
-        <th>Full Session</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Adults</td>
-        <td>{{ info.adultHalfSessionNonMember | number: "1.2-2" }}</td>
-        <td>{{ info.adultFullSessionNonMember | number: "1.2-2" }}</td>
-      </tr>
-      <tr>
-        <td>Under 18's, OAP, Unwaged, Students</td>
-        <td>{{ info.childHalfSessionNonMember | number: "1.2-2" }}</td>
-        <td>{{ info.childFullSessionNonMember | number: "1.2-2" }}</td>
+        <td>{{ info.childThirtyMinuteSession | number : "1.2-2" }}</td>
+        <td>{{ info.childSixtyMinuteSession | number : "1.2-2" }}</td>
+        <td>{{ info.childFullSession | number : "1.2-2" }}</td>
       </tr>
     </tbody>
   </table>
