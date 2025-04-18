@@ -11,64 +11,20 @@
   </p>
   <p>
     If we don't hear from you within 90 days you'll automatically be taken off
-    the mailing list, or you can contact us at
-    contactus@sheffieldcitykayakclub.co.uk
+    the mailing list, or you can contact us at:
+    <a href="mailto:contactus@sheffieldcitykayakclub.co.uk"
+      >contactus@sheffieldcitykayakclub.co.uk</a
+    >
   </p>
-  <div class="error" *ngIf="error" [innerHTML]="error"></div>
-  <div class="response" *ngIf="response">{{ response }}</div>
-  <div *ngIf="!response">
-    <mat-form-field class="full-width" appearance="fill">
-      <mat-label>Name</mat-label>
-      <input matInput placeholder="Your Name" [formControl]="name" required />
-      <mat-error *ngIf="name.invalid">{{ getErrorMessage(name) }}</mat-error>
-    </mat-form-field>
-    <mat-form-field class="full-width" appearance="fill">
-      <mat-label>Email</mat-label>
-      <input
-        matInput
-        placeholder="bob@example.com"
-        [formControl]="email"
-        type="email"
-        required
-      />
-      <mat-error *ngIf="email.invalid">{{ getErrorMessage(email) }}</mat-error>
-    </mat-form-field>
-    <mat-form-field class="full-width" appearance="fill">
-      <mat-label>Contact Telephone</mat-label>
-      <input matInput [formControl]="telno" type="tel" />
-      <mat-error *ngIf="telno.invalid">{{ getErrorMessage(telno) }}</mat-error>
-    </mat-form-field>
 
-    <mat-form-field class="full-width" appearance="fill">
-      <mat-label>Details</mat-label>
-      <textarea
-        matInput
-        placeholder="Enter number of people and any relevant information"
-        [formControl]="message"
-        required
-      ></textarea>
-      <mat-error *ngIf="message.invalid">{{
-        getErrorMessage(message)
-      }}</mat-error>
-    </mat-form-field>
-
-    <app-busy-button
-      label="Send"
-      (clickButton)="sendMessage()"
-      [busy]="isBusy"
-    ></app-busy-button>
-
-    <!-- <button mat-flat-button color="accent" (click)="sendMessage()">
-      <div class="button-content-wrapper">
-        <span>Send</span>
-        <mat-progress-spinner
-          diameter="24"
-          class="spinner"
-          color="primary"
-          mode="indeterminate"
-        >
-        </mat-progress-spinner>
-      </div>
-    </button> -->
-  </div>
+  <p>
+    Register your interest by clicking the link below. Please add your name and
+    any relevant details
+  </p>
+  <a
+    href="mailto:enquiries@sheffieldcitykayakclub.co.uk&subject=Booking%20request%20for%20{{
+      booking.Summary
+    }}%20on%20{{ booking.LocaleDate }}"
+    >enquiries@sheffieldcitykayakclub.co.uk</a
+  >
 </div>

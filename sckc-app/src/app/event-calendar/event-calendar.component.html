@@ -37,18 +37,13 @@
 
         <ng-container matColumnDef="book">
           <td class="book-cell" mat-cell *matCellDef="let element">
-            <a
+            <!-- <a
               *ngIf="element.EventType === 'pool'"
               routerLink="/member-check"
               [state]="element"
               >Book</a
-            >
-            <a
-              *ngIf="element.EventType === 'river'"
-              routerLink="/enquire"
-              [state]="element"
-              >Register Interest</a
-            >
+            > -->
+            <a routerLink="/enquire" [state]="element">Register Interest</a>
           </td>
         </ng-container>
 
