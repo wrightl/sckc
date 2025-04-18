@@ -101,7 +101,7 @@ jobs:
                   Copy-Item ".\Resources\*" -Destination ".\deploy\Resources" -Recurse -Force
 
             - name: Upload Artifact
-              uses: actions/upload-artifact@v3.1.2
+              uses: actions/upload-artifact@v4.6.2
               with:
                   name: published_api
                   path: ./sckc/sckc.api/deploy
@@ -144,7 +144,7 @@ jobs:
               run: npm run test:${{ inputs.env_type }}
 
             - name: Upload Artifact
-              uses: actions/upload-artifact@v3.1.2
+              uses: actions/upload-artifact@v4.6.2
               with:
                   name: published_app
                   path: ./sckc-app/dist/sckc-app
