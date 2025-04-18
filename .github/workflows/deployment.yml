@@ -217,7 +217,7 @@ jobs:
         steps:
 
             - name: Delete Artifacts
-              uses: GeekyEggo/delete-artifact@v2.0.0
+              uses: GeekyEggo/delete-artifact@v5.1.0
               with:
                   # The name of the artifact to delete; multiple names can be supplied on new lines.
                   name: |
