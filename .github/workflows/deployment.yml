@@ -159,7 +159,7 @@ jobs:
         # Steps represent a sequence of tasks that will be executed as part of the job
         steps:
             - name: Download all workflow run artifacts
-              uses: actions/download-artifact@v2.1.1
+              uses: actions/download-artifact@v4.2.1
 
             - name: ftp-action-app
               uses: SamKirkland/FTP-Deploy-Action@v4.3.4
