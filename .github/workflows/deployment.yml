@@ -101,7 +101,7 @@ jobs:
                   Copy-Item ".\Resources\*" -Destination ".\deploy\Resources" -Recurse -Force
 
             - name: Upload Artifact
-              uses: actions/upload-artifact@v3.1.2
+              uses: actions/upload-artifact@v4.6.2
               with:
                   name: published_api
                   path: ./sckc/sckc.api/deploy
@@ -144,7 +144,7 @@ jobs:
               run: npm run test:${{ inputs.env_type }}
 
             - name: Upload Artifact
-              uses: actions/upload-artifact@v3.1.2
+              uses: actions/upload-artifact@v4.6.2
               with:
                   name: published_app
                   path: ./sckc-app/dist/sckc-app
@@ -159,7 +159,7 @@ jobs:
         # Steps represent a sequence of tasks that will be executed as part of the job
         steps:
             - name: Download all workflow run artifacts
-              uses: actions/download-artifact@v2.1.1
+              uses: actions/download-artifact@v4.2.1
 
             - name: ftp-action-app
               uses: SamKirkland/FTP-Deploy-Action@v4.3.4
@@ -217,7 +217,7 @@ jobs:
         steps:
 
             - name: Delete Artifacts
-              uses: GeekyEggo/delete-artifact@v2.0.0
+              uses: GeekyEggo/delete-artifact@v5.1.0
               with:
                   # The name of the artifact to delete; multiple names can be supplied on new lines.
                   name: |
