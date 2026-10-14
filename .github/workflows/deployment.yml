@@ -32,33 +32,19 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v3.5.1
 
-            - name: setup-msbuild
-              uses: microsoft/setup-msbuild@v1.1
-              #with:
-              # Folder location of where vswhere.exe is located if a self-hosted agent
-              #vswhere-path: # optional
-              # Version of Visual Studio to search; defaults to latest if not specified
-              #vs-version: # optional/p:DeployOnBuild=true /p:PublishProfile=FolderProfile
-              # Enable searching for pre-release versions of Visual Studio/MSBuild
-              #vs-prerelease: # optional
-              # The preferred processor architecture of MSBuild. Can be either "x86" or "x64". "x64" is only available from Visual Studio version 17.0 and later.
-              #msbuild-architecture: # optional, default is x86
+            - name: Setup .NET
+              uses: actions/setup-dotnet@v4
+              with:
+                  global-json-file: ./sckc/global.json
 
-            - name: Setup nuget
-              uses: NuGet/setup-nuget@v1.2.0
-
-            - name: Restore NuGet Packages
+            - name: Publish API
               working-directory: ./sckc
-              run: nuget restore sckc.sln
-
-            - name: Build Web App
-              working-directory: ./sckc
-              run: msbuild sckc.sln /p:Configuration=Release
+              run: dotnet publish sckc.api/sckc.api.csproj -c Release -o sckc.api/deploy
 
             - name: Write google secrets file
               uses: DamianReeves/write-file-action@v1.2
               with:
-                  path: ./sckc/sckc.api/data/sckc.data
+                  path: ./sckc/sckc.api/deploy/data/sckc.data
                   # The contents of the file
                   contents: ${{ secrets.google_calendar_creds }}
                   # The mode of writing to use: `overwrite`, `append`, or `preserve`.
@@ -67,16 +53,16 @@ jobs:
             - name: Write stripe apikey file
               uses: DamianReeves/write-file-action@v1.2
               with:
-                  path: ./sckc/sckc.api/data/stripe_apikey.data
+                  path: ./sckc/sckc.api/deploy/data/stripe_apikey.data
                   # The contents of the file
                   contents: ${{ secrets.stripe_apikey }}
                   # The mode of writing to use: `overwrite`, `append`, or `preserve`.
                   write-mode: overwrite # optional, default is preserve
-                  
+
             - name: Write email api key
               uses: DamianReeves/write-file-action@v1.2
               with:
-                  path: ./sckc/sckc.api/data/sendgrid_apikey.data
+                  path: ./sckc/sckc.api/deploy/data/sendgrid_apikey.data
                   # The contents of the file
                   contents: ${{ secrets.sendgrid_apikey }}
                   # The mode of writing to use: `overwrite`, `append`, or `preserve`.
@@ -85,20 +71,6 @@ jobs:
             # TODO: run unit test
             #
             #
-
-            - name: Copy sckc.api deployment files
-              run: |
-                  cd ./sckc/sckc.api
-                  mkdir deploy
-                  mkdir deploy\data
-                  mkdir deploy\Resources
-                  ((Get-Content -path RewriteRules.config -Raw) -replace '{{deployment_path}}','${{ inputs.deployment_path }}') | Set-Content -Path RewriteRules.config
-                  Copy-Item "global.asax" -Destination ".\deploy\" -Force
-                  Copy-Item "web.config" -Destination ".\deploy\" -Force
-                  Copy-Item "RewriteRules.config" -Destination ".\deploy\" -Force
-                  Copy-Item ".\bin\*" -Destination ".\deploy\bin" -Recurse -Force
-                  Copy-Item ".\data\*" -Destination ".\deploy\data" -Recurse -Force
-                  Copy-Item ".\Resources\*" -Destination ".\deploy\Resources" -Recurse -Force
 
             - name: Upload Artifact
               uses: actions/upload-artifact@v4.6.2

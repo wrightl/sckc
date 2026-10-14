@@ -1,12 +1,15 @@
-﻿using System.Web.Http;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace sckc.api.APIs
 {
-    public class HealthController : ApiController
+    [ApiController]
+    [Route("api/[controller]")]
+    public class HealthController : ControllerBase
 	{
-		public IHttpActionResult Get()
+		[HttpGet]
+		public IActionResult Get()
         {
-			return Json("Healthy");
+			return Ok("Healthy");
         }
 	}
 }

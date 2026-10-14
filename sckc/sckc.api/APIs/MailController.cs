@@ -2,15 +2,16 @@
 using sckc.api.Models;
 using SendGrid.Helpers.Mail;
 using System.Threading.Tasks;
-using System.Web.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace sckc.api.APIs
 {
-    public class MailController : ApiController
+    [ApiController]
+    public class MailController : ControllerBase
     {
         [Route("api/ContactUs")]
         [HttpPost]
-        public async Task<IHttpActionResult> SendContactUsMail(ContactUsDto info)
+        public async Task<IActionResult> SendContactUsMail(ContactUsDto info)
         {
             var from = new EmailAddress(Constants.ContactUsEmailAddress, Constants.ContactUsEmailAddress);
             var to = new EmailAddress(Constants.ContactUsEmailAddress, Constants.ContactUsEmailAddress);
@@ -23,7 +24,7 @@ namespace sckc.api.APIs
 
             if (response)
                 return Ok("Thanks for getting in touch. Someone will reply to your email soon");
-            return InternalServerError();
+            return StatusCode(StatusCodes.Status500InternalServerError);
         }
     }
 }

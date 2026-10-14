@@ -1,17 +1,20 @@
-﻿using sckc.api.Models;
+﻿using sckc.api.Extensions;
+using sckc.api.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Web;
-using System.Web.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace sckc.api.APIs
 {
-    public class GalleryController : ApiController
+    [ApiController]
+    [Route("api/[controller]")]
+    public class GalleryController : ControllerBase
     {
         // GET api/<controller>
-        public IHttpActionResult Get()
+        [HttpGet]
+        public IActionResult Get()
         {
             string str;
             List<PhotoSet> photoSets = new List<PhotoSet>();
@@ -28,9 +31,9 @@ namespace sckc.api.APIs
                     string[] files = Directory.GetFiles(str2);
                     if (files.Length != 0)
                     {
-                        if (!File.Exists(Path.Combine(str2, "primary.jpg")))
+                        if (!System.IO.File.Exists(Path.Combine(str2, "primary.jpg")))
                         {
-                            str = (!File.Exists(Path.Combine(str2, "primary.jpeg")) ? Path.GetFileName(files[0]) : "primary.jpeg");
+                            str = (!System.IO.File.Exists(Path.Combine(str2, "primary.jpeg")) ? Path.GetFileName(files[0]) : "primary.jpeg");
                         }
                         else
                         {
@@ -49,10 +52,11 @@ namespace sckc.api.APIs
                 }
             }
             photoSets.Sort((PhotoSet x, PhotoSet y) => (!x.created.Equals(y.created) ? y.created.CompareTo(x.created) : 0));
-            return Json(photoSets);
+            return Ok(photoSets);
         }
 
-        public IHttpActionResult GetPhotoSet(string id)
+        [HttpGet("{id}")]
+        public IActionResult GetPhotoSet(string id)
         {
             string baseFolder = GetBaseFolder();
             string folder = Path.Combine(baseFolder, id);
@@ -65,12 +69,12 @@ namespace sckc.api.APIs
             DateTime dt = DateTime.Parse(id.Split('@')[0]);
             string title = id.Split('@')[1].Replace("_", " ");
             var photos = Directory.GetFiles(folder).Select(file => string.Format("gallery/{0}/{1}", id, Path.GetFileName(file)));
-            return Json(new { Date = dt, Title = title, Photos = photos });
+            return Ok(new { Date = dt, Title = title, Photos = photos });
         }
 
         private string GetBaseFolder()
         {
-            string folder = HttpContext.Current.Server.MapPath("~/gallery");
+            string folder = Helper.MapPath("gallery");
 
             if (!Directory.Exists(folder))
             {

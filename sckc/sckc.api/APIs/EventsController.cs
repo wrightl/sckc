@@ -8,34 +8,38 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Web.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace sckc.api.APIs
 {
-    public class EventsController : ApiController
+    [ApiController]
+    public class EventsController : ControllerBase
 	{
         [Route("api/GetEvents")]
-        public IHttpActionResult GetEvents(int count = 10)
+        [HttpGet]
+        public IActionResult GetEvents(int count = 10)
 		{
 			count = validateCount(count);
 
-			return Json(CalendarServiceHelper.GetClubEvents(count));
+			return Ok(CalendarServiceHelper.GetClubEvents(count));
 		}
 
 		[Route("api/GetEventsOfType")]
-        public IHttpActionResult GetEventsOfType(string type, int count = 5)
+		[HttpGet]
+        public IActionResult GetEventsOfType(string type, int count = 5)
 		{
 			count = validateCount(count);
 
 			var events = CalendarServiceHelper.GetClubEvents().Where(ev => ev.EventType.ToLowerInvariant().Contains(type)).Take(count);
 
-			return Json(events);
+			return Ok(events);
 		}
 
         [Route("api/GetGroupedEvents")]
-        public IHttpActionResult GetGroupedEvent()
+        [HttpGet]
+        public IActionResult GetGroupedEvent()
 		{
-			return Json(CalendarServiceHelper.GetGroupedClubEvents());
+			return Ok(CalendarServiceHelper.GetGroupedClubEvents());
 		}
 
 		private int validateCount(int count)

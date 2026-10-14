@@ -8,11 +8,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace sckc.api.APIs
 {
-    public class BookingsController : ApiController
+    [ApiController]
+    public class BookingsController : ControllerBase
     {
         public BookingsController()
         {
@@ -21,7 +22,7 @@ namespace sckc.api.APIs
 
         [Route("api/Book")]
         [HttpPost]
-        public async Task<IHttpActionResult> Book(BookingDto info)
+        public async Task<IActionResult> Book(BookingDto info)
         {
             if (info.payNow)
             {
@@ -65,7 +66,7 @@ namespace sckc.api.APIs
 
         [Route("api/BookingEnquiry")]
         [HttpPost]
-        public async Task<IHttpActionResult> SendBookingEnquiry(BookingRequestDto info)
+        public async Task<IActionResult> SendBookingEnquiry(BookingRequestDto info)
         {
             var from = new EmailAddress(Constants.BookingRequestEmailAddress, Constants.BookingRequestEmailName);
             var to = new EmailAddress(Constants.BookingRequestEmailAddress, Constants.BookingRequestEmailName);
@@ -99,14 +100,14 @@ namespace sckc.api.APIs
 
                 return Ok("Thanks for getting in touch. Someone will reply to your email soon");
             }
-            return InternalServerError();
+            return StatusCode(StatusCodes.Status500InternalServerError);
         }
 
         private async Task<string> payNow(BookingDto info)
         {
             var items = ConvertItems(info.Items);
 
-            var uri = (new Uri(this.ControllerContext.Request.Headers.Referrer, "./")).ToString();
+            var uri = (new Uri(new Uri(Request.Headers.Referer.ToString()), "./")).ToString();
 
             var options = new SessionCreateOptions
             {
