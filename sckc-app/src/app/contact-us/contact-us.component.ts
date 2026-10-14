@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { UntypedFormControl, Validators } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -9,16 +9,16 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./contact-us.component.scss'],
 })
 export class ContactUsComponent {
-  name = new FormControl('', [Validators.required]);
-  email = new FormControl('', [Validators.required, Validators.email]);
-  subject = new FormControl('', [Validators.required]);
-  message = new FormControl('', [Validators.required]);
+  name = new UntypedFormControl('', [Validators.required]);
+  email = new UntypedFormControl('', [Validators.required, Validators.email]);
+  subject = new UntypedFormControl('', [Validators.required]);
+  message = new UntypedFormControl('', [Validators.required]);
   error = '';
   response = '';
 
   constructor(private http: HttpClient) {}
 
-  getErrorMessage(field: FormControl) {
+  getErrorMessage(field: UntypedFormControl) {
     if (field.hasError('required')) {
       return 'You must enter a value';
     }

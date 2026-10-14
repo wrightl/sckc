@@ -1,6 +1,6 @@
 // import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { UntypedFormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 // import { environment } from 'src/environments/environment';
@@ -15,10 +15,10 @@ import { BookingService } from '../services/booking.service';
 export class EnquireComponent implements OnInit {
   booking!: CalendarEvent;
 
-  name = new FormControl('', [Validators.required]);
-  telno = new FormControl('');
-  email = new FormControl('', [Validators.required, Validators.email]);
-  message = new FormControl('', [Validators.required]);
+  name = new UntypedFormControl('', [Validators.required]);
+  telno = new UntypedFormControl('');
+  email = new UntypedFormControl('', [Validators.required, Validators.email]);
+  message = new UntypedFormControl('', [Validators.required]);
   error = '';
   response = '';
 
@@ -46,7 +46,7 @@ export class EnquireComponent implements OnInit {
     }
   }
 
-  getErrorMessage(field: FormControl) {
+  getErrorMessage(field: UntypedFormControl) {
     if (field.hasError('required')) {
       return 'You must enter a value';
     }
