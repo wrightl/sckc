@@ -182,10 +182,10 @@ jobs:
 
             - name: App Check
               env:
-                  APP_URL: ${{ format('http://www.sheffieldcitykayakclub.co.uk/{0}', inputs.deployment_path) }}
+                  APP_URL: ${{ format('http://www.sheffieldcitykayakclub.co.uk/{0}index.html', inputs.deployment_path) }}
                   BASE_HREF: ${{ format('<base href="/{0}"', inputs.deployment_path) }}
               run: |
-                  # Make sure the Angular build for this environment is the one being served
+                  # Make sure the Angular build for this environment (identified by its base href) was deployed
                   for attempt in 1 2 3; do
                       body=$(curl -s --max-time 30 "$APP_URL" || true)
                       if [[ "$body" == *"$BASE_HREF"* ]]; then
