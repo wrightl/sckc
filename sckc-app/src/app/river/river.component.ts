@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { RIVERINFO } from '../data/river';
 
 @Component({
-  selector: 'app-river',
-  templateUrl: './river.component.html',
-  styleUrls: ['./river.component.scss']
+    selector: 'app-river',
+    templateUrl: './river.component.html',
+    styleUrls: ['./river.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class RiverComponent {
 

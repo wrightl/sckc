@@ -1,10 +1,11 @@
 <mat-card>
-  <img
-    *ngIf="imageSource"
-    mat-card-image
-    src="{{ imageSource }}"
-    alt="{{ title }} image"
-  />
+  @if (imageSource) {
+    <img
+      mat-card-image
+      src="{{ imageSource }}"
+      alt="{{ title }} image"
+      />
+  }
   <mat-card-header>
     <mat-card-title>{{ title }}</mat-card-title>
   </mat-card-header>

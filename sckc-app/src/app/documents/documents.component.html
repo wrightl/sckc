@@ -1,7 +1,9 @@
 <app-page-title title="Documents & Policies"></app-page-title>
 
 <mat-list>
-  <mat-list-item *ngFor="let document of documents">
-    <a href="{{ document.link }}">{{ document.name }}</a>
-  </mat-list-item>
+  @for (document of documents; track document) {
+    <mat-list-item>
+      <a href="{{ document.link }}">{{ document.name }}</a>
+    </mat-list-item>
+  }
 </mat-list>

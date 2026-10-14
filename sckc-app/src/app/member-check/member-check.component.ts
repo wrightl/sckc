@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { CalendarEvent } from '../models/calendar-event';
 
 @Component({
-  selector: 'app-member-check',
-  templateUrl: './member-check.component.html',
-  styleUrls: ['./member-check.component.scss']
+    selector: 'app-member-check',
+    templateUrl: './member-check.component.html',
+    styleUrls: ['./member-check.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class MemberCheckComponent implements OnInit {
 

@@ -1,6 +1,6 @@
-import { DOCUMENT } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+
+import { Component, Inject, OnInit, DOCUMENT, ChangeDetectionStrategy } from '@angular/core';
+import { UntypedFormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { MEMBERSHIP_INFO } from '../data/membership';
@@ -10,9 +10,11 @@ import { CalendarEvent } from '../models/calendar-event';
 import { BookingService } from '../services/booking.service';
 
 @Component({
-  selector: 'app-booking',
-  templateUrl: './booking.component.html',
-  styleUrls: ['./booking.component.scss'],
+    selector: 'app-booking',
+    templateUrl: './booking.component.html',
+    styleUrls: ['./booking.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class BookingComponent implements OnInit {
   booking!: CalendarEvent;
@@ -23,12 +25,12 @@ export class BookingComponent implements OnInit {
   displayedColumns: string[] = ['description', 'cost', 'quantity', 'total'];
   bookingItems: BookingItem[] = [];
 
-  name = new FormControl('', [Validators.required]);
-  number = new FormControl('');
-  email = new FormControl('', [Validators.required, Validators.email]);
-  memberno = new FormControl('', [Validators.required]);
-  telno = new FormControl('');
-  message = new FormControl('');
+  name = new UntypedFormControl('', [Validators.required]);
+  number = new UntypedFormControl('');
+  email = new UntypedFormControl('', [Validators.required, Validators.email]);
+  memberno = new UntypedFormControl('', [Validators.required]);
+  telno = new UntypedFormControl('');
+  message = new UntypedFormControl('');
   error = '';
   response = '';
 
@@ -71,7 +73,7 @@ export class BookingComponent implements OnInit {
     this.bookingItems.forEach((x) => (x.quantity = 0));
   }
 
-  getErrorMessage(field: FormControl) {
+  getErrorMessage(field: UntypedFormControl) {
     if (field.hasError('required')) {
       return 'You must enter a value';
     }

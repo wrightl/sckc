@@ -24,5 +24,16 @@ mat-spinner {
   gap: 10px;
 }
 
-/* Importing Bootstrap SCSS file. */
-@import "~bootstrap/scss/bootstrap";
+
+/* Bootstrap 5 underlines links by default; keep the Bootstrap 4 behaviour of underlining on hover only */
+body a {
+  text-decoration: none;
+}
+body a:hover {
+  text-decoration: underline;
+}
+
+/* Material's MDC cards inherit the page font size; keep the pre-MDC 14px card text */
+.mat-mdc-card-content {
+  font-size: 14px;
+}
