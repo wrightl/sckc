@@ -41,32 +41,18 @@ jobs:
               working-directory: ./sckc
               run: dotnet publish sckc.api/sckc.api.csproj -c Release -o sckc.api/deploy
 
-            - name: Write google secrets file
-              uses: DamianReeves/write-file-action@v1.3
-              with:
-                  path: ./sckc/sckc.api/deploy/data/sckc.data
-                  # The contents of the file
-                  contents: ${{ secrets.google_calendar_creds }}
-                  # The mode of writing to use: `overwrite`, `append`, or `preserve`.
-                  write-mode: overwrite # optional, default is preserve
-
-            - name: Write stripe apikey file
-              uses: DamianReeves/write-file-action@v1.3
-              with:
-                  path: ./sckc/sckc.api/deploy/data/stripe_apikey.data
-                  # The contents of the file
-                  contents: ${{ secrets.stripe_apikey }}
-                  # The mode of writing to use: `overwrite`, `append`, or `preserve`.
-                  write-mode: overwrite # optional, default is preserve
-
-            - name: Write email api key
-              uses: DamianReeves/write-file-action@v1.3
-              with:
-                  path: ./sckc/sckc.api/deploy/data/sendgrid_apikey.data
-                  # The contents of the file
-                  contents: ${{ secrets.sendgrid_apikey }}
-                  # The mode of writing to use: `overwrite`, `append`, or `preserve`.
-                  write-mode: overwrite # optional, default is preserve
+            - name: Write secret files
+              shell: pwsh
+              env:
+                  GOOGLE_CALENDAR_CREDS: ${{ secrets.google_calendar_creds }}
+                  STRIPE_APIKEY: ${{ secrets.stripe_apikey }}
+                  SENDGRID_APIKEY: ${{ secrets.sendgrid_apikey }}
+              run: |
+                  $dataDir = Join-Path $PWD 'sckc/sckc.api/deploy/data'
+                  New-Item -ItemType Directory -Force -Path $dataDir | Out-Null
+                  [IO.File]::WriteAllText((Join-Path $dataDir 'sckc.data'), $env:GOOGLE_CALENDAR_CREDS)
+                  [IO.File]::WriteAllText((Join-Path $dataDir 'stripe_apikey.data'), $env:STRIPE_APIKEY)
+                  [IO.File]::WriteAllText((Join-Path $dataDir 'sendgrid_apikey.data'), $env:SENDGRID_APIKEY)
 
             # TODO: run unit test
             #
