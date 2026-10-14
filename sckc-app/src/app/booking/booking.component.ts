@@ -10,9 +10,10 @@ import { CalendarEvent } from '../models/calendar-event';
 import { BookingService } from '../services/booking.service';
 
 @Component({
-  selector: 'app-booking',
-  templateUrl: './booking.component.html',
-  styleUrls: ['./booking.component.scss'],
+    selector: 'app-booking',
+    templateUrl: './booking.component.html',
+    styleUrls: ['./booking.component.scss'],
+    standalone: false
 })
 export class BookingComponent implements OnInit {
   booking!: CalendarEvent;

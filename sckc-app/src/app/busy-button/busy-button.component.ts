@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-busy-button',
-  templateUrl: './busy-button.component.html',
-  styleUrls: ['./busy-button.component.scss'],
+    selector: 'app-busy-button',
+    templateUrl: './busy-button.component.html',
+    styleUrls: ['./busy-button.component.scss'],
+    standalone: false
 })
 export class BusyButtonComponent {
   @Input() busy = false;

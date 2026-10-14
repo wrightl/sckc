@@ -4,9 +4,10 @@ import { PhotoSet } from '../models/photo-set';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-photos',
-  templateUrl: './photos.component.html',
-  styleUrls: ['./photos.component.scss']
+    selector: 'app-photos',
+    templateUrl: './photos.component.html',
+    styleUrls: ['./photos.component.scss'],
+    standalone: false
 })
 export class PhotosComponent implements OnInit {
 

@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-activities',
-  templateUrl: './activities.component.html',
-  styleUrls: ['./activities.component.scss'],
+    selector: 'app-activities',
+    templateUrl: './activities.component.html',
+    styleUrls: ['./activities.component.scss'],
+    standalone: false
 })
 export class ActivitiesComponent {
   constructor() {}

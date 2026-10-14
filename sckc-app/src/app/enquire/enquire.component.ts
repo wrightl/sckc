@@ -8,9 +8,10 @@ import { CalendarEvent } from '../models/calendar-event';
 import { BookingService } from '../services/booking.service';
 
 @Component({
-  selector: 'app-enquire',
-  templateUrl: './enquire.component.html',
-  styleUrls: ['./enquire.component.scss'],
+    selector: 'app-enquire',
+    templateUrl: './enquire.component.html',
+    styleUrls: ['./enquire.component.scss'],
+    standalone: false
 })
 export class EnquireComponent implements OnInit {
   booking!: CalendarEvent;

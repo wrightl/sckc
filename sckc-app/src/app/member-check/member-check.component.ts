@@ -4,9 +4,10 @@ import { Router } from '@angular/router';
 import { CalendarEvent } from '../models/calendar-event';
 
 @Component({
-  selector: 'app-member-check',
-  templateUrl: './member-check.component.html',
-  styleUrls: ['./member-check.component.scss']
+    selector: 'app-member-check',
+    templateUrl: './member-check.component.html',
+    styleUrls: ['./member-check.component.scss'],
+    standalone: false
 })
 export class MemberCheckComponent implements OnInit {
 

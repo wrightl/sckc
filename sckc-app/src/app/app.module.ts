@@ -92,7 +92,7 @@ import { ShePaddlesComponent } from './she-paddles/she-paddles.component';
         ShePaddlesComponent,
     ],
     exports: [MatInputModule],
-    bootstrap: [AppComponent], imports: [BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    bootstrap: [AppComponent], imports: [BrowserModule,
         AppRoutingModule,
         FormsModule,
         ReactiveFormsModule,

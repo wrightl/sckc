@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { PoolInfo, POOLINFO } from '../data/pool';
 
 @Component({
-  selector: 'app-pool',
-  templateUrl: './pool.component.html',
-  styleUrls: ['./pool.component.scss']
+    selector: 'app-pool',
+    templateUrl: './pool.component.html',
+    styleUrls: ['./pool.component.scss'],
+    standalone: false
 })
 export class PoolComponent {
 

@@ -4,9 +4,10 @@ import { UntypedFormControl, Validators } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-contact-us',
-  templateUrl: './contact-us.component.html',
-  styleUrls: ['./contact-us.component.scss'],
+    selector: 'app-contact-us',
+    templateUrl: './contact-us.component.html',
+    styleUrls: ['./contact-us.component.scss'],
+    standalone: false
 })
 export class ContactUsComponent {
   name = new UntypedFormControl('', [Validators.required]);
