@@ -154,18 +154,23 @@ jobs:
                   log-level: verbose
 
             - name: URL Health Check
-              uses: Jtalk/url-health-check-action@v5
-              with:
-                  # Target URL(s), split by |
-                  url: ${{ format('http://www.sheffieldcitykayakclub.co.uk/{0}api/health', inputs.deployment_path) }}
-                  # Number of unsuccessful attempts to call URL before giving up
-                  max-attempts: 3 # optional, default is 1
-                  # Time between attempts (e.g. 3s, 1m)
-                  retry-delay: 30s # optional, default is 3s
-                  # Follow redirected location in case request resulted in 3XX status code
-                  follow-redirect: false # optional, default is false
-                  # Retry all errors, including 4xx (see man curl on --retry-all-errors).
-                  
+              env:
+                  HEALTH_URL: ${{ format('http://www.sheffieldcitykayakclub.co.uk/{0}api/health', inputs.deployment_path) }}
+              run: |
+                  # The API returns the JSON string "Healthy". Check the body, not just the status code: the
+                  # site's SPA fallback answers unknown paths with index.html and a 200.
+                  for attempt in 1 2 3; do
+                      body=$(curl -s --max-time 30 "$HEALTH_URL" || true)
+                      if [ "$body" = '"Healthy"' ]; then
+                          echo "Health check passed: $HEALTH_URL"
+                          exit 0
+                      fi
+                      echo "Attempt $attempt: unexpected response from $HEALTH_URL: $(printf '%s' "$body" | tr -s '\n' ' ' | cut -c1-150)"
+                      [ "$attempt" -lt 3 ] && sleep 30
+                  done
+                  echo "::error::Health check failed for $HEALTH_URL"
+                  exit 1
+
     cleanup:
         needs: [angular-app, api, ftp]
         if: always()
