@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CalendarEvent, CalendarEventMonth } from '../models/calendar-event';
 import { EventsService } from '../services/events.service';
 
@@ -6,6 +6,7 @@ import { EventsService } from '../services/events.service';
     selector: 'app-event-calendar',
     templateUrl: './event-calendar.component.html',
     styleUrls: ['./event-calendar.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class EventCalendarComponent implements OnInit {

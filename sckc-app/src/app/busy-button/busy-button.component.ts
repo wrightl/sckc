@@ -1,9 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'app-busy-button',
     templateUrl: './busy-button.component.html',
     styleUrls: ['./busy-button.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class BusyButtonComponent {
@@ -11,7 +12,6 @@ export class BusyButtonComponent {
   @Input() colour = 'accent';
   @Input() label = '';
 
-  // eslint-disable-next-line @angular-eslint/no-output-native
   @Output() clickButton: EventEmitter<any> = new EventEmitter();
 
   onClick() {

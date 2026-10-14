@@ -6,7 +6,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { APP_BASE_HREF } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi, withXhr } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -115,6 +115,6 @@ import { ShePaddlesComponent } from './she-paddles/she-paddles.component';
         MatTableModule,
         MatToolbarModule,
         MatTreeModule,
-        NgbCarouselModule], providers: [{ provide: APP_BASE_HREF, useValue: environment.baseHref }, provideHttpClient(withInterceptorsFromDi())] })
+        NgbCarouselModule], providers: [{ provide: APP_BASE_HREF, useValue: environment.baseHref }, provideHttpClient(withXhr(), withInterceptorsFromDi())] })
 export class AppModule {}
 //{ provide: APP_BASE_HREF, useValue: '/app' }

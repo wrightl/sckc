@@ -1,6 +1,6 @@
 # SckcApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.18.
+This project uses [Angular CLI](https://github.com/angular/angular-cli) version 22 and requires Node.js 24 (see `.nvmrc`).
 
 ## Development server
 
@@ -12,15 +12,11 @@ Run `ng generate component component-name -m app` to generate a new component. Y
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use `npm run build:production` for a production build.
 
 ## Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
 ## Further help
 

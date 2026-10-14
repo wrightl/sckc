@@ -1,5 +1,5 @@
 
-import { Component, Inject, OnInit, DOCUMENT } from '@angular/core';
+import { Component, Inject, OnInit, DOCUMENT, ChangeDetectionStrategy } from '@angular/core';
 import { UntypedFormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -13,6 +13,7 @@ import { BookingService } from '../services/booking.service';
     selector: 'app-booking',
     templateUrl: './booking.component.html',
     styleUrls: ['./booking.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class BookingComponent implements OnInit {

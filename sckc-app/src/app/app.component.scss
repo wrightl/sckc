@@ -16,6 +16,11 @@
     border-radius: 0;
     margin-right: 20px;
 
+    // keep the pre-MDC button spacing
+    .mat-mdc-button {
+      padding: 0 16px;
+    }
+
     .mat-mdc-button.active {
       border-bottom: 2px solid white;
       border-radius: 0;

@@ -1,16 +1,9 @@
-// This file is required by karma.conf.js and loads recursively all the .spec and framework files
-
-import 'zone.js/testing';
 import { getTestBed } from '@angular/core/testing';
-import {
-  BrowserDynamicTestingModule,
-  platformBrowserDynamicTesting
-} from '@angular/platform-browser-dynamic/testing';
+import { BrowserTestingModule, platformBrowserTesting } from '@angular/platform-browser/testing';
 
-// First, initialize the Angular testing environment.
-getTestBed().initTestEnvironment(
-  BrowserDynamicTestingModule,
-  platformBrowserDynamicTesting(), {
-    teardown: { destroyAfterEach: false }
-}
-);
+// The specs are shallow CLI-generated tests that don't import child components or Material modules,
+// so keep the pre-v21 behaviour of not failing on unknown elements/properties.
+getTestBed().initTestEnvironment(BrowserTestingModule, platformBrowserTesting(), {
+  errorOnUnknownElements: false,
+  errorOnUnknownProperties: false,
+});

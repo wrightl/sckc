@@ -1,5 +1,5 @@
 // import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { UntypedFormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -11,6 +11,7 @@ import { BookingService } from '../services/booking.service';
     selector: 'app-enquire',
     templateUrl: './enquire.component.html',
     styleUrls: ['./enquire.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class EnquireComponent implements OnInit {
