@@ -63,10 +63,17 @@ var staticFiles = new StaticFileOptions { FileProvider = app.Environment.Content
 app.UseDefaultFiles(new DefaultFilesOptions { FileProvider = app.Environment.ContentRootFileProvider });
 app.UseStaticFiles(staticFiles);
 
+// Routing has to come after the static file middleware, otherwise the fallback endpoints below are chosen before
+// UseDefaultFiles can map a folder request such as /app/ to its index.html
+app.UseRouting();
+
 app.MapControllers();
 
-// Angular routes: anything that isn't an API call or a file falls back to the app's index.html
+// Angular routes: anything that isn't an API call or a file falls back to the app's index.html. The staged build is
+// deployed under app/ (and uses this API), so its routes fall back to app/index.html.
 app.MapFallbackToFile("{*path:nonfile}", "index.html", staticFiles);
+app.MapFallbackToFile("app/{*path:nonfile}", "app/index.html", staticFiles);
 app.MapFallback("/api/{**path}", () => Results.NotFound());
+app.MapFallback("/app/api/{**path}", () => Results.NotFound());
 
 app.Run();

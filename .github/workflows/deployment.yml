@@ -9,6 +9,11 @@ on:
             deployment_path:
                 required: true
                 type: string
+            deploy_api:
+                description: Build and deploy the API. Staging only deploys the Angular app, which uses the production API.
+                required: false
+                type: boolean
+                default: true
         secrets:
             google_calendar_creds:
                 required: true
@@ -25,6 +30,7 @@ on:
 jobs:
     # build api
     api:
+        if: ${{ inputs.deploy_api }}
         runs-on: windows-latest
 
         steps:
@@ -109,7 +115,8 @@ jobs:
     # deploy main webapp to host
     ftp:
         needs: [angular-app, api]
-        if: ${{ true }} # disable for now?
+        # still deploy when the api job was skipped (deploy_api: false)
+        if: ${{ !cancelled() && needs.angular-app.result == 'success' && contains(fromJSON('["success", "skipped"]'), needs.api.result) }}
         # The type of runner that the job will run on
         runs-on: ubuntu-latest
 
@@ -137,6 +144,7 @@ jobs:
                   log-level: verbose # optional
 
             - name: ftp-action-api
+              if: ${{ inputs.deploy_api }}
               uses: SamKirkland/FTP-Deploy-Action@v4.4.0
               with:
                   # FTP host
@@ -154,6 +162,7 @@ jobs:
                   log-level: verbose
 
             - name: URL Health Check
+              if: ${{ inputs.deploy_api }}
               env:
                   HEALTH_URL: ${{ format('http://www.sheffieldcitykayakclub.co.uk/{0}api/health', inputs.deployment_path) }}
               run: |
@@ -169,6 +178,24 @@ jobs:
                       [ "$attempt" -lt 3 ] && sleep 30
                   done
                   echo "::error::Health check failed for $HEALTH_URL"
+                  exit 1
+
+            - name: App Check
+              env:
+                  APP_URL: ${{ format('http://www.sheffieldcitykayakclub.co.uk/{0}', inputs.deployment_path) }}
+                  BASE_HREF: ${{ format('<base href="/{0}"', inputs.deployment_path) }}
+              run: |
+                  # Make sure the Angular build for this environment is the one being served
+                  for attempt in 1 2 3; do
+                      body=$(curl -s --max-time 30 "$APP_URL" || true)
+                      if [[ "$body" == *"$BASE_HREF"* ]]; then
+                          echo "App check passed: $APP_URL"
+                          exit 0
+                      fi
+                      echo "Attempt $attempt: $APP_URL did not contain $BASE_HREF"
+                      [ "$attempt" -lt 3 ] && sleep 30
+                  done
+                  echo "::error::App check failed for $APP_URL"
                   exit 1
 
     cleanup:
