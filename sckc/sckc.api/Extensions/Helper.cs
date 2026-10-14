@@ -4,12 +4,13 @@ using SendGrid.Helpers.Mail;
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace sckc.api.Extensions
 {
     public static class Helper
     {
+		public static string ContentRootPath { get; set; } = AppContext.BaseDirectory;
+
 		public static string MapPath(string path)
 		{
 			if (path.StartsWith("/"))
@@ -19,13 +20,12 @@ namespace sckc.api.Extensions
 			string text = path;
 			char directorySeparatorChar = Path.DirectorySeparatorChar;
 			path = text.Replace("/", directorySeparatorChar.ToString());
-			string physicalApplicationPath = HttpContext.Current.Request.PhysicalApplicationPath;
-			return Path.Combine(physicalApplicationPath, path);
+			return Path.Combine(ContentRootPath, path);
 		}
 
 		public static async Task<bool> SendMail(SendGridMessage message)
 		{
-			var apiKey = File.ReadAllText(Helper.MapPath("data/sendgrid_apikey.data"));
+			var apiKey = File.ReadAllText(Helper.MapPath("data/sendgrid_apikey.data")).Trim();
 			var client = new SendGridClient(apiKey);
 			var response = await client.SendEmailAsync(message);
 
