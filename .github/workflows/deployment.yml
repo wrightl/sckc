@@ -30,10 +30,10 @@ jobs:
         steps:
             # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
             - name: Checkout code
-              uses: actions/checkout@v3.5.1
+              uses: actions/checkout@v7
 
             - name: Setup .NET
-              uses: actions/setup-dotnet@v4
+              uses: actions/setup-dotnet@v6
               with:
                   global-json-file: ./sckc/global.json
 
@@ -42,7 +42,7 @@ jobs:
               run: dotnet publish sckc.api/sckc.api.csproj -c Release -o sckc.api/deploy
 
             - name: Write google secrets file
-              uses: DamianReeves/write-file-action@v1.2
+              uses: DamianReeves/write-file-action@v1.3
               with:
                   path: ./sckc/sckc.api/deploy/data/sckc.data
                   # The contents of the file
@@ -51,7 +51,7 @@ jobs:
                   write-mode: overwrite # optional, default is preserve
 
             - name: Write stripe apikey file
-              uses: DamianReeves/write-file-action@v1.2
+              uses: DamianReeves/write-file-action@v1.3
               with:
                   path: ./sckc/sckc.api/deploy/data/stripe_apikey.data
                   # The contents of the file
@@ -60,7 +60,7 @@ jobs:
                   write-mode: overwrite # optional, default is preserve
 
             - name: Write email api key
-              uses: DamianReeves/write-file-action@v1.2
+              uses: DamianReeves/write-file-action@v1.3
               with:
                   path: ./sckc/sckc.api/deploy/data/sendgrid_apikey.data
                   # The contents of the file
@@ -73,7 +73,7 @@ jobs:
             #
 
             - name: Upload Artifact
-              uses: actions/upload-artifact@v4.6.2
+              uses: actions/upload-artifact@v7
               with:
                   name: published_api
                   path: ./sckc/sckc.api/deploy
@@ -87,10 +87,10 @@ jobs:
         # Steps represent a sequence of tasks that will be executed as part of the job
         steps:
             # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-            - uses: actions/checkout@v3.5.1
+            - uses: actions/checkout@v7
 
             - name: Setup Node.js environment
-              uses: actions/setup-node@v4
+              uses: actions/setup-node@v7
               with:
                   node-version-file: ./sckc-app/.nvmrc
 
@@ -115,7 +115,7 @@ jobs:
               run: npm run test:${{ inputs.env_type }}
 
             - name: Upload Artifact
-              uses: actions/upload-artifact@v4.6.2
+              uses: actions/upload-artifact@v7
               with:
                   name: published_app
                   path: ./sckc-app/dist/sckc-app
@@ -130,10 +130,10 @@ jobs:
         # Steps represent a sequence of tasks that will be executed as part of the job
         steps:
             - name: Download all workflow run artifacts
-              uses: actions/download-artifact@v4.2.1
+              uses: actions/download-artifact@v8
 
             - name: ftp-action-app
-              uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+              uses: SamKirkland/FTP-Deploy-Action@v4.4.0
               with:
                   # FTP host
                   server: ${{ secrets.ftphost}}
@@ -151,7 +151,7 @@ jobs:
                   log-level: verbose # optional
 
             - name: ftp-action-api
-              uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+              uses: SamKirkland/FTP-Deploy-Action@v4.4.0
               with:
                   # FTP host
                   server: ${{ secrets.ftphost}}
@@ -168,7 +168,7 @@ jobs:
                   log-level: verbose
 
             - name: URL Health Check
-              uses: Jtalk/url-health-check-action@v2
+              uses: Jtalk/url-health-check-action@v5
               with:
                   # Target URL(s), split by |
                   url: ${{ format('http://www.sheffieldcitykayakclub.co.uk{0}/api/health', inputs.deployment_path) }}
@@ -188,7 +188,7 @@ jobs:
         steps:
 
             - name: Delete Artifacts
-              uses: GeekyEggo/delete-artifact@v5.1.0
+              uses: GeekyEggo/delete-artifact@v6
               with:
                   # The name of the artifact to delete; multiple names can be supplied on new lines.
                   name: |
