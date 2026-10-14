@@ -110,21 +110,21 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "sckc-app:build"
+            "buildTarget": "sckc-app:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "sckc-app:build:production"
+              "buildTarget": "sckc-app:build:production"
             },
             "local": {
-              "browserTarget": "sckc-app:build:local"
+              "buildTarget": "sckc-app:build:local"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "sckc-app:build"
+            "buildTarget": "sckc-app:build"
           }
         },
         "test": {
