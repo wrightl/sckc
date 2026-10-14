@@ -1,23 +1,26 @@
 <app-page-title title="Photos"></app-page-title>
 
-<mat-spinner *ngIf="!isReady"></mat-spinner>
+@if (!isReady) {
+  <mat-spinner></mat-spinner>
+}
 
 <div class="photosets-container">
-  <div
-    class="photoset-container"
-    *ngFor="let photoset of photoSets"
-    style="background-image: url({{ baseUrl }}{{ photoset.primaryPhotoUrl }});"
-  >
-    <a [routerLink]="['/gallery', photoset.id]">
-      <div class="photoset-info">
-        <!-- <div class="caption-background"></div> -->
-        <h5>{{ photoset.title }}</h5>
-        <h6>{{ photoset.photoCount }} photos</h6>
-      </div>
-    </a>
-  </div>
+  @for (photoset of photoSets; track photoset) {
+    <div
+      class="photoset-container"
+      style="background-image: url({{ baseUrl }}{{ photoset.primaryPhotoUrl }});"
+      >
+      <a [routerLink]="['/gallery', photoset.id]">
+        <div class="photoset-info">
+          <!-- <div class="caption-background"></div> -->
+          <h5>{{ photoset.title }}</h5>
+          <h6>{{ photoset.photoCount }} photos</h6>
+        </div>
+      </a>
+    </div>
+  }
 </div>
-<!-- 
+<!--
 <mat-grid-list cols="2">
   <mat-grid-tile *ngFor="let photoset of photoSets">
     <a [routerLink]="['/gallery', photoset.id]">
@@ -27,14 +30,14 @@
           <mat-card-title>{{ photoset.title }}</mat-card-title>
           <mat-card-subtitle
             >{{ photoset.photoCount }} photos</mat-card-subtitle
-          >
-        </mat-card-header>
-        <img
-          mat-card-image
-          src="{{ baseUrl }}{{ photoset.primaryPhotoUrl }}"
-          alt="Photo of a Shiba Inu"
-        />
-      </mat-card>
-    </a>
-  </mat-grid-tile>
-</mat-grid-list> -->
+            >
+          </mat-card-header>
+          <img
+            mat-card-image
+            src="{{ baseUrl }}{{ photoset.primaryPhotoUrl }}"
+            alt="Photo of a Shiba Inu"
+            />
+        </mat-card>
+      </a>
+    </mat-grid-tile>
+  </mat-grid-list> -->

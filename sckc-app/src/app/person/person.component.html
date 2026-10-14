@@ -8,7 +8,9 @@
       <div [innerHTML]="person.longText"></div>
     </mat-card-content>
     <div class="person-image">
-      <img *ngIf="person.imageUrl" src="{{ person.imageUrl }}" />
+      @if (person.imageUrl) {
+        <img src="{{ person.imageUrl }}" />
+      }
     </div>
   </div>
   <a [href]="getMailTo()">{{ person.emailAddress }}</a>

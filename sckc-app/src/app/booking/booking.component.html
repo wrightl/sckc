@@ -3,12 +3,18 @@
 ></app-page-title>
 
 <div class="form">
-  <div class="error" *ngIf="error" [innerHTML]="error"></div>
-  <div class="response" *ngIf="response">{{ response }}</div>
+  @if (error) {
+    <div class="error" [innerHTML]="error"></div>
+  }
+  @if (response) {
+    <div class="response">{{ response }}</div>
+  }
   <mat-form-field class="full-width" appearance="fill">
     <mat-label>Your Name</mat-label>
     <input matInput placeholder="Your Name" [formControl]="name" required />
-    <mat-error *ngIf="name.invalid">{{ getErrorMessage(name) }}</mat-error>
+    @if (name.invalid) {
+      <mat-error>{{ getErrorMessage(name) }}</mat-error>
+    }
   </mat-form-field>
   <mat-form-field class="full-width" appearance="fill">
     <mat-label>Email</mat-label>
@@ -18,32 +24,40 @@
       [formControl]="email"
       type="email"
       required
-    />
-    <mat-error *ngIf="email.invalid">{{ getErrorMessage(email) }}</mat-error>
+      />
+    @if (email.invalid) {
+      <mat-error>{{ getErrorMessage(email) }}</mat-error>
+    }
   </mat-form-field>
   <mat-form-field class="full-width" appearance="fill">
     <mat-label>Membership Number</mat-label>
     <input matInput [formControl]="memberno" required />
-    <mat-error *ngIf="email.invalid">{{ getErrorMessage(email) }}</mat-error>
+    @if (email.invalid) {
+      <mat-error>{{ getErrorMessage(email) }}</mat-error>
+    }
   </mat-form-field>
   <mat-form-field class="full-width" appearance="fill">
     <mat-label>Contact Telephone</mat-label>
     <input matInput [formControl]="telno" type="tel" />
-    <mat-error *ngIf="telno.invalid">{{ getErrorMessage(telno) }}</mat-error>
+    @if (telno.invalid) {
+      <mat-error>{{ getErrorMessage(telno) }}</mat-error>
+    }
   </mat-form-field>
 
   <mat-form-field class="full-width" appearance="fill">
     <mat-label>Leave a comment</mat-label>
     <textarea matInput placeholder="" [formControl]="message"></textarea>
-    <mat-error *ngIf="message.invalid">{{
-      getErrorMessage(message)
-    }}</mat-error>
+    @if (message.invalid) {
+      <mat-error>{{
+        getErrorMessage(message)
+      }}</mat-error>
+    }
   </mat-form-field>
 
   <div class="booking-items">
     <p class="participants-label">Select Participants:</p>
     <mat-divider></mat-divider>
-    <ng-container *ngFor="let element of bookingItems">
+    @for (element of bookingItems; track element) {
       <div class="booking-card">
         <div class="details">
           <p class="description">{{ element.description }}</p>
@@ -56,7 +70,7 @@
                 aria-label="Decrease Quantity"
                 (click)="decreaseQuantity(element)"
                 [disabled]="disableDecreaseQuantity(element)"
-              >
+                >
                 <mat-icon>remove</mat-icon>
               </button>
               <span class="qty-value">{{ element.quantity }}</span>
@@ -66,7 +80,7 @@
                 aria-label="Increase Quantity"
                 (click)="increaseQuantity(element)"
                 [disabled]="disableIncreaseQuantity(element)"
-              >
+                >
                 <mat-icon>add</mat-icon>
               </button>
             </div>
@@ -77,7 +91,7 @@
         </div>
       </div>
       <mat-divider></mat-divider>
-    </ng-container>
+    }
     <div class="total-row">
       Total: <span>{{ getTotalCost() | currency: "GBP" }}</span>
     </div>
