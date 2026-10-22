@@ -1,18 +1,29 @@
-<mat-card>
-  <mat-card-subtitle>{{ report.trip }}</mat-card-subtitle>
-  <mat-card-subtitle>{{ report.date | date: "longDate" }}</mat-card-subtitle>
-  <mat-card-subtitle>{{ report.organiser }}</mat-card-subtitle>
-  <mat-card-subtitle>{{ report.start }}</mat-card-subtitle>
-  <mat-card-subtitle>{{ report.triplength }}</mat-card-subtitle>
-  <mat-card-subtitle>{{ report.paddlers }}</mat-card-subtitle>
-  <mat-card-subtitle>{{ report.weather }}</mat-card-subtitle>
-  <mat-card-subtitle>{{ report.phrase }}</mat-card-subtitle>
-  @if (report.photos) {
-    <mat-card-subtitle
-      ><a [routerLink]="'/gallery/' + report.photos">{{
-      report.trip
-    }}</a></mat-card-subtitle
-    >
-  }
-  <mat-card-content><div [innerHTML]="report.report"></div></mat-card-content>
-</mat-card>
+<div class="trip-report">
+  <dl class="facts">
+    @for (fact of facts; track fact.label) {
+      @if (fact.value) {
+        <div class="fact">
+          <mat-icon>{{ fact.icon }}</mat-icon>
+          <div>
+            <dt>{{ fact.label }}</dt>
+            <dd>{{ fact.value }}</dd>
+          </div>
+        </div>
+      }
+    }
+  </dl>
+
+  <div class="report-body" [innerHTML]="report.report"></div>
+
+  <div class="report-footer">
+    @if (report.author) {
+      <span class="author">Written by {{ report.author }}</span>
+    }
+    @if (report.photos) {
+      <a mat-stroked-button color="primary" [routerLink]="['/gallery', report.photos]">
+        <mat-icon>photo_library</mat-icon>
+        View photos
+      </a>
+    }
+  </div>
+</div>

@@ -1,43 +1,40 @@
 <div class="app-container">
   <mat-toolbar color="primary" class="toolbar">
-    <h1 class="app-name app-name-medium" routerLink=".">
-      Sheffield City Kayak Club
-    </h1>
-    <h1 class="app-name app-name-small" routerLink=".">SCKC</h1>
+    <a class="app-name" routerLink="/" aria-label="Sheffield City Kayak Club home">
+      <span class="app-name-medium">Sheffield City Kayak Club</span>
+      <span class="app-name-small">SCKC</span>
+    </a>
     <div class="menu-buttons-centre app-menu-medium">
-      <button mat-button routerLink="/home" routerLinkActive="active">
+      <button mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" ariaCurrentWhenActive="page">
         Home
       </button>
-      <button mat-button routerLink="/about" routerLinkActive="active">
+      <button mat-button routerLink="/about" routerLinkActive="active" ariaCurrentWhenActive="page">
         About
       </button>
-      <button mat-button routerLink="/photos" routerLinkActive="active">
+      <button mat-button routerLink="/photos" routerLinkActive="active" ariaCurrentWhenActive="page">
         Gallery
       </button>
-      <button mat-button routerLink="/activities" routerLinkActive="active">
+      <button mat-button routerLink="/activities" routerLinkActive="active" ariaCurrentWhenActive="page">
         Events
       </button>
-      <button mat-button routerLink="/contactus" routerLinkActive="active">
+      <button mat-button routerLink="/contactus" routerLinkActive="active" ariaCurrentWhenActive="page">
         Contact
       </button>
     </div>
     <div class="menu-buttons-centre app-menu-small">
       <button mat-button [matMenuTriggerFor]="menu">Menu</button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item routerLink="/home">Home</button>
-        <button mat-menu-item routerLink="/about">About</button>
-        <button mat-menu-item routerLink="/photos">Gallery</button>
-        <button mat-menu-item routerLink="/activities">Events</button>
-        <button mat-menu-item routerLink="/contactus">Contact</button>
+        <button mat-menu-item routerLink="/" routerLinkActive="active-menu-item" [routerLinkActiveOptions]="{ exact: true }" ariaCurrentWhenActive="page">Home</button>
+        <button mat-menu-item routerLink="/about" routerLinkActive="active-menu-item" ariaCurrentWhenActive="page">About</button>
+        <button mat-menu-item routerLink="/photos" routerLinkActive="active-menu-item" ariaCurrentWhenActive="page">Gallery</button>
+        <button mat-menu-item routerLink="/activities" routerLinkActive="active-menu-item" ariaCurrentWhenActive="page">Events</button>
+        <button mat-menu-item routerLink="/contactus" routerLinkActive="active-menu-item" ariaCurrentWhenActive="page">Contact</button>
       </mat-menu>
-    </div>
-    <div class="menu-buttons-right">
-      <button mat-flat-button color="accent" routerLink="events">Book</button>
     </div>
   </mat-toolbar>
 
-  <div class="router-container">
+  <main class="router-container">
     <router-outlet></router-outlet>
-  </div>
+  </main>
   <app-footer></app-footer>
 </div>

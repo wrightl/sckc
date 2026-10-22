@@ -35,10 +35,13 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.scss",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+              "src/styles.scss"
             ],
+            "stylePreprocessorOptions": {
+              "sass": {
+                "silenceDeprecations": ["import", "global-builtin", "color-functions", "if-function"]
+              }
+            },
             "scripts": [],
             "extractLicenses": false,
             "sourceMap": true,
@@ -104,6 +107,14 @@
                   "with": "src/environments/environment.local.ts"
                 }
               ]
+            },
+            "ngrok": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.ngrok.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": ""
@@ -111,7 +122,8 @@
         "serve": {
           "builder": "@angular/build:dev-server",
           "options": {
-            "buildTarget": "sckc-app:build"
+            "buildTarget": "sckc-app:build",
+            "allowedHosts": [".ngrok-free.dev"]
           },
           "configurations": {
             "production": {
@@ -119,6 +131,10 @@
             },
             "local": {
               "buildTarget": "sckc-app:build:local"
+            },
+            "ngrok": {
+              "buildTarget": "sckc-app:build:ngrok",
+              "proxyConfig": "proxy.conf.json"
             }
           }
         },
@@ -152,10 +168,13 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.scss",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+              "src/styles.scss"
             ],
+            "stylePreprocessorOptions": {
+              "sass": {
+                "silenceDeprecations": ["import", "global-builtin", "color-functions", "if-function"]
+              }
+            },
             "scripts": []
           }
         },
@@ -174,7 +193,8 @@
   "cli": {
     "schematicCollections": [
       "@angular-eslint/schematics"
-    ]
+    ],
+    "analytics": false
   },
   "schematics": {
     "@angular-eslint/schematics:application": {

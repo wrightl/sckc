@@ -1,0 +1,25 @@
+<app-page-title
+  title="Sheffield City Kayak Club"
+  keywords="kayak,canoe,paddling,sheffield,club"
+></app-page-title>
+
+<div class="landing-container">
+  <img class="hero" [src]="heroImage" alt="Club members paddling" />
+
+  <div class="landing-choices">
+    <a class="landing-choice" routerLink="/new-to-the-club">
+      <span class="landing-choice-title">New to the club?</span>
+      <span class="landing-choice-text">
+        Find out how to try paddling with us, what to bring and how to join.
+      </span>
+      <span class="landing-choice-cta">Start here &rarr;</span>
+    </a>
+    <a class="landing-choice" routerLink="/home">
+      <span class="landing-choice-title">Club members</span>
+      <span class="landing-choice-text">
+        Sessions, trips and what's going on at the club.
+      </span>
+      <span class="landing-choice-cta">Go to the club homepage &rarr;</span>
+    </a>
+  </div>
+</div>

@@ -1,6 +1,48 @@
+:host {
+  display: block;
+}
+
+.info-card-link {
+  display: block;
+  height: 100%;
+  color: inherit;
+  border-radius: var(--radius-md);
+
+  &:hover,
+  &:focus-visible {
+    text-decoration: none;
+
+    .mat-mdc-card {
+      box-shadow:
+        0 4px 12px rgba(31, 20, 21, 0.12),
+        0 2px 4px rgba(31, 20, 21, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .read-more {
+      text-decoration: underline;
+    }
+  }
+}
+
 .mat-mdc-card {
   width: 320px;
-  box-shadow: none;
+  height: 100%;
+  overflow: hidden;
+  transition:
+    box-shadow 150ms ease,
+    transform 150ms ease;
+}
+
+img[mat-card-image] {
+  height: 160px;
+  object-fit: cover;
+}
+
+img.icon-image {
+  object-fit: contain;
+  padding: 28px;
+  background-color: var(--red-tint);
 }
 
 .mat-mdc-card-header {
@@ -9,10 +51,23 @@
 
 p {
   text-align: center;
-  min-height: 90px;
+  margin-bottom: 0;
 }
 
-.mat-mdc-card-actions {
+.mat-mdc-card-content {
+  flex: 1 0 auto;
+}
+
+.mat-mdc-card-footer {
   display: flex;
   justify-content: center;
+  padding: 8px 16px 16px;
+}
+
+.read-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+  color: var(--red-text);
 }

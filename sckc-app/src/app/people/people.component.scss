@@ -1,4 +1,19 @@
-.person-container {
-  max-width: 900px;
-  margin: 0px auto;
+.intro {
+  max-width: 720px;
+  margin: 0 auto 32px;
+  text-align: center;
+  font-size: 1.05rem;
+}
+
+.people-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+@media screen and (max-width: 480px) {
+  .people-grid {
+    grid-template-columns: 1fr;
+  }
 }

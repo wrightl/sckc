@@ -1,14 +1,36 @@
 <div class="container">
   <app-page-title title="Pool Sessions"></app-page-title>
 
+  <dl class="at-a-glance">
+    <dt>When</dt>
+    <dd>Every other Tuesday. Arrive 7:10pm for a 7:30pm start</dd>
+    <dt>Where</dt>
+    <dd>
+      Hillsborough Leisure Centre, Beulah Rd, Sheffield S6 2AN
+      (<a routerLink="." fragment="location">map</a>)
+    </dd>
+    <dt>Cost</dt>
+    <dd>
+      From £{{ info.adultThirtyMinuteSession | number: "1.2-2" }} for adults
+      and £{{ info.childThirtyMinuteSession | number: "1.2-2" }} for under
+      18s and concessions (<a routerLink="." fragment="pricing">full prices</a>)
+    </dd>
+    <dt>Bring</dt>
+    <dd>A swimming costume and an old T-shirt. We provide everything else</dd>
+    <dt>Experience</dt>
+    <dd>None needed. Non-members can come to 3 club sessions in total (pool or river) before joining</dd>
+    <dt>Dates</dt>
+    <dd>Emailed to our mailing list. Reply to an invite to book</dd>
+  </dl>
+
   <p>
-    Pool sessions are held on Tuesday evenings every 2 weeks at Hillborough
-    Leisure Centre. See our calendar of events <a routerLink="/events">here</a>.
+    Pool sessions are held on Tuesday evenings every 2 weeks at Hillsborough
+    Leisure Centre.
   </p>
 
   <p>
     You should arrive at 7:10pm in order to be signed in and changed ready for
-    the session to start at 7:30pm. Sessions last for either 30, 60 or minutes.
+    the session to start at 7:30pm. Sessions last for either 30, 60 or 90 minutes.
   </p>
 
   <p>
@@ -20,11 +42,12 @@
   <h3>Booking</h3>
 
   <p>
-    Enquiries should be made using the link on the
-    <a routerLink="/events">Events</a> Page.
+    We email invites for upcoming sessions to everyone on our mailing list. To
+    book a place, just reply to the invite. Not on our mailing list yet?
+    <a href="mailto:bookingrequest@sheffieldcitykayakclub.co.uk">email us</a> and we'll add you.
   </p>
 
-  <h3>Pricing</h3>
+  <h3 id="pricing">Pricing</h3>
 
   <p>
     The cost of the sessions depend on whether you are a club member, age and
@@ -50,15 +73,15 @@
     <tbody>
       <tr>
         <td>Adults</td>
-        <td>{{ info.adultThirtyMinuteSession | number : "1.2-2" }}</td>
-        <td>{{ info.adultSixtyMinuteSession | number : "1.2-2" }}</td>
-        <td>{{ info.adultFullSession | number : "1.2-2" }}</td>
+        <td>£{{ info.adultThirtyMinuteSession | number: "1.2-2" }}</td>
+        <td>£{{ info.adultSixtyMinuteSession | number: "1.2-2" }}</td>
+        <td>£{{ info.adultFullSession | number: "1.2-2" }}</td>
       </tr>
       <tr>
         <td>Under 18's, OAP, Unwaged, Students</td>
-        <td>{{ info.childThirtyMinuteSession | number : "1.2-2" }}</td>
-        <td>{{ info.childSixtyMinuteSession | number : "1.2-2" }}</td>
-        <td>{{ info.childFullSession | number : "1.2-2" }}</td>
+        <td>£{{ info.childThirtyMinuteSession | number: "1.2-2" }}</td>
+        <td>£{{ info.childSixtyMinuteSession | number: "1.2-2" }}</td>
+        <td>£{{ info.childFullSession | number: "1.2-2" }}</td>
       </tr>
     </tbody>
   </table>
@@ -94,7 +117,7 @@
     loading="lazy"
   ></iframe>
 
-  <h3>What to Bring</h3>
+  <h3 id="what-to-bring">What to Bring</h3>
 
   <p>
     You will need a regular swimming costume and an old t-shirt that you don't

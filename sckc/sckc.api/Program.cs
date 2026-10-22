@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Newtonsoft.Json.Serialization;
 using sckc.api.Extensions;
@@ -27,6 +28,39 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 
 Helper.ContentRootPath = app.Environment.ContentRootPath;
+
+// Unhandled errors are returned as problem details JSON (exception type and message, no stack trace) so a failing API
+// call shows what went wrong in the browser's network tab. The full exception is also appended to logs/errors.log,
+// which can be downloaded over FTP but is never served (see blockedFolders below).
+app.UseExceptionHandler(errorApp => errorApp.Run(async context =>
+{
+    var exception = context.Features.Get<IExceptionHandlerPathFeature>()?.Error;
+    var traceId = context.TraceIdentifier;
+    var request = $"{context.Request.Method} {context.Request.Path}{context.Request.QueryString}";
+
+    app.Logger.LogError(exception, "Unhandled exception for {Request} (trace {TraceId})", request, traceId);
+    try
+    {
+        var logFolder = Path.Combine(app.Environment.ContentRootPath, "logs");
+        Directory.CreateDirectory(logFolder);
+        await File.AppendAllTextAsync(Path.Combine(logFolder, "errors.log"),
+            $"{DateTime.UtcNow:u} {request} trace={traceId}{Environment.NewLine}{exception}{Environment.NewLine}{Environment.NewLine}");
+    }
+    catch (Exception logException)
+    {
+        app.Logger.LogError(logException, "Could not write to logs/errors.log");
+    }
+
+    context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+    await context.Response.WriteAsJsonAsync(new
+    {
+        title = "The server could not complete the request",
+        status = StatusCodes.Status500InternalServerError,
+        detail = exception?.Message,
+        exception = exception?.GetType().Name,
+        traceId,
+    }, (System.Text.Json.JsonSerializerOptions)null, "application/problem+json");
+}));
 
 if (app.Environment.IsDevelopment())
 {
@@ -77,3 +111,6 @@ app.MapFallback("/api/{**path}", () => Results.NotFound());
 app.MapFallback("/app/api/{**path}", () => Results.NotFound());
 
 app.Run();
+
+// Exposes the entry point to the integration tests (WebApplicationFactory<Program>)
+public partial class Program { }

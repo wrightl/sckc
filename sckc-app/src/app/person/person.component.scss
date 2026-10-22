@@ -1,22 +1,112 @@
+:host {
+  display: block;
+}
+
 .person-card {
-  margin: 12px 0 12px 0;
+  height: 100%;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
 }
 
-.person-info {
-  flex-direction: row;
+.person-photo {
+  background-color: var(--red-tint);
+
+  img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    object-position: center 30%;
+    display: block;
+  }
+}
+
+.person-body {
+  padding: 20px 20px 4px;
+}
+
+.person-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+
+.person-roles {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px;
   display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+
+  li {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-display);
+    font-size: 13px;
+    line-height: 16px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: var(--space-1) 10px;
+    border-radius: var(--radius-full);
+    color: var(--on-red-tint);
+    background-color: var(--red-tint);
+
+    /* The COACH badge: the only red on a person's card */
+    &.coach {
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      padding: 0;
+      font-size: 12px;
+      line-height: 12px;
+      letter-spacing: 0.04em;
+      color: var(--on-red);
+      background-color: var(--red);
+    }
+  }
 }
 
-.person-image {
-  flex: 0 0 auto;
+.person-bio {
+  line-height: 1.55;
+
+  ::ng-deep {
+    p {
+      margin-bottom: 0.6em;
+    }
+
+    ul {
+      margin: 0 0 0.6em;
+      padding-left: 1.2em;
+    }
+  }
+
+  &.clamped {
+    max-height: 9.5em;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent);
+    mask-image: linear-gradient(to bottom, #000 60%, transparent);
+  }
 }
 
-img {
-  width: 160px;
+.bio-toggle {
+  margin-left: -12px;
 }
 
-a {
-  font-size: 14px;
+.person-contact {
+  margin-top: auto;
+  padding: 12px 20px 16px;
+  border-top: 1px solid var(--hairline);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    overflow-wrap: anywhere;
+  }
 }

@@ -39,7 +39,7 @@ export class EnquireComponent implements OnInit {
       !this.booking?.Summary ||
       new Date(this.booking.StartDateTime) < new Date()
     ) {
-      this.router.navigate(['/events']);
+      this.router.navigate(['/home']);
 
       this._snackBar.open(`That event cannot be booked`, undefined, {
         duration: 5000,

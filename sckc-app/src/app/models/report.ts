@@ -5,6 +5,7 @@ export interface Report {
   triptype: string;
   triplength: string;
   organiser: string;
+  coaches: string;
   start: string;
   paddlers: string;
   weather: string;

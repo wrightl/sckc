@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
@@ -8,7 +8,7 @@ import { Meta, Title } from '@angular/platform-browser';
     changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
-export class PageTitleComponent implements OnInit, OnDestroy {
+export class PageTitleComponent implements OnInit, OnChanges, OnDestroy {
   @Input() title = '';
   @Input() pageTitle? : string = undefined;
   @Input() keywords = '';
@@ -23,8 +23,14 @@ export class PageTitleComponent implements OnInit, OnDestroy {
       name: 'keywords',
       content: this.keywords,
     });
+  }
 
-    this.titleService.setTitle(`${this.pageTitle ?? this.title} - Sheffield City Kayak Club`);
+  // Runs again when the title arrives later, e.g. a gallery's name once its photos have loaded
+  ngOnChanges(): void {
+    const pageName = this.pageTitle ?? this.title;
+    this.titleService.setTitle(
+      pageName ? `${pageName} - Sheffield City Kayak Club` : 'Sheffield City Kayak Club'
+    );
   }
 
   ngOnDestroy(): void {

@@ -33,7 +33,6 @@ import { ActivitiesComponent } from './activities/activities.component';
 import { PeopleComponent } from './people/people.component';
 import { PersonComponent } from './person/person.component';
 import { FooterComponent } from './footer/footer.component';
-import { EventsComponent } from './events/events.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { PhotosComponent } from './photos/photos.component';
 import { LocationComponent } from './location/location.component';
@@ -41,7 +40,6 @@ import { PoolComponent } from './pool/pool.component';
 import { RiverComponent } from './river/river.component';
 import { ReportsComponent } from './reports/reports.component';
 import { TripReportComponent } from './trip-report/trip-report.component';
-import { EventCalendarComponent } from './event-calendar/event-calendar.component';
 import { HomeComponent } from './home/home.component';
 import { JoiningComponent } from './joining/joining.component';
 import { DocumentsComponent } from './documents/documents.component';
@@ -58,6 +56,9 @@ import { MemberCheckComponent } from './member-check/member-check.component';
 import { EnquireComponent } from './enquire/enquire.component';
 import { BusyButtonComponent } from './busy-button/busy-button.component';
 import { ShePaddlesComponent } from './she-paddles/she-paddles.component';
+import { SubmitReportComponent } from './submit-report/submit-report.component';
+import { LandingComponent } from './landing/landing.component';
+import { NewToTheClubComponent } from './new-to-the-club/new-to-the-club.component';
 
 @NgModule({ declarations: [
         AppComponent,
@@ -65,7 +66,6 @@ import { ShePaddlesComponent } from './she-paddles/she-paddles.component';
         PeopleComponent,
         PersonComponent,
         FooterComponent,
-        EventsComponent,
         GalleryComponent,
         PhotosComponent,
         LocationComponent,
@@ -73,7 +73,6 @@ import { ShePaddlesComponent } from './she-paddles/she-paddles.component';
         RiverComponent,
         ReportsComponent,
         TripReportComponent,
-        EventCalendarComponent,
         HomeComponent,
         JoiningComponent,
         DocumentsComponent,
@@ -90,6 +89,9 @@ import { ShePaddlesComponent } from './she-paddles/she-paddles.component';
         EnquireComponent,
         BusyButtonComponent,
         ShePaddlesComponent,
+        SubmitReportComponent,
+        LandingComponent,
+        NewToTheClubComponent,
     ],
     exports: [MatInputModule],
     bootstrap: [AppComponent], imports: [BrowserModule,

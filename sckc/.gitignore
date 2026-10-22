@@ -54,3 +54,6 @@ Thumbs.db
 
 /sckc.api/data
 /sckc.api/Web.config
+
+# ignore errors.log
+**/errors.log
