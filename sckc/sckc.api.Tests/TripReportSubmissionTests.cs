@@ -219,12 +219,30 @@ namespace sckc.api.Tests
             var token = Regex.Match(confirmHtml, "name=\"token\" value=\"([^\"]+)\"").Groups[1].Value;
             var id = new Uri(acceptLink).Segments.Last();
             var post = await client.PostAsync($"/api/reports/review/{id}",
+                new FormUrlEncodedContent(new Dictionary<string, string> { ["token"] = "wrong", ["decision"] = "accept" }));
+            Assert.AreEqual(HttpStatusCode.NotFound, post.StatusCode);
+
+            post = await client.PostAsync($"/api/reports/review/{id}",
                 new FormUrlEncodedContent(new Dictionary<string, string> { ["token"] = token, ["decision"] = "accept" }));
 
             Assert.AreEqual(HttpStatusCode.OK, post.StatusCode);
             StringAssert.Contains(await post.Content.ReadAsStringAsync(), "trip reports page");
             var reports = await client.GetFromJsonAsync<List<Report>>("/api/reports");
             CollectionAssert.AreEqual(new[] { "River Wye, Glasbury to Hay", "Matlock" }, reports.Select(r => r.title).ToArray());
+        }
+
+        // Locally the dev server's proxy rewrites Host to the API's port, so the links follow the browser's Origin instead
+        [TestMethod]
+        public async Task Pipeline_LocalLinksPointAtTheSiteTheReportCameFrom()
+        {
+            using var factory = new WebApplicationFactory<Program>().WithWebHostBuilder(builder => builder.UseContentRoot(root));
+            Helper.MailSender = message => { sent.Add(message); return Task.FromResult(true); };
+            var request = new HttpRequestMessage(HttpMethod.Post, "/api/reports") { Content = JsonContent.Create(Submission()) };
+            request.Headers.Add("Origin", "http://localhost:4200");
+
+            Assert.AreEqual(HttpStatusCode.OK, (await factory.CreateClient().SendAsync(request)).StatusCode);
+
+            StringAssert.Contains(sent.Single().Text, "Accept and publish: http://localhost:4200/api/reports/review/");
         }
 
         private void Write(string relativePath, string content)

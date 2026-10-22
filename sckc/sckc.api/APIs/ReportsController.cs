@@ -136,17 +136,24 @@ namespace sckc.api.APIs
             };
         }
 
-        // Production links always point at the live site. When running locally they point at this API instead,
-        // so the review links can be tried out without touching the live reports.
+        // Production links always point at the live site. When running locally they point at the site the request
+        // came from (the dev server or an ngrok tunnel, whose proxy passes /api on to this API), so the review links
+        // can be tried out without touching the live reports. The request is trusted for this only in development.
         private string SiteBaseUrl()
         {
             var environment = HttpContext?.RequestServices.GetService<IWebHostEnvironment>();
-            if (environment?.IsDevelopment() == true)
+            if (environment?.IsDevelopment() != true)
             {
-                return $"{Request.Scheme}://{Request.Host}/";
+                return Constants.SiteBaseUrl;
             }
 
-            return Constants.SiteBaseUrl;
+            // The browser's Origin survives the dev server's proxy, which rewrites Host to this API's own port
+            if (Uri.TryCreate(Request.Headers.Origin.ToString(), UriKind.Absolute, out var origin) && origin.Scheme is "http" or "https")
+            {
+                return origin.GetLeftPart(UriPartial.Authority) + "/";
+            }
+
+            return $"{Request.Scheme}://{Request.Host}/";
         }
 
         private static bool IsDecision(string decision) => decision is "accept" or "reject";
