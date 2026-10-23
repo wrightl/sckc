@@ -1,17 +1,35 @@
-<mat-card class="person-card">
-  <mat-card-title-group>
-    <mat-card-title>{{ person.name }}</mat-card-title>
-  </mat-card-title-group>
-  <div class="person-info">
-    <mat-card-content>
-      <mat-card-subtitle>{{ person.role }}</mat-card-subtitle>
-      <div [innerHTML]="person.longText"></div>
-    </mat-card-content>
-    <div class="person-image">
-      @if (person.imageUrl) {
-        <img src="{{ person.imageUrl }}" />
+<mat-card class="person-card" appearance="outlined">
+  <div class="person-photo">
+    @if (person.imageUrl) {
+      <img [src]="person.imageUrl" [alt]="person.name" loading="lazy" />
+    }
+  </div>
+
+  <mat-card-content class="person-body">
+    <h2 class="person-name">{{ person.name }}</h2>
+    <ul class="person-roles">
+      @for (role of person.roles; track role) {
+        <li [class.coach]="role.toLowerCase() === 'coach'">{{ role }}</li>
+      }
+    </ul>
+
+    <div class="person-bio" [class.clamped]="isLong && !expanded" [innerHTML]="person.longText"></div>
+    @if (isLong) {
+      <button mat-button type="button" class="bio-toggle" (click)="expanded = !expanded" [attr.aria-expanded]="expanded">
+        {{ expanded ? 'Show less' : 'Read more' }}
+        <mat-icon iconPositionEnd>{{ expanded ? 'expand_less' : 'expand_more' }}</mat-icon>
+      </button>
+    }
+  </mat-card-content>
+
+  @if (person.emailAddresses.length) {
+    <div class="person-contact">
+      @for (email of person.emailAddresses; track email) {
+        <a [href]="'mailto:' + email">
+          <mat-icon inline>mail_outline</mat-icon>
+          <span>{{ email }}</span>
+        </a>
       }
     </div>
-  </div>
-  <a [href]="getMailTo()">{{ person.emailAddress }}</a>
+  }
 </mat-card>

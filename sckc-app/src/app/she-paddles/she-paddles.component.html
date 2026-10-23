@@ -103,30 +103,9 @@
     Paddles Club Ambassador.
   </p>
 
-  <mat-card class="person-card">
-    <mat-card-title-group>
-      <mat-card-title>Tracy Edwards</mat-card-title>
-    </mat-card-title-group>
-    <div class="person-info">
-      <mat-card-content>
-        <mat-card-subtitle>She Paddles Club Ambassador</mat-card-subtitle>
-        <div>
-          My role as the She Paddles Club Ambassador will be to help all female
-          paddlers feel supported and enjoy their time on the water with the
-          club. If you have any concerns about paddling or need any information
-          about taking part in sessions on the river or the pool, please contact
-          me via the 'Contact Us' section on our website. I look forward to
-          seeing you on the water
-        </div>
-      </mat-card-content>
-      <div class="person-image">
-        <img src="assets/tracy.jpg" />
-      </div>
-    </div>
-    <a href="mailto:shepaddles@sheffieldcitykayakclub.co.uk"
-      >shepaddles&#64;sheffieldcitykayakclub.co.uk</a
-    >
-  </mat-card>
+  @if (ambassador) {
+    <app-person class="ambassador" [person]="ambassador"></app-person>
+  }
 
   <h2>Resources</h2>
   <ul>

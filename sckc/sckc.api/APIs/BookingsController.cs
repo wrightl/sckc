@@ -1,6 +1,6 @@
 ﻿using sckc.api.Extensions;
 using sckc.core.Models;
-using SendGrid.Helpers.Mail;
+using sckc.api.Models;
 using Stripe;
 using Stripe.Checkout;
 using System;
@@ -41,8 +41,7 @@ namespace sckc.api.APIs
                     subject = $"***TEST TEST {subject} TEST TEST***";
                 }
 
-                var msg = MailHelper.CreateSingleEmail(from, to, subject, htmlContent, htmlContent);
-                msg.ReplyTo = new EmailAddress(info.Email.Trim());
+                var msg = new EmailMessage(from, to, subject, htmlContent) { ReplyTo = new EmailAddress(info.Email.Trim()) };
 
                 var response = await Helper.SendMail(msg);
 
@@ -72,8 +71,7 @@ namespace sckc.api.APIs
             var to = new EmailAddress(Constants.BookingRequestEmailAddress, Constants.BookingRequestEmailName);
             var subject = $"Booking request for {info.Event} on {info.Date}";
             var htmlContent = $"From: {info.Name}<br/>Email: <a href=\"mailto:{info.Email}\">{info.Email}</a><br/>Number of people: {info.Number}<br/>People: {info.Names}<br/>TelNo: {info.TelNo}<br/>Message:<br/>{info.Message}";
-            var msg = MailHelper.CreateSingleEmail(from, to, subject, htmlContent, htmlContent);
-            msg.ReplyTo = new EmailAddress(info.Email);
+            var msg = new EmailMessage(from, to, subject, htmlContent) { ReplyTo = new EmailAddress(info.Email) };
 
             var response = await Helper.SendMail(msg);
 
@@ -94,7 +92,7 @@ namespace sckc.api.APIs
 
                 var autoReplyContent = Helper.ReplaceTemplatePlaceholders(System.IO.File.ReadAllText(Helper.MapPath($"Resources/{info.Type}_booking_request_response.html")).Trim(), info);
 
-                msg = MailHelper.CreateSingleEmail(from, to, subject, autoReplyContent, autoReplyContent);
+                msg = new EmailMessage(from, to, subject, autoReplyContent);
 
                 await Helper.SendMail(msg);
 

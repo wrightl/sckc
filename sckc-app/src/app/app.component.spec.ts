@@ -20,7 +20,7 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('h1.app-name').textContent).toContain(
+    expect(compiled.querySelector('a.app-name').textContent).toContain(
       'Sheffield City Kayak Club'
     );
   });

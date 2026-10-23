@@ -1,0 +1,95 @@
+<app-page-title
+  title="New to the Club?"
+  keywords="beginners,newcomers,try kayaking,joining"
+></app-page-title>
+
+<div class="container">
+  <p class="intro">
+    Sheffield City Kayak Club is a friendly club that aims to make kayaking
+    accessible to everyone, young and old. No experience is necessary and we can
+    supply all the equipment you need apart from clothing. Here's everything you
+    need to know to get started.
+  </p>
+
+  <section>
+    <h3>How to try it</h3>
+    <p>
+      You don't need to be a member to come along. All our sessions are
+      booked by email: <a href="mailto:bookingrequest@sheffieldcitykayakclub.co.uk">email us</a> to say you'd like to give it a go and we'll add
+      you to our mailing list. You'll then get an email invite for each
+      upcoming session - just reply to one to book your place.
+    </p>
+    <p>
+      We prefer people who are new to the club to join us at a pool session
+      before coming to a river event, so you can get comfortable in a kayak
+      before heading out on the river.
+    </p>
+    <p>
+      If you're unsure about going straight onto the river, a pool session is a
+      great first step in a nice warm environment.
+    </p>
+    <p>
+      Non-members can come to up to 3 club sessions in total, pool or river.
+      After that you'll need to join the club to keep coming along.
+    </p>
+    <a class="more" href="mailto:bookingrequest@sheffieldcitykayakclub.co.uk"
+      >Email us to get started &rarr;</a
+    >
+  </section>
+
+  <section>
+    <h3>Sessions and where</h3>
+    <dl class="at-a-glance">
+      <dt>River</dt>
+      <dd>
+        Selected Sundays through the year, 9am until about 12pm, plus Tuesday
+        evenings from May to October. Sessions run when we have coaching cover
+        and are announced by email to our mailing list. At our base at the end of Kelham Island. Non-members
+        £{{ river.adultSessionCostNonMember | number: "0.2-2" }} per session
+        plus £{{ river.adultEquipmentHireNonMember | number: "0.2-2" }} if you
+        borrow kit.
+      </dd>
+      <dt>Pool</dt>
+      <dd>
+        Every other Tuesday, 7:30pm start (arrive 7:10pm), at Hillsborough
+        Leisure Centre. From
+        £{{ pool.adultThirtyMinuteSession | number: "1.2-2" }} for adults and
+        £{{ pool.childThirtyMinuteSession | number: "1.2-2" }} for under 18s
+        and concessions.
+      </dd>
+    </dl>
+    <p class="more-links">
+      <a routerLink="/river">River sessions &rarr;</a>
+      <a routerLink="/pool">Pool sessions &rarr;</a>
+      <a routerLink="/location">How to find us &rarr;</a>
+    </p>
+  </section>
+
+  <section>
+    <h3>What to bring</h3>
+    <p>
+      We lend you the boat, paddle, buoyancy aid, spraydeck and helmet. For the
+      river, bring light clothing and a waterproof top, slip-on shoes, a towel
+      and dry clothes for afterwards. For the pool, just a swimming costume and
+      an old T-shirt.
+    </p>
+    <p class="more-links">
+      <a routerLink="/river" fragment="what-to-bring">River kit list &rarr;</a>
+      <a routerLink="/pool" fragment="what-to-bring">Pool kit list &rarr;</a>
+    </p>
+  </section>
+
+  <section>
+    <h3>Joining the club</h3>
+    <p>
+      When you're ready to become a member, joining is easy: fill in the online
+      membership form. Members pay less for sessions and can come on club
+      trips around the country.
+    </p>
+    <a class="more" routerLink="/joining">Membership and prices &rarr;</a>
+  </section>
+
+  <p>
+    Any other questions? <a routerLink="/contactus">Get in touch</a>.
+  </p>
+</div>

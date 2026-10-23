@@ -1,16 +1,64 @@
-<app-page-title title="Trip Reports"></app-page-title>
+<div class="container">
+  <app-page-title title="Trip Reports"></app-page-title>
 
-@if (!isReady) {
-  <mat-spinner></mat-spinner>
-}
+  <p class="intro">
+    Write-ups from recent club trips. Fancy coming along next time? Upcoming
+    trips are emailed to our mailing list - reply to the invite to book a
+    place.
+  </p>
+  <p class="write">
+    <a mat-stroked-button color="primary" routerLink="/reports/write">
+      <mat-icon>edit</mat-icon>
+      Write a trip report
+    </a>
+  </p>
 
-@for (report of reports; track report) {
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      {{ report.title }}
-    </mat-expansion-panel-header>
-    <ng-template matExpansionPanelContent>
-      <app-trip-report [report]="report"></app-trip-report>
-    </ng-template>
-  </mat-expansion-panel>
-}
+  @if (!isReady) {
+    <mat-spinner></mat-spinner>
+  }
+
+  <mat-accordion class="reports" displayMode="flat">
+    @for (report of reports; track report.id; let first = $first) {
+      <mat-expansion-panel [expanded]="first">
+        <mat-expansion-panel-header collapsedHeight="auto" expandedHeight="auto">
+          <div class="report-header">
+            <time class="date-badge" [attr.datetime]="report.date">
+              <span class="day">{{ report.date | date: "d" }}</span>
+              <span class="month">{{ report.date | date: "MMM" }}</span>
+              <span class="year">{{ report.date | date: "y" }}</span>
+            </time>
+            <div class="report-heading">
+              <span class="report-title">{{ report.title }}</span>
+              <span class="report-summary">
+                @if (report.triptype) {
+                  <span class="trip-type">{{ report.triptype }}</span>
+                }
+                @if (report.phrase) {
+                  <span class="phrase">{{ report.phrase }}</span>
+                }
+              </span>
+            </div>
+          </div>
+        </mat-expansion-panel-header>
+        <ng-template matExpansionPanelContent>
+          <app-trip-report [report]="report"></app-trip-report>
+        </ng-template>
+      </mat-expansion-panel>
+    } @empty {
+      @if (error) {
+        <div class="message error">
+          <mat-icon>error_outline</mat-icon>
+          Sorry, we couldn't load the trip reports. Please try again later.
+        </div>
+        @if (errorDetail) {
+          <p class="error-detail">{{ errorDetail }}</p>
+        }
+      } @else if (isReady) {
+        <div class="message">
+          <mat-icon>rowing</mat-icon>
+          There are no trip reports yet. Check back after our next trip!
+        </div>
+      }
+    }
+  </mat-accordion>
+</div>

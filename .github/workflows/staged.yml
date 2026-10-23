@@ -22,5 +22,5 @@ jobs:
             ftphost: ${{ secrets.ftphost }}
             ftpuser: ${{ secrets.ftpuser }}
             ftppassword: ${{ secrets.ftppassword }}
-            sendgrid_apikey: ${{ secrets.sendgrid_apikey }}
+            resend_apikey: ${{ secrets.resend_apikey }}
             stripe_apikey: ${{ secrets.stripe_apikey_test }}

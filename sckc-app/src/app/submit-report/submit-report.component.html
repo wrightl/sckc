@@ -1,0 +1,139 @@
+<div class="container">
+  <app-page-title title="Write a Trip Report"></app-page-title>
+
+  @if (submitted) {
+    <div class="message" role="status">
+      <mat-icon>check_circle</mat-icon>
+      <div>
+        <p>{{ submitted }}</p>
+        <p class="actions">
+          <a routerLink="/reports">Back to trip reports</a>
+          <button mat-button type="button" (click)="writeAnother()">Write another report</button>
+        </p>
+      </div>
+    </div>
+  } @else {
+    <p class="intro">
+      Been on a club trip? Tell everyone how it went. Reports are checked by the
+      club before they appear on the
+      <a routerLink="/reports">trip reports page</a>.
+    </p>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+      <fieldset>
+        <legend>The trip</legend>
+        <div class="fields">
+          <mat-form-field appearance="outline" class="wide">
+            <mat-label>Title</mat-label>
+            <input matInput id="title" formControlName="title" placeholder="River Wye, Glasbury to Hay" />
+            <mat-error>{{ errorFor('title') }}</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Date of the trip</mat-label>
+            <input matInput id="date" type="date" formControlName="date" [max]="today" />
+            <mat-error>{{ errorFor('date') }}</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>River or location</mat-label>
+            <input matInput id="trip" formControlName="trip" placeholder="River Wye" />
+            <mat-error>{{ errorFor('trip') }}</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Type of trip</mat-label>
+            <input matInput id="triptype" formControlName="triptype" placeholder="Kayak, canoe, sea kayak…" />
+            <mat-error>{{ errorFor('triptype') }}</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Where you started</mat-label>
+            <input matInput id="start" formControlName="start" placeholder="Glasbury bridge" />
+            <mat-error>{{ errorFor('start') }}</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Distance or time</mat-label>
+            <input matInput id="triplength" formControlName="triplength" placeholder="10 miles / 4 hours" />
+            <mat-error>{{ errorFor('triplength') }}</mat-error>
+          </mat-form-field>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Who went</legend>
+        <div class="fields">
+          <mat-form-field appearance="outline">
+            <mat-label>Organiser</mat-label>
+            <input matInput id="organiser" formControlName="organiser" />
+            <mat-error>{{ errorFor('organiser') }}</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Coaches</mat-label>
+            <input matInput id="coaches" formControlName="coaches" />
+            <mat-error>{{ errorFor('coaches') }}</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="wide">
+            <mat-label>Paddlers</mat-label>
+            <input matInput id="paddlers" formControlName="paddlers" placeholder="Angel, Lee, Steve" />
+            <mat-hint>First names are fine</mat-hint>
+            <mat-error>{{ errorFor('paddlers') }}</mat-error>
+          </mat-form-field>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>The report</legend>
+        <div class="fields">
+          <mat-form-field appearance="outline">
+            <mat-label>Weather</mat-label>
+            <input matInput id="weather" formControlName="weather" placeholder="Sunny, low wind" />
+            <mat-error>{{ errorFor('weather') }}</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Phrase of the day</mat-label>
+            <input matInput id="phrase" formControlName="phrase" placeholder="Mind the rocks!" />
+            <mat-error>{{ errorFor('phrase') }}</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="wide">
+            <mat-label>How did it go?</mat-label>
+            <textarea matInput id="report" formControlName="report" rows="12"></textarea>
+            <mat-hint>Leave a blank line between paragraphs.</mat-hint>
+            <mat-error>{{ errorFor('report') }}</mat-error>
+          </mat-form-field>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>About you</legend>
+        <div class="fields">
+          <mat-form-field appearance="outline">
+            <mat-label>Your name</mat-label>
+            <input matInput id="author" formControlName="author" autocomplete="name" />
+            <mat-hint>Shown on the report</mat-hint>
+            <mat-error>{{ errorFor('author') }}</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Your email</mat-label>
+            <input matInput id="email" type="email" formControlName="email" autocomplete="email" />
+            <mat-hint>Only used if we have a question; never shown</mat-hint>
+            <mat-error>{{ errorFor('email') }}</mat-error>
+          </mat-form-field>
+          <div class="website" aria-hidden="true">
+            <label for="website">Leave this empty</label>
+            <input id="website" formControlName="website" tabindex="-1" autocomplete="off" />
+        </div>
+        </div>
+      </fieldset>
+
+      @if (error) {
+        <div class="message error" role="alert">
+          <mat-icon>error_outline</mat-icon>
+          {{ error }}
+        </div>
+      }
+
+      <div class="submit">
+        <button mat-flat-button color="primary" type="submit" [disabled]="busy">
+          {{ busy ? 'Sending…' : 'Send report for checking' }}
+        </button>
+      </div>
+    </form>
+  }
+</div>

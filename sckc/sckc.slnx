@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="sckc.api.Tests/sckc.api.Tests.csproj" />
+  <Project Path="sckc.api/sckc.api.csproj" />
+  <Project Path="sckc.core/sckc.core.csproj" />
+</Solution>

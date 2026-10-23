@@ -9,6 +9,7 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 })
 export class InfoCardComponent {
   @Input() imageSource = '';
+  @Input() imageFit: 'cover' | 'contain' = 'cover';
   @Input() link = '';
   @Input() content = '';
   @Input() title = '';

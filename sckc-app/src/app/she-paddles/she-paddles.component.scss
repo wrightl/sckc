@@ -10,29 +10,7 @@ h2 {
   margin-bottom: 1rem;
 }
 
-.person-card {
-  margin: 12px 0 12px 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.person-info {
-  flex-direction: row;
-  display: flex;
-}
-
-.person-image {
-  flex: 0 0 auto;
-}
-
-img {
-  width: 160px;
-}
-
-a {
-  font-size: 14px;
-}
-
-mat-card {
-  max-width: 600px;
+.ambassador {
+  max-width: 360px;
+  margin: 16px 0 8px;
 }

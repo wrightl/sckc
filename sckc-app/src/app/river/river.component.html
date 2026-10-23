@@ -1,13 +1,42 @@
 <app-page-title title="River Sessions"></app-page-title>
 
 <div class="container">
+  <dl class="at-a-glance">
+    <dt>When</dt>
+    <dd>
+      Selected Sundays through the year, 9am until about 12pm, when we have
+      coaching cover. Tuesday evenings from May to October, 7pm until about
+      9pm
+    </dd>
+    <dt>Where</dt>
+    <dd>
+      Our base at the end of Kelham Island, Sheffield
+      (<a routerLink="." fragment="location">map</a>)
+    </dd>
+    <dt>Cost</dt>
+    <dd>
+      Members £{{ info.adultSessionCost | number: "0.2-2" }}, non-members
+      £{{ info.adultSessionCostNonMember | number: "0.2-2" }}, plus
+      £{{ info.adultEquipmentHire | number: "0.2-2" }} if you borrow kit
+      (<a routerLink="." fragment="pricing">full prices</a>)
+    </dd>
+    <dt>Bring</dt>
+    <dd>
+      A waterproof top, light clothing, slip-on shoes, a towel and dry clothes
+      for afterwards
+    </dd>
+    <dt>Experience</dt>
+    <dd>None needed</dd>
+    <dt>Dates</dt>
+    <dd>Emailed to our mailing list. Reply to an invite to book</dd>
+  </dl>
+
   <p>
-    River paddle sessions take place on Sunday mornings all year round, and
-    occasionally on Tuesday evenings through the Summer months. All sessions
-    must be booked in advance to ensure that we have appropriate coaching cover.
-    Bookings can be made using the link next to the session you would like to
-    book on our
-    <a routerLink="/events">Booking</a> page.
+    River paddle sessions take place on Sunday mornings through the year, and
+    occasionally on Tuesday evenings through the Summer months. They don't run
+    every week - we plan each session when we have enough coaching cover, then
+    email an invite to our members and everyone on our mailing list. Reply to
+    the invite to book your place. All sessions must be booked in advance.
   </p>
 
   <p>
@@ -19,8 +48,8 @@
   <p>
     The Tuesday evening sessions usually begin in May and run through to
     October. They start at 7pm and run through to about 9pm, depending on
-    weather, available list and the paddlers. Bookings must be made by the
-    preceeding Tuesday to ensure coaches are available.
+    weather, available light and the paddlers. Bookings must be made by the
+    preceding Tuesday to ensure coaches are available.
   </p>
 
   <p>
@@ -31,11 +60,12 @@
   <h3>Booking</h3>
 
   <p>
-    Bookings should be made using the link on the
-    <a routerLink="/events">Booking</a> Page.
+    We email invites for upcoming sessions to everyone on our mailing list. To
+    book a place, just reply to the invite. Not on our mailing list yet?
+    <a href="mailto:bookingrequest@sheffieldcitykayakclub.co.uk">email us</a> and we'll add you.
   </p>
 
-  <h3>Pricing</h3>
+  <h3 id="pricing">Pricing</h3>
 
   <p>
     The cost of the sessions depend on whether you are a club member, age and
@@ -95,9 +125,13 @@
 
   <h3>Parking</h3>
 
-  <p>There is ample parking at our base at the end of Kelham Island.</p>
+  <p>
+    There is ample parking at our base at the end of Kelham Island, but parking
+    charges now apply. You can pay by card, app or cash. Please check the signs
+    when you arrive for the current charges.
+  </p>
 
-  <h3>Location</h3>
+  <h3 id="location">Location</h3>
   <p>
     We are located at the end of Kelham Island. To get there, drive past Kelham
     Island Museum and through the large red gates at the end of the cobbled
@@ -110,7 +144,7 @@
     allowfullscreen
   ></iframe>
 
-  <h3>What to Bring</h3>
+  <h3 id="what-to-bring">What to Bring</h3>
 
   <p>
     While we can supply most of the equipment you'll need to get started, you
@@ -140,7 +174,7 @@
     Yes you can! Please be aware though that it must be suitable for the
     occasion and will need to be checked by the a club official before use. If
     you're not sure please
-    <a href="mailto:enquiries@sheffieldcitykayaclub.co.uk">contact us</a>, or add
+    <a href="mailto:enquiries@sheffieldcitykayakclub.co.uk">contact us</a>, or add
     a note to your booking
   </p>
 

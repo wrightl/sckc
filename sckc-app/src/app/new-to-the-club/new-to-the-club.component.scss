@@ -1,0 +1,22 @@
+.container {
+  max-width: 900px;
+}
+
+.intro {
+  font-size: 1.1rem;
+}
+
+section {
+  margin-bottom: 32px;
+}
+
+.more,
+.more-links a {
+  font-weight: 500;
+}
+
+.more-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}

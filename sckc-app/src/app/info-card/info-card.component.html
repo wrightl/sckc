@@ -1,22 +1,23 @@
-<mat-card>
-  @if (imageSource) {
-    <img
-      mat-card-image
-      src="{{ imageSource }}"
-      alt="{{ title }} image"
-      />
-  }
-  <mat-card-header>
-    <mat-card-title>{{ title }}</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <p>
-      {{ content }}
-    </p>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-flat-button color="accent" routerLink="{{ link }}">
-      Read More
-    </button>
-  </mat-card-actions>
-</mat-card>
+<a class="info-card-link" [routerLink]="link">
+  <mat-card appearance="outlined">
+    @if (imageSource) {
+      <img
+        mat-card-image
+        [src]="imageSource"
+        [class.icon-image]="imageFit === 'contain'"
+        alt=""
+        />
+    }
+    <mat-card-header>
+      <mat-card-title>{{ title }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        {{ content }}
+      </p>
+    </mat-card-content>
+    <mat-card-footer>
+      <span class="read-more">Read more <mat-icon inline>arrow_forward</mat-icon></span>
+    </mat-card-footer>
+  </mat-card>
+</a>

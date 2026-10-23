@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ActivitiesComponent } from './activities/activities.component';
 import { PeopleComponent } from './people/people.component';
-import { EventsComponent } from './events/events.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { PhotosComponent } from './photos/photos.component';
 import { LocationComponent } from './location/location.component';
@@ -22,13 +21,17 @@ import { BookingRequestConfComponent } from './booking-request-conf/booking-requ
 import { MemberCheckComponent } from './member-check/member-check.component';
 import { EnquireComponent } from './enquire/enquire.component';
 import { ShePaddlesComponent } from './she-paddles/she-paddles.component';
+import { LandingComponent } from './landing/landing.component';
+import { NewToTheClubComponent } from './new-to-the-club/new-to-the-club.component';
+import { SubmitReportComponent } from './submit-report/submit-report.component';
 
 const routes: Routes = [
+  { path: '', pathMatch: 'full', component: LandingComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'new-to-the-club', component: NewToTheClubComponent },
   { path: 'activities', component: ActivitiesComponent },
   { path: 'people', component: PeopleComponent },
   { path: 'documents', component: DocumentsComponent },
-  { path: 'events', component: EventsComponent },
   { path: 'gallery/:id', component: GalleryComponent },
   { path: 'joining', component: JoiningComponent },
   { path: 'photos', component: PhotosComponent },
@@ -37,6 +40,7 @@ const routes: Routes = [
   { path: 'enquire', component: EnquireComponent },
   { path: 'river', component: RiverComponent },
   { path: 'reports', component: ReportsComponent },
+  { path: 'reports/write', component: SubmitReportComponent },
   { path: 'trips', component: TripsComponent },
   { path: 'about', component: AboutComponent },
   { path: 'contactus', component: ContactUsComponent },
@@ -53,7 +57,10 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes, {
       initialNavigation: 'enabledBlocking',
-      scrollPositionRestoration: 'top',
+      scrollPositionRestoration: 'enabled',
+      anchorScrolling: 'enabled',
+      // keep anchored headings clear of the sticky toolbar
+      scrollOffset: [0, 80],
     }),
   ],
   exports: [RouterModule],

@@ -1,0 +1,49 @@
+.landing-container {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.hero {
+  width: 100%;
+  max-height: 420px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+}
+
+.landing-choices {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.landing-choice {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 24px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md);
+  background-color: var(--surface);
+  color: inherit;
+
+  &:hover,
+  &:focus-visible {
+    text-decoration: none;
+    background-color: var(--red-tint);
+  }
+}
+
+.landing-choice-title {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+
+.landing-choice-cta {
+  margin-top: auto;
+  font-weight: 600;
+  color: var(--red-text);
+}

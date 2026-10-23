@@ -10,7 +10,12 @@ export class ReportsService {
 
   constructor(private http: HttpClient) { }
 
-  getPhotoSets() {
+  getReports() {
     return this.http.get<Report[]>(`${environment.baseApiUrl}reports`);
+  }
+
+  // The report is held back until someone accepts it from the review email; resolves to a thank-you message
+  submitReport(submission: Record<string, string>) {
+    return this.http.post<string>(`${environment.baseApiUrl}reports`, submission);
   }
 }
