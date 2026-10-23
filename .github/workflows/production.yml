@@ -22,3 +22,4 @@ jobs:
             ftppassword: ${{ secrets.ftppassword }}
             resend_apikey: ${{ secrets.resend_apikey }}
             stripe_apikey: ${{ secrets.stripe_apikey_live }}
+            stripe_webhook_secret: ${{ secrets.stripe_webhook_secret_live }}

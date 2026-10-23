@@ -1,6 +1,6 @@
 # Sheffield City Kayak Club website
 
-Source for [www.sheffieldcitykayakclub.co.uk](http://www.sheffieldcitykayakclub.co.uk): an Angular site and a small
+Source for [www.sheffieldcitykayakclub.co.uk](https://www.sheffieldcitykayakclub.co.uk): an Angular site and a small
 ASP.NET Core API that runs alongside it on the same host. This document is the handover guide: how the project fits
 together, how to run and deploy it, and the accounts, DNS and certificate details that live outside the code.
 
@@ -54,6 +54,7 @@ Browser ──► Cloudflare (proxy, DNS) ──► 123reg Windows/IIS hosting
 | `GET api/reports` | Published trip reports | `data/tripreports.data` |
 | `POST api/reports` | Submits a trip report. It is saved as pending and emailed to `admin@` for review | `data/pendingreports.data`, Resend |
 | `GET/POST api/reports/review/{id}` | Accept/reject links from the review email. GET only shows a confirm page, POST makes the change | token in the link |
+| `POST api/stripe/webhook` | Called by Stripe when a Checkout payment is received; emails `payment@` with the amount and booking details | `data/stripe_webhook_secret.data`, Resend |
 
 Swagger UI is available at `/swagger` (locally: <http://localhost:32767/swagger>).
 
@@ -91,6 +92,9 @@ or download them from the server over FTP:
 - `data/resend_apikey.data`: Resend API key. Without it any form that sends email fails.
 - `data/stripe_apikey.data`: Stripe secret key. **Use a test-mode key locally.** The bookings controller needs this
   file even for bookings that only send an email.
+- `data/stripe_webhook_secret.data`: signing secret of the Stripe webhook (`whsec_…`). Only needed to try the
+  payment webhook locally: run `stripe listen --forward-to localhost:32767/api/stripe/webhook` and save the secret it
+  prints here.
 - `data/tripreports.data`, `data/pendingreports.data`: trip report store (JSON). Missing files are treated as empty.
 - `gallery/`: photo folders (optional, only needed for the gallery pages).
 
@@ -141,8 +145,8 @@ Deployment is fully automated through GitHub Actions in [.github/workflows/](.gi
 Both call [deployment.yml](.github/workflows/deployment.yml), which:
 
 1. Runs `dotnet test`.
-2. Publishes the API and writes `data/sckc.data`, `data/stripe_apikey.data` and `data/resend_apikey.data` from GitHub
-   secrets.
+2. Publishes the API and writes `data/sckc.data`, `data/stripe_apikey.data`, `data/resend_apikey.data` and
+   `data/stripe_webhook_secret.data` from GitHub secrets.
 3. Builds and lints the Angular app.
 4. Uploads over FTP with `SamKirkland/FTP-Deploy-Action`. This only uploads changed files and tracks state in
    `.ftp-deploy-app-sync-state.json` and `.ftp-deploy-api-sync-state.json` on the server. If you delete those files,
@@ -159,6 +163,7 @@ To deploy, merge to `master`. To roll back, revert the commit and push.
 | `google_calendar_creds` | Google service account JSON, written to `data/sckc.data` |
 | `resend_apikey` | Resend API key |
 | `stripe_apikey_live` | Stripe live secret key (production) |
+| `stripe_webhook_secret_live` | Signing secret of the live Stripe webhook endpoint (production) |
 | `stripe_apikey_test` | Stripe test secret key (passed to staging, but unused while staging doesn't deploy the API) |
 
 ## Secrets and server-only files
@@ -184,9 +189,9 @@ These files exist only on the server (and on developer machines). They are not i
 | 123reg | Domain registrar **and** Windows/IIS web hosting (FTP) | **TODO** |
 | Cloudflare | DNS and proxy in front of the site | **TODO** |
 | Resend | Sending all site email. The `sheffieldcitykayakclub.co.uk` domain is verified in Resend, which needs its DNS records | **TODO** |
-| Stripe | Card payments for event bookings (Checkout) | **TODO** |
+| Stripe | Card payments for event bookings (Checkout), and a webhook to `https://www.sheffieldcitykayakclub.co.uk/api/stripe/webhook` sending `checkout.session.completed` and `checkout.session.async_payment_succeeded` (Snapshot payload, API version `2026-09-30.endive`, matching Stripe.net 53.0.0; upgrading Stripe.net means creating a new endpoint at its version) | **TODO** |
 | Google Cloud | Service account with read-only access to the club calendar `sheffieldcitykayakclub@gmail.com` | **TODO** |
-| Club mailboxes | `admin@`, `contactus@`, `bookings@`, `bookingrequest@` | **TODO**: where the mailboxes are hosted |
+| Club mailboxes | `admin@`, `contactus@`, `bookings@`, `bookingrequest@`, `payment@` | **TODO**: where the mailboxes are hosted |
 
 When handing over, also hand over (or rotate) the API keys and FTP password, then update the GitHub secrets.
 
@@ -219,7 +224,10 @@ ns28.domaincontrol.com
 ### Cloudflare notes
 
 - Mail-related records (MX and the mail server's A record, if any) must be **DNS only** (grey cloud), never proxied.
-- With the Origin certificate installed on the host, set Cloudflare SSL/TLS mode to **Full (strict)**.
+- With the Origin certificate installed on the host, set Cloudflare SSL/TLS mode to **Full (strict)**, and turn on
+  **Always Use HTTPS** (SSL/TLS → Edge Certificates) so `http://` links redirect.
+- Cloudflare's bot protection can block Stripe's webhook calls. If Stripe's dashboard shows failed deliveries with a
+  403 or a challenge page, add a WAF skip rule for the path `/api/stripe/webhook`.
 - After a deploy, if users still see old files, purge the Cloudflare cache (Caching → Configuration → Purge
   Everything). Angular output files have hashed names, but `index.html` can be cached.
 
@@ -278,8 +286,8 @@ Important:
   `isLive: false` flag only adds "TEST" to email subjects.
 - The production workflow deploys to the site root (`deployment_path: ''`). The comment there about moving to a
   staged path is old.
-- `Constants.SiteBaseUrl` and the CI health checks use `http://`. Cloudflare redirects or proxies these. If you turn
-  on "Always Use HTTPS", consider changing them to `https://`.
+- The site is served over HTTPS. `Constants.SiteBaseUrl` (used for the trip report review links) and the CI health
+  checks use `https://`. Stripe only delivers live webhooks to HTTPS addresses, so keep it that way.
 - The API returns PascalCase JSON (Newtonsoft `DefaultContractResolver`), which the Angular models expect. Don't
   switch to System.Text.Json defaults without updating the front end.
 - Angular unit tests are disabled in CI (`if: ${{ false }}` in deployment.yml).

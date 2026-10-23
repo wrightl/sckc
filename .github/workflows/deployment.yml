@@ -27,6 +27,9 @@ on:
                 required: true
             stripe_apikey:
                 required: true
+            # Signing secret of the Stripe webhook endpoint (api/stripe/webhook); only the API needs it
+            stripe_webhook_secret:
+                required: false
 jobs:
     # test api - runs even when the api isn't being deployed, so PRs are still checked
     api-tests:
@@ -71,12 +74,16 @@ jobs:
                   GOOGLE_CALENDAR_CREDS: ${{ secrets.google_calendar_creds }}
                   STRIPE_APIKEY: ${{ secrets.stripe_apikey }}
                   RESEND_APIKEY: ${{ secrets.resend_apikey }}
+                  STRIPE_WEBHOOK_SECRET: ${{ secrets.stripe_webhook_secret }}
               run: |
                   $dataDir = Join-Path $PWD 'sckc/sckc.api/deploy/data'
                   New-Item -ItemType Directory -Force -Path $dataDir | Out-Null
                   [IO.File]::WriteAllText((Join-Path $dataDir 'sckc.data'), $env:GOOGLE_CALENDAR_CREDS)
                   [IO.File]::WriteAllText((Join-Path $dataDir 'stripe_apikey.data'), $env:STRIPE_APIKEY)
                   [IO.File]::WriteAllText((Join-Path $dataDir 'resend_apikey.data'), $env:RESEND_APIKEY)
+                  if ($env:STRIPE_WEBHOOK_SECRET) {
+                      [IO.File]::WriteAllText((Join-Path $dataDir 'stripe_webhook_secret.data'), $env:STRIPE_WEBHOOK_SECRET)
+                  }
 
             - name: Upload Artifact
               uses: actions/upload-artifact@v7
@@ -205,7 +212,7 @@ jobs:
             - name: URL Health Check
               if: ${{ inputs.deploy_api }}
               env:
-                  HEALTH_URL: ${{ format('http://www.sheffieldcitykayakclub.co.uk/{0}api/health', inputs.deployment_path) }}
+                  HEALTH_URL: ${{ format('https://www.sheffieldcitykayakclub.co.uk/{0}api/health', inputs.deployment_path) }}
               run: |
                   # The API returns the JSON string "Healthy". Check the body, not just the status code: the
                   # site's SPA fallback answers unknown paths with index.html and a 200.
@@ -223,7 +230,7 @@ jobs:
 
             - name: App Check
               env:
-                  APP_URL: ${{ format('http://www.sheffieldcitykayakclub.co.uk/{0}index.html', inputs.deployment_path) }}
+                  APP_URL: ${{ format('https://www.sheffieldcitykayakclub.co.uk/{0}index.html', inputs.deployment_path) }}
                   BASE_HREF: ${{ format('<base href="/{0}"', inputs.deployment_path) }}
               run: |
                   # Make sure the Angular build for this environment (identified by its base href) was deployed

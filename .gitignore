@@ -4,3 +4,6 @@
 
 #development environment files
 /sckc-app/src/environments/environment.local.ts
+
+# ignore secrets folder
+**/.secrets
