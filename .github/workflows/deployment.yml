@@ -157,6 +157,23 @@ jobs:
                   # How verbose should the information be - minimal, standard, or verbose
                   log-level: verbose # optional
 
+            # IIS locks the API's DLLs while it runs, so uploading over them fails with "550 ... being used by another
+            # process". An app_offline.htm in the app folder makes IIS stop the app and release the locks; the site shows
+            # that page until it is deleted again below.
+            - name: Take API offline
+              id: api-offline
+              if: ${{ inputs.deploy_api }}
+              env:
+                  FTP_HOST: ${{ secrets.ftphost }}
+                  FTP_USER: ${{ secrets.ftpuser }}
+                  FTP_PASSWORD: ${{ secrets.ftppassword }}
+                  DEPLOY_PATH: ${{ inputs.deployment_path }}
+              run: |
+                  echo '<!doctype html><title>Updating</title><p>The site is being updated and will be back in a minute.</p>' > app_offline.htm
+                  curl --fail --silent --show-error --user "$FTP_USER:$FTP_PASSWORD" -T app_offline.htm "ftp://$FTP_HOST/${DEPLOY_PATH}app_offline.htm"
+                  # Give IIS time to notice the file and shut the app down
+                  sleep 15
+
             - name: ftp-action-api
               if: ${{ inputs.deploy_api }}
               uses: SamKirkland/FTP-Deploy-Action@v4.4.0
@@ -174,6 +191,16 @@ jobs:
                   # Path and name of the state file - this file is used to track which files have been deployed
                   state-name: .ftp-deploy-api-sync-state.json # optional
                   log-level: verbose
+
+            # Runs even if the upload failed, so a failed deploy doesn't leave the whole site showing the offline page
+            - name: Bring API back online
+              if: ${{ always() && steps.api-offline.outcome == 'success' }}
+              env:
+                  FTP_HOST: ${{ secrets.ftphost }}
+                  FTP_USER: ${{ secrets.ftpuser }}
+                  FTP_PASSWORD: ${{ secrets.ftppassword }}
+                  DEPLOY_PATH: ${{ inputs.deployment_path }}
+              run: curl --fail --silent --show-error --user "$FTP_USER:$FTP_PASSWORD" -Q "DELE ${DEPLOY_PATH}app_offline.htm" "ftp://$FTP_HOST/" -o /dev/null
 
             - name: URL Health Check
               if: ${{ inputs.deploy_api }}
