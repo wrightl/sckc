@@ -81,7 +81,7 @@ export class SubmitReportComponent {
         });
         this.error = Object.keys(fieldErrors).length
           ? 'Some details need changing. Check the highlighted fields.'
-          : "We couldn't send your report. Your text is still here, so try again in a few minutes, or email it to contactus@sheffieldcitykayakclub.co.uk.";
+          : "We couldn't send your report. Your text is still here, so try again in a few minutes, or email it to enquiries@sheffieldcitykayakclub.co.uk.";
       },
     });
   }
